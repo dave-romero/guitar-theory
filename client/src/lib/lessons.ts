@@ -100,6 +100,10 @@ note("a2 as2 b2 c3 cs3 d3 ds3 e3 f3 fs3 g3 gs3 a3")
         title: "Same Note, Different String",
         concept: "The guitar is a 2D grid where the same note exists in multiple places.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Unison Note", color: "primary" },
+          { label: "Open Unison Note", color: "primary", outline: true }
+        ],
         explanation: "Unlike a piano where each key plays a unique pitch, the guitar has multiple locations for the same pitch. For example, the 5th fret of the Low E string is the note 'A'. This is the exact same pitch as the open A string.\n\nThis pattern repeats across the fretboard (except for the G to B string, which shifts by 4 frets instead of 5).",
         tabs: [
           {
@@ -137,6 +141,10 @@ cat(
         title: "Half Steps & Whole Steps",
         concept: "Building blocks of distance on the fretboard.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Start Note", color: "primary" },
+          { label: "Target Note", color: "secondary" }
+        ],
         explanation: "We already know a Half Step is 1 fret. A Whole Step is simply 2 frets (or 2 half steps).\n\nMost scales are built from patterns of whole steps (W) and half steps (H). Being able to visualize 'skip a fret' (Whole Step) vs 'adjacent fret' (Half Step) is crucial.",
         tabs: [
           {
@@ -183,6 +191,10 @@ cat(
         title: "The Major Scale Pattern",
         concept: "The universal formula: W-W-H-W-W-W-H",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root Note", color: "primary" },
+          { label: "Scale Note", color: "secondary" }
+        ],
         explanation: "Every major scale follows the same pattern of steps: Whole, Whole, Half, Whole, Whole, Whole, Half.\n\nLet's build a G Major scale on one string using this formula:\nStart on G (3rd fret)\n+ Whole (5)\n+ Whole (7)\n+ Half (8)\n+ Whole (10)\n+ Whole (12)\n+ Whole (14)\n+ Half (15 - which is G again!)",
         tabs: [
           {
@@ -224,6 +236,9 @@ note("g2 a2 b2 c3 d3 e3 fs3 g3")
         title: "Octaves",
         concept: "Finding the 'same note' shape across strings.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Octave Note", color: "primary" }
+        ],
         explanation: "An octave is the distance from one note to the next version of that same note (e.g., Low G to High G). On the guitar, there is a consistent shape to find octaves:\n\nFrom E or A string: Go down 2 strings, and up 2 frets.\n\nThis shape is your anchor. If you know where G is on the Low E string, you instantly know where G is on the D string.",
         tabs: [
           {
