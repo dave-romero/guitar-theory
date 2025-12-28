@@ -10,6 +10,7 @@ import { RhythmGrid } from "./visualizations/RhythmGrid";
 import { StrummingPattern } from "./visualizations/StrummingPattern";
 import { SongStructure } from "./visualizations/SongStructure";
 import { CircleOfFifths } from "./visualizations/CircleOfFifths";
+import { RhythmLegend } from "./RhythmLegend";
 
 interface LessonPageProps {
   lesson: LessonContent;
@@ -27,40 +28,52 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
   const renderVisualization = () => {
     if (!lesson.visualization) return null;
 
+    // Common wrapper for consistent height and styling
+    const Wrapper = ({ children }: { children: React.ReactNode }) => (
+      <div className="my-8 p-6 border rounded-lg bg-card flex items-center justify-center h-[300px] overflow-hidden">
+        <div className="w-full h-full flex items-center justify-center">
+          {children}
+        </div>
+      </div>
+    );
+
     switch (lesson.visualization) {
       case "RhythmGrid":
         return lesson.rhythmGridData ? (
-          <div className="my-8">
-            <RhythmGrid 
-              timeSignature={lesson.rhythmGridData.timeSignature}
-              notes={lesson.rhythmGridData.notes}
-              activeBeat={lesson.rhythmGridData.activeBeat}
-            />
-          </div>
+          <>
+            <RhythmLegend />
+            <Wrapper>
+              <RhythmGrid 
+                timeSignature={lesson.rhythmGridData.timeSignature}
+                notes={lesson.rhythmGridData.notes}
+                activeBeat={lesson.rhythmGridData.activeBeat}
+              />
+            </Wrapper>
+          </>
         ) : null;
       case "StrummingPattern":
         return lesson.strummingPatternData ? (
-          <div className="my-8">
+          <Wrapper>
             <StrummingPattern 
               pattern={lesson.strummingPatternData.pattern}
             />
-          </div>
+          </Wrapper>
         ) : null;
       case "SongStructure":
         return lesson.songStructureData ? (
-          <div className="my-8">
+          <Wrapper>
             <SongStructure 
               sections={lesson.songStructureData.sections}
             />
-          </div>
+          </Wrapper>
         ) : null;
       case "CircleOfFifths":
         return lesson.circleOfFifthsData ? (
-          <div className="my-8">
+          <Wrapper>
             <CircleOfFifths 
               activeKey={lesson.circleOfFifthsData.activeKey}
             />
-          </div>
+          </Wrapper>
         ) : null;
       default:
         return null;
