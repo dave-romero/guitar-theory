@@ -71,14 +71,14 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             )}
             {strum === "x" && (
               <g>
-                <circle r="25" fill="var(--primary)" opacity="0.2" />
+                <circle r="25" fill="var(--foreground)" opacity="0.1" />
                 <text
                     x="0"
                     y="10"
                     textAnchor="middle"
                     fontSize="30"
                     fontWeight="bold"
-                    fill="var(--primary)"
+                    fill="var(--foreground)"
                 >
                     ×
                 </text>
