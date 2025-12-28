@@ -23,7 +23,7 @@ export function GuitarTab({
   // Dimensions
   const width = 300;
   const height = 200;
-  const padding = { top: 40, right: 30, bottom: 20, left: 50 }; // Increased left padding
+  const padding = { top: 25, right: 30, bottom: 35, left: 50 }; // Shifted up by 15px
   
   const drawingWidth = width - padding.left - padding.right;
   const drawingHeight = height - padding.top - padding.bottom;

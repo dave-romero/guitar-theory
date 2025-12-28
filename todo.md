@@ -1,4 +1,2 @@
 - [ ] Refine SVG Tabs:
-    - [ ] Update `GuitarTab.tsx`: Move string labels left to avoid overlap with open string markers
-    - [ ] Update `TabLegend.tsx`: Simplify keys (Root, Note, Open String) and fix color duplication
-    - [ ] Ensure "Open String" is represented clearly (e.g., hollow circle) in both component and legend
+    - [ ] Update `GuitarTab.tsx`: Decrease top padding by 15px and increase bottom padding by 15px to center content vertically
