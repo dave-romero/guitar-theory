@@ -25,10 +25,16 @@ export function TabLegend({
         <span className="text-xs font-medium text-foreground">{secondaryLabel}</span>
       </div>
 
-      {/* Open String */}
+      {/* Open Primary */}
       <div className="flex items-center gap-2">
-        <div className="w-4 h-4 rounded-full bg-background border-2 border-muted-foreground shadow-sm"></div>
-        <span className="text-xs font-medium text-foreground">Open String</span>
+        <div className="w-4 h-4 rounded-full bg-background border-2 border-primary shadow-sm"></div>
+        <span className="text-xs font-medium text-foreground">Open {primaryLabel}</span>
+      </div>
+
+      {/* Open Secondary */}
+      <div className="flex items-center gap-2">
+        <div className="w-4 h-4 rounded-full bg-background border-2 border-secondary shadow-sm"></div>
+        <span className="text-xs font-medium text-foreground">Open {secondaryLabel}</span>
       </div>
     </div>
   );

@@ -137,7 +137,8 @@ interface GuitarTabProps {
             // Special styling for open strings (fret 0)
             if (marker.fret === 0) {
               fillClass = "fill-background"; // Use background color (cream) instead of transparent to hide line behind it
-              strokeClass = "stroke-muted-foreground"; // Always gray border to match key
+              // Dynamic border color: Primary (Orange) or Secondary (Gray)
+              strokeClass = marker.color === "primary" ? "stroke-primary" : "stroke-secondary";
             }
 
             return (
