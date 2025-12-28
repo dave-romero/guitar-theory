@@ -1,3 +1,4 @@
 - [ ] Refine SVG Tabs:
-    - [ ] Create `client/src/components/TabLegend.tsx`
-    - [ ] Update `client/src/pages/TestTabs.tsx` to include the legend
+    - [ ] Update `GuitarTab.tsx`: Move string labels left to avoid overlap with open string markers
+    - [ ] Update `TabLegend.tsx`: Simplify keys (Root, Note, Open String) and fix color duplication
+    - [ ] Ensure "Open String" is represented clearly (e.g., hollow circle) in both component and legend

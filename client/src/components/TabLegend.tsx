@@ -11,16 +11,16 @@ export function TabLegend() {
         <span className="text-xs font-medium text-foreground">Root Note</span>
       </div>
 
-      {/* Scale/Chord Note */}
+      {/* Regular Note */}
       <div className="flex items-center gap-2">
         <div className="w-4 h-4 rounded-full bg-secondary border-2 border-background shadow-sm"></div>
-        <span className="text-xs font-medium text-foreground">Scale Note</span>
+        <span className="text-xs font-medium text-foreground">Regular Note</span>
       </div>
 
-      {/* Interval/Special Note */}
+      {/* Open String */}
       <div className="flex items-center gap-2">
-        <div className="w-4 h-4 rounded-full bg-accent border-2 border-background shadow-sm"></div>
-        <span className="text-xs font-medium text-foreground">Interval / Special</span>
+        <div className="w-4 h-4 rounded-full bg-transparent border-2 border-secondary shadow-sm"></div>
+        <span className="text-xs font-medium text-foreground">Open String</span>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ export function GuitarTab({
   // Dimensions
   const width = 300;
   const height = 200;
-  const padding = { top: 40, right: 30, bottom: 20, left: 40 };
+  const padding = { top: 40, right: 30, bottom: 20, left: 50 }; // Increased left padding
   
   const drawingWidth = width - padding.left - padding.right;
   const drawingHeight = height - padding.top - padding.bottom;
@@ -44,7 +44,7 @@ export function GuitarTab({
   // Fret 0 is to the left of the nut (or start).
   // Fret 1 is in the middle of the first fret block.
   const getFretX = (fretNum: number) => {
-    if (fretNum === 0) return -15; // Open string marker position
+    if (fretNum === 0) return -20; // Open string marker position (further left)
     const relativeFret = fretNum - startFret + 1;
     return (relativeFret * fretSpacing) - (fretSpacing / 2);
   };
@@ -105,10 +105,10 @@ export function GuitarTab({
           {['e', 'B', 'G', 'D', 'A', 'E'].map((note, i) => (
             <text
               key={`string-name-${i}`}
-              x={-10}
+              x={-35} // Moved further left to avoid overlap
               y={i * stringSpacing + 4}
               textAnchor="end"
-              className="text-xs fill-muted-foreground font-mono"
+              className="text-xs fill-muted-foreground font-mono font-bold"
             >
               {note}
             </text>
@@ -125,18 +125,25 @@ export function GuitarTab({
             // Color logic
             let fillClass = "fill-primary";
             let textClass = "fill-primary-foreground";
+            let strokeClass = "stroke-background";
             
             if (marker.color === "secondary") { fillClass = "fill-secondary"; textClass = "fill-secondary-foreground"; }
             if (marker.color === "accent") { fillClass = "fill-accent"; textClass = "fill-accent-foreground"; }
             if (marker.color === "muted") { fillClass = "fill-muted"; textClass = "fill-muted-foreground"; }
+
+            // Special styling for open strings (fret 0)
+            if (marker.fret === 0) {
+              fillClass = "fill-transparent";
+              strokeClass = marker.color === "primary" ? "stroke-primary" : "stroke-secondary";
+            }
 
             return (
               <g key={`marker-${i}`}>
                 <circle
                   cx={cx}
                   cy={cy}
-                  r={marker.fret === 0 ? 6 : 10} // Smaller for open strings
-                  className={`${fillClass} stroke-background stroke-2`}
+                  r={marker.fret === 0 ? 7 : 10} 
+                  className={`${fillClass} ${strokeClass} stroke-2`}
                 />
                 {marker.label && marker.fret !== 0 && (
                   <text
