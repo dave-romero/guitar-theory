@@ -40,7 +40,7 @@ export default function Layout({ children }: LayoutProps) {
         </Link>
       </div>
 
-      <ScrollArea className="flex-1 py-4">
+      <ScrollArea className="flex-1 min-h-0 py-4">
         <div className="px-4 space-y-6">
           {lessons.map((category) => {
             const Icon = categoryIcons[category.id];
