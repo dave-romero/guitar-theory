@@ -114,6 +114,15 @@ note("a2 as2 b2 c3 cs3 d3 ds3 e3 f3 fs3 g3 gs3 a3")
               { string: 6, fret: 5, label: "A", color: "primary" },
               { string: 5, fret: 0, label: "A", color: "primary" },
             ]
+          },
+          {
+            title: "Exception: B Note (G String vs Open B)",
+            startFret: 0,
+            fretCount: 5,
+            markers: [
+              { string: 3, fret: 4, label: "B", color: "primary" },
+              { string: 2, fret: 0, label: "B", color: "primary" },
+            ]
           }
         ],
         strudelCode: `// Unison Notes (Same Pitch)
@@ -257,6 +266,15 @@ note("g2 a2 b2 c3 d3 e3 fs3 g3")
             markers: [
               { string: 5, fret: 3, label: "C", color: "primary" },
               { string: 3, fret: 5, label: "C", color: "primary" },
+            ]
+          },
+          {
+            title: "Octave Shape (D String Root)",
+            startFret: 3,
+            fretCount: 5,
+            markers: [
+              { string: 4, fret: 3, label: "F", color: "primary" },
+              { string: 2, fret: 6, label: "F", color: "primary" },
             ]
           }
         ],
