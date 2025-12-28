@@ -39,11 +39,12 @@ note("e2 f2 f#2 g2 g#2 a2 a#2 b2 c3 c#3 d3 d#3 e3")
   .slow(2)     // Play slowly to hear each note
 
 /* 
-  GLOSSARY:
-  - note("..."): Plays a sequence of notes
-  - e2, f2, etc.: Note names with octave numbers (2 is low, 3 is higher)
-  - s("guitar"): Sets the instrument sound to guitar
-  - slow(2): Slows down the playback speed (higher number = slower)
+  STRUDEL GLOSSARY:
+  - note("..."): Creates a sequence of notes from a string of note names
+  - e2, f2: Note names followed by octave number (2 is low range, 3 is higher)
+  - #: Sharp symbol (e.g., f#2 is F sharp in octave 2)
+  - .s("guitar"): Sets the synthesizer sound to 'guitar'
+  - .slow(2): Slows down playback by a factor of 2 (higher number = slower)
 */`,
     nextLesson: "/lesson/cat1/2"
   },
@@ -83,11 +84,14 @@ note("a2 a3 a4")
   .slow(1.5)
 
 /* 
-  GLOSSARY:
-  - a2: Low A (like open A string)
-  - a3: Middle A (like 2nd fret G string)
-  - a4: High A (like 5th fret high E string)
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - note("..."): Creates a sequence of notes
+  - a2, a3, a4: The same note name 'A' in different octaves
+  - Octave numbers: 
+    - 2: Low range (like open A string)
+    - 3: Mid range (like 2nd fret G string)
+    - 4: High range (like 5th fret high E string)
+  - .s("guitar"): Sets the instrument sound
 */`,
     prevLesson: "/lesson/cat1/1",
     nextLesson: "/lesson/cat1/3"
@@ -134,11 +138,11 @@ cat(
 .slow(2)
 
 /* 
-  GLOSSARY:
-  - cat(...): Concatenates (sequences) patterns so they play one after another
-  - c4, c#4: Notes in the 4th octave (middle range)
-  - #: Sharp symbol (one half step higher)
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - cat(a, b): Concatenates patterns 'a' and 'b' to play them sequentially
+  - note("..."): Defines the note sequence
+  - c#4: 'c' is the note, '#' is sharp, '4' is the octave
+  - .s("guitar"): Applied to each pattern individually or the whole sequence
 */`,
     prevLesson: "/lesson/cat1/2",
     nextLesson: "/lesson/cat1/4"
@@ -180,18 +184,11 @@ note("c3 d3 e3 f3 g3 a3 b3 c4")
   .slow(2)
 
 /* 
-  GLOSSARY:
-  - c3 to c4: One full octave of the C Major scale
-  - Scale Degrees:
-    1: c3 (Root)
-    2: d3
-    3: e3
-    4: f3
-    5: g3
-    6: a3
-    7: b3
-    8: c4 (Octave)
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - note("..."): Plays the notes in order from left to right
+  - c3, d3, etc.: Notes in the 3rd octave
+  - c4: The octave note (C in the 4th octave)
+  - Spaces: Spaces between note names separate them in the sequence
 */`,
     prevLesson: "/lesson/cat1/3",
     nextLesson: "/lesson/cat1/5"
@@ -246,12 +243,11 @@ cat(
 ).slow(2)
 
 /* 
-  GLOSSARY:
-  - cat(...): Plays patterns one after another
-  - stack(...): Plays notes at the same time (harmony)
-  - c3: Low C (Root)
-  - c4: High C (Octave, 12 half steps higher)
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - cat(a, b): Plays pattern 'a' then pattern 'b'
+  - stack(a, b): Plays pattern 'a' and 'b' at the same time (harmony)
+  - note("c3 c4"): A sequence of two notes
+  - note("c3"): A single note pattern
 */`,
     prevLesson: "/lesson/cat1/4",
     nextLesson: "/lesson/cat1/6"
@@ -303,16 +299,17 @@ cat(
   // 2. Play them together (Power Chord)
   stack(
     note("c3"), // Root
-    note("g3")  // Perfect 5th (7 half steps up)
+    note("g3")  // Perfect 5th
   ).s("guitar")
 ).slow(2)
 
 /* 
-  GLOSSARY:
-  - c3: Root note (C)
-  - g3: Perfect 5th note (G)
-  - stack(...): Plays notes simultaneously to create a chord
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - cat(...): Sequences the melodic and harmonic parts
+  - stack(...): Layers notes to create a chord
+  - note("c3 g3"): Plays C then G
+  - note("c3"): Plays C
+  - note("g3"): Plays G
 */`,
     prevLesson: "/lesson/cat1/5",
     nextLesson: "/lesson/cat1/7"
@@ -371,12 +368,11 @@ cat(
 ).slow(2)
 
 /* 
-  GLOSSARY:
-  - c4: Root note
-  - e4: Major 3rd (4 half steps up)
-  - eb4: Minor 3rd (3 half steps up, "flat" E)
-  - stack(...): Plays notes together as a chord
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - cat(...): Plays the first chord, then the second chord
+  - stack(...): Combines notes into a chord
+  - eb4: 'eb' stands for E flat (the 'b' is the flat symbol)
+  - e4: E natural
 */`,
     prevLesson: "/lesson/cat1/6",
     nextLesson: "/lesson/cat1/8"
@@ -417,21 +413,11 @@ note("c4 c#4 d4 eb4 e4 f4 f#4 g4 g#4 a4 bb4 b4 c5")
   .slow(3)
 
 /* 
-  GLOSSARY:
-  - c4: Root
-  - c#4: Minor 2nd
-  - d4: Major 2nd
-  - eb4: Minor 3rd
-  - e4: Major 3rd
-  - f4: Perfect 4th
-  - f#4: Tritone
-  - g4: Perfect 5th
-  - g#4: Minor 6th
-  - a4: Major 6th
-  - bb4: Minor 7th
-  - b4: Major 7th
-  - c5: Octave
-  - s("guitar"): Sets the instrument sound to guitar
+  STRUDEL GLOSSARY:
+  - note("..."): The string contains all 12 notes in sequence
+  - # (sharp): Raises note by half step (e.g., c#4)
+  - b (flat): Lowers note by half step (e.g., eb4, bb4)
+  - Spaces: Separate each note in the sequence
 */`,
     prevLesson: "/lesson/cat1/7",
     nextLesson: "/lesson/cat1/9"
@@ -481,24 +467,22 @@ E|--3-----3---------------------|
     strudelCode: `// Playing the same interval (Major 3rd) in different octaves
 // This simulates moving the shape across string pairs
 cat(
-  // Low position (like 6th-5th strings)
+  // Low position
   stack(note("c3"), note("e3")).s("guitar"),
   
-  // Middle position (like 4th-3rd strings)
+  // Middle position
   stack(note("c4"), note("e4")).s("guitar"),
   
-  // High position (like 2nd-1st strings)
+  // High position
   stack(note("c5"), note("e5")).s("guitar")
 ).slow(2)
 
 /* 
-  GLOSSARY:
+  STRUDEL GLOSSARY:
   - cat(...): Sequences the three chords
   - stack(...): Plays the two notes of each interval together
-  - c3/e3: Major 3rd interval in low register
-  - c4/e4: Major 3rd interval in middle register
-  - c5/e5: Major 3rd interval in high register
-  - s("guitar"): Sets the instrument sound to guitar
+  - c3, c4, c5: The same note C in different octaves
+  - e3, e4, e5: The same note E in different octaves
 */`,
     prevLesson: "/lesson/cat1/8",
     nextLesson: "/lesson/cat1/10"
@@ -535,29 +519,28 @@ E|--5--6--7--8--9--10--11--12---|
     explanation: `<p>Now it's time to train your ear. Each interval has a unique sound that you can learn to recognize. Many musicians use reference songs: a perfect 4th sounds like "Here Comes the Bride," a perfect 5th sounds like "Star Wars," a major 3rd sounds like "When the Saints Go Marching In."</p><p>Practice playing intervals and singing them back. Try playing an interval and identifying it before looking at the fretboard. The Strudel example below plays various intervals in a musical context—listen actively and try to identify each interval by its sound quality. This skill takes time, but it's incredibly valuable for learning songs by ear and improvising.</p>`,
     strudelCode: `// Ear Training Challenge: Identify these intervals
 cat(
-  // 1. Perfect 5th (Strong, Stable)
+  // 1. Perfect 5th
   stack(note("c4"), note("g4")).s("guitar"),
   
-  // 2. Major 3rd (Happy, Bright)
+  // 2. Major 3rd
   stack(note("c4"), note("e4")).s("guitar"),
   
-  // 3. Perfect 4th (Open, Stable)
+  // 3. Perfect 4th
   stack(note("c4"), note("f4")).s("guitar"),
   
-  // 4. Minor 3rd (Sad, Dark)
+  // 4. Minor 3rd
   stack(note("c4"), note("eb4")).s("guitar"),
   
-  // 5. Tritone (Tense, Dissonant)
+  // 5. Tritone
   stack(note("c4"), note("f#4")).s("guitar")
 ).slow(2)
 
 /* 
-  GLOSSARY:
+  STRUDEL GLOSSARY:
   - cat(...): Plays the intervals one after another
   - stack(...): Plays the two notes together
-  - c4: The root note for all examples
-  - g4, e4, f4, etc.: The interval note above the root
-  - s("guitar"): Sets the instrument sound to guitar
+  - note("..."): Defines the notes
+  - s("guitar"): Sets the instrument sound
 */`,
     prevLesson: "/lesson/cat1/9"
   }

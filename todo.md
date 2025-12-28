@@ -1,9 +1,4 @@
-- [ ] Update `LessonPage.tsx`:
-    - [ ] Move "Interactive Code" section above navigation buttons
-    - [ ] Change header to "Interactive Code", left-aligned, matching "Key Terms" style
 - [ ] Update `lessons.ts` (all 10 lessons):
-    - [ ] Change sound source to `.s("guitar")`
-    - [ ] Refactor `stack()`/`late()` to `cat()` or sequential timing for clear separation
-    - [ ] Add commented glossary section at the bottom of each code snippet explaining:
-        - Note names (e.g., "c4 = Middle C")
-        - Functions (e.g., "note()", "s()", "slow()")
+    - [ ] Rewrite Strudel glossary comments to focus ONLY on code syntax/functions
+    - [ ] Remove redundant music theory explanations from the glossary
+    - [ ] Explain terms like `note()`, `s()`, `slow()`, `cat()`, `stack()`, octave numbering (e.g., `c3` vs `c4`), and sharps/flats syntax (`#` vs `b`)
