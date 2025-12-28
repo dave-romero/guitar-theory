@@ -29,10 +29,10 @@ export function RhythmLegend({ items }: RhythmLegendProps) {
               <div className="w-4 h-4 rounded bg-primary border border-primary-foreground shadow-sm"></div>
             )}
             {item.type === "rest" && (
-              <div className="w-4 h-1 rounded bg-muted opacity-50"></div>
+              <div className="w-4 h-1 rounded bg-secondary opacity-80"></div>
             )}
             {item.type === "beat" && (
-              <div className="w-4 h-6 bg-muted opacity-30 border border-border"></div>
+              <div className="w-4 h-6 bg-muted opacity-50 border border-border"></div>
             )}
             {item.type === "subdivision" && (
               <div className="h-6 border-l border-dashed border-border"></div>

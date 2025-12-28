@@ -32,12 +32,12 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
       ))}
 
       {/* Subdivision Grid Lines (Eighth Notes) */}
-      {Array.from({ length: totalBeats * 2 }).map((_, i) => (
+      {Array.from({ length: totalBeats }).map((_, i) => (
         <line
           key={i}
-          x1={i * (beatWidth / 2)}
+          x1={i * beatWidth + (beatWidth / 2)}
           y1="40"
-          x2={i * (beatWidth / 2)}
+          x2={i * beatWidth + (beatWidth / 2)}
           y2={height + 40}
           stroke="var(--border)"
           strokeWidth="1"
@@ -80,7 +80,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             y={note.type === "note" ? 60 : 80}
             width={note.duration * beatWidth - 4} // Gap
             height={note.type === "note" ? 60 : 20}
-            rx="6"
+            rx={note.type === "note" ? "6" : "2"}
             fill={note.type === "note" ? "var(--primary)" : "var(--secondary)"}
             stroke={note.type === "note" ? "var(--primary-foreground)" : "none"}
             strokeWidth="2"
