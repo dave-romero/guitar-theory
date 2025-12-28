@@ -1,8 +1,6 @@
-- [ ] Update `LessonContent` interface to support multiple tabs (`tabs: { title?: string, content: string }[]`)
-- [ ] Update `lessons.ts` with multiple tabs for relevant lessons (e.g., Lesson 5, 6, 7, 9)
-- [ ] Fix Strudel URL generation in `LessonPage.tsx` to use hash format (`https://strudel.cc/#${encodedCode}`)
 - [ ] Update `LessonPage.tsx` layout:
-    - [ ] Increase max-width of container
-    - [ ] Adjust grid ratio (e.g., 60/40 or 50/50)
-    - [ ] Add zoom/scale transform to iframe container or use CSS to make content smaller
-- [ ] Verify tab rendering logic to display side-by-side grid for multiple tabs
+    - [ ] Move Strudel iframe container below the main content grid (full width)
+    - [ ] Remove the 2-column grid structure
+    - [ ] Add `key={lesson.id}` to the iframe element to force re-render on lesson change
+    - [ ] Apply CSS transform `scale(0.85)` or similar to the iframe to reduce text size, with `transform-origin: top left` and adjusted width/height to compensate
+- [ ] Verify navigation updates the iframe content correctly

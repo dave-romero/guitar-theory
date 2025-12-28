@@ -41,9 +41,9 @@ export default function LessonPage({ lesson }: LessonPageProps) {
         <p className="text-xl text-muted-foreground font-light max-w-2xl">{lesson.concept}</p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12">
-        {/* Left Column: Content (50%) */}
-        <div className="space-y-8">
+      <div className="space-y-12">
+        {/* Main Content Area */}
+        <div className="space-y-8 max-w-4xl mx-auto">
           
           {/* Learning Goals */}
           <Card className="bg-secondary/30 border-none shadow-none p-6 rounded-lg">
@@ -128,38 +128,36 @@ export default function LessonPage({ lesson }: LessonPageProps) {
           </div>
         </div>
 
-        {/* Right Column: Strudel (50%) - Sticky */}
-        <div>
-          <div className="sticky top-8 space-y-4">
-            <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden">
-              <div className="bg-muted/50 p-3 border-b border-border flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-400/80" />
-                </div>
-                <span className="text-xs font-mono text-muted-foreground">Interactive Example</span>
+        {/* Full Width Strudel Editor */}
+        <div className="space-y-4 pt-8 border-t border-border">
+          <h3 className="font-serif font-bold text-2xl text-center">Interactive Code Lab</h3>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-6">
+            Click "Play" to hear the example. Edit the code to experiment with the sounds.
+          </p>
+          
+          <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden max-w-5xl mx-auto">
+            <div className="bg-muted/50 p-3 border-b border-border flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-400/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-400/80" />
+                <div className="w-3 h-3 rounded-full bg-green-400/80" />
               </div>
-              
-              <div className="relative aspect-[16/10] xl:aspect-[4/5] w-full bg-black group">
-                <iframe
-                  src={strudelUrl}
-                  className="absolute inset-0 w-full h-full"
-                  title="Strudel Live Code"
-                  allow="midi; clipboard-write"
-                  // Use CSS zoom to fit more content if needed, though Strudel is responsive
-                  style={{ border: 0 }}
-                />
-              </div>
-              
-              <div className="p-4 bg-secondary/20 border-t border-border">
-                <div className="flex items-start gap-3">
-                  <PlayCircle className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-foreground">Try it:</strong> Click the "Play" button in the code editor above to hear the example. You can even edit the code to experiment!
-                  </p>
-                </div>
-              </div>
+              <span className="text-xs font-mono text-muted-foreground">Strudel Editor</span>
+            </div>
+            
+            {/* 
+              Zoom Hack: We make the container larger (125%) and scale the iframe down (80%)
+              to effectively "zoom out" the content inside the iframe.
+            */}
+            <div className="relative w-full h-[600px] bg-black overflow-hidden">
+              <iframe
+                key={lesson.id} // Force re-render when lesson changes
+                src={strudelUrl}
+                className="absolute inset-0 w-[125%] h-[125%] origin-top-left transform scale-80"
+                title="Strudel Live Code"
+                allow="midi; clipboard-write"
+                style={{ border: 0 }}
+              />
             </div>
           </div>
         </div>
