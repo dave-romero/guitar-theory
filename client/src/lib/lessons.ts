@@ -35,7 +35,7 @@ E|--0--1--2--3--4--5--6--7--8--9--10--11--12--|
     strudelCode: `// Play the chromatic scale on low E string
 // Each note represents one fret (half step)
 note("e2 f2 f#2 g2 g#2 a2 a#2 b2 c3 c#3 d3 d#3 e3")
-  .s("guitar") // Use a guitar sound
+  .s("acoustic") // Use a guitar sound
   .slow(2)     // Play slowly to hear each note
 
 /* 
@@ -43,7 +43,7 @@ note("e2 f2 f#2 g2 g#2 a2 a#2 b2 c3 c#3 d3 d#3 e3")
   - note("..."): Creates a sequence of notes from a string of note names
   - e2, f2: Note names followed by octave number (2 is low range, 3 is higher)
   - #: Sharp symbol (e.g., f#2 is F sharp in octave 2)
-  - .s("guitar"): Sets the synthesizer sound to 'guitar'
+  - .s("acoustic"): Sets the synthesizer sound to 'guitar'
   - .slow(2): Slows down playback by a factor of 2 (higher number = slower)
 */`,
     nextLesson: "/lesson/cat1/2"
@@ -80,7 +80,7 @@ E|-----5------------------------|
     strudelCode: `// Play the note A in different octaves
 // Simulating finding the same note on different strings
 note("a2 a3 a4") 
-  .s("guitar")
+  .s("acoustic")
   .slow(1.5)
 
 /* 
@@ -91,7 +91,7 @@ note("a2 a3 a4")
     - 2: Low range (like open A string)
     - 3: Mid range (like 2nd fret G string)
     - 4: High range (like 5th fret high E string)
-  - .s("guitar"): Sets the instrument sound
+  - .s("acoustic"): Sets the instrument sound
 */`,
     prevLesson: "/lesson/cat1/1",
     nextLesson: "/lesson/cat1/3"
@@ -130,10 +130,10 @@ E|------------------------------|
     strudelCode: `// Demonstrate half step vs whole step sequentially
 cat(
   // 1. Half step: C to C# (1 fret distance)
-  note("c4 c#4").s("guitar"),
+  note("c4 c#4").s("acoustic"),
   
   // 2. Whole step: C to D (2 frets distance)
-  note("c4 d4").s("guitar")
+  note("c4 d4").s("acoustic")
 )
 .slow(2)
 
@@ -142,7 +142,7 @@ cat(
   - cat(a, b): Concatenates patterns 'a' and 'b' to play them sequentially
   - note("..."): Defines the note sequence
   - c#4: 'c' is the note, '#' is sharp, '4' is the octave
-  - .s("guitar"): Applied to each pattern individually or the whole sequence
+  - .s("acoustic"): Applied to each pattern individually or the whole sequence
 */`,
     prevLesson: "/lesson/cat1/2",
     nextLesson: "/lesson/cat1/4"
@@ -180,7 +180,7 @@ E|--8--10--12--13--15--17--19--20--|
     explanation: `<p>The major scale is the foundation of Western music. It's the "do-re-mi" you've heard since childhood. What makes it major? The specific pattern of whole and half steps: W-W-H-W-W-W-H.</p><p>Notice that the half steps occur between the 3rd-4th notes (mi-fa) and the 7th-8th notes (ti-do). This pattern is the same in every key—if you start on any note and follow this formula, you'll create a major scale. The major scale sounds happy, bright, and resolved.</p>`,
     strudelCode: `// C Major Scale - "do re mi fa sol la ti do"
 note("c3 d3 e3 f3 g3 a3 b3 c4") 
-  .s("guitar")
+  .s("acoustic")
   .slow(2)
 
 /* 
@@ -235,11 +235,11 @@ E|--3--------------15-----------|
     strudelCode: `// 1. Play root and octave separately (Melody)
 // 2. Play them together (Harmony)
 cat(
-  note("c3 c4").s("guitar"), // Separate
+  note("c3 c4").s("acoustic"), // Separate
   stack(
     note("c3"), 
     note("c4")
-  ).s("guitar") // Together
+  ).s("acoustic") // Together
 ).slow(2)
 
 /* 
@@ -294,13 +294,13 @@ E|--3---------------------------|
     strudelCode: `// Power Chord Demonstration
 cat(
   // 1. Play Root then 5th separately
-  note("c3 g3").s("guitar"),
+  note("c3 g3").s("acoustic"),
   
   // 2. Play them together (Power Chord)
   stack(
     note("c3"), // Root
     note("g3")  // Perfect 5th
-  ).s("guitar")
+  ).s("acoustic")
 ).slow(2)
 
 /* 
@@ -358,13 +358,13 @@ cat(
   stack(
     note("c4"), 
     note("e4")
-  ).s("guitar"),
+  ).s("acoustic"),
   
   // 2. Minor 3rd (Sad)
   stack(
     note("c4"), 
     note("eb4")
-  ).s("guitar")
+  ).s("acoustic")
 ).slow(2)
 
 /* 
@@ -409,7 +409,7 @@ E|--8--9--10--11--12--13--14--15--16--17--18--19--20--|
     explanation: `<p>Here's the complete map of intervals within one octave. Each interval has a unique sound and function in music. The "perfect" intervals (4th, 5th, octave) are stable and neutral. The major intervals sound bright; minor intervals sound dark.</p><p>The tritone (6 half steps) is the most dissonant interval—it sounds tense and unstable, which is why it's been called "the devil's interval" throughout history. Memorizing these distances will help you build chords, play melodies, and understand harmony.</p>`,
     strudelCode: `// Play all 12 intervals ascending from C
 note("c4 c#4 d4 eb4 e4 f4 f#4 g4 g#4 a4 bb4 b4 c5")
-  .s("guitar")
+  .s("acoustic")
   .slow(3)
 
 /* 
@@ -468,13 +468,13 @@ E|--3-----3---------------------|
 // This simulates moving the shape across string pairs
 cat(
   // Low position
-  stack(note("c3"), note("e3")).s("guitar"),
+  stack(note("c3"), note("e3")).s("acoustic"),
   
   // Middle position
-  stack(note("c4"), note("e4")).s("guitar"),
+  stack(note("c4"), note("e4")).s("acoustic"),
   
   // High position
-  stack(note("c5"), note("e5")).s("guitar")
+  stack(note("c5"), note("e5")).s("acoustic")
 ).slow(2)
 
 /* 
@@ -520,19 +520,19 @@ E|--5--6--7--8--9--10--11--12---|
     strudelCode: `// Ear Training Challenge: Identify these intervals
 cat(
   // 1. Perfect 5th
-  stack(note("c4"), note("g4")).s("guitar"),
+  stack(note("c4"), note("g4")).s("acoustic"),
   
   // 2. Major 3rd
-  stack(note("c4"), note("e4")).s("guitar"),
+  stack(note("c4"), note("e4")).s("acoustic"),
   
   // 3. Perfect 4th
-  stack(note("c4"), note("f4")).s("guitar"),
+  stack(note("c4"), note("f4")).s("acoustic"),
   
   // 4. Minor 3rd
-  stack(note("c4"), note("eb4")).s("guitar"),
+  stack(note("c4"), note("eb4")).s("acoustic"),
   
   // 5. Tritone
-  stack(note("c4"), note("f#4")).s("guitar")
+  stack(note("c4"), note("f#4")).s("acoustic")
 ).slow(2)
 
 /* 

@@ -129,7 +129,7 @@ export default function LessonPage({ lesson }: LessonPageProps) {
                   src={strudelUrl}
                   className="absolute inset-0 w-[125%] h-[125%] origin-top-left transform scale-80"
                   title="Strudel Live Code"
-                  allow="midi; clipboard-write"
+                  allow="autoplay; midi; clipboard-write"
                   style={{ border: 0 }}
                 />
               </div>

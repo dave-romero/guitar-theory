@@ -1,4 +1,4 @@
-- [ ] Update `lessons.ts` (all 10 lessons):
-    - [ ] Rewrite Strudel glossary comments to focus ONLY on code syntax/functions
-    - [ ] Remove redundant music theory explanations from the glossary
-    - [ ] Explain terms like `note()`, `s()`, `slow()`, `cat()`, `stack()`, octave numbering (e.g., `c3` vs `c4`), and sharps/flats syntax (`#` vs `b`)
+- [ ] Troubleshoot Strudel audio:
+    - [ ] Verify correct guitar instrument name (try `nylon-guitar`, `clean-guitar`, or fallback to `sawtooth` if needed)
+    - [ ] Update `LessonPage.tsx` iframe `allow` attribute to include `autoplay`
+    - [ ] Test if `.s("guitar")` is valid in the embedded version
