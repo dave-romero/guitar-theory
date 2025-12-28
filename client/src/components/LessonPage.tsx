@@ -6,6 +6,10 @@ import { Link } from "wouter";
 import { GuitarTab } from "./GuitarTab";
 import { TabLegend } from "./TabLegend";
 import { LessonContent } from "@/lib/lessons";
+import { RhythmGrid } from "./visualizations/RhythmGrid";
+import { StrummingPattern } from "./visualizations/StrummingPattern";
+import { SongStructure } from "./visualizations/SongStructure";
+import { CircleOfFifths } from "./visualizations/CircleOfFifths";
 
 interface LessonPageProps {
   lesson: LessonContent;
@@ -19,6 +23,39 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
   // We use the hash-based format which is more reliable for embedding
   const encodedCode = btoa(lesson.strudelCode);
   const strudelUrl = `https://strudel.cc/?embed=1#${encodedCode}`;
+
+  const renderVisualization = () => {
+    if (!lesson.visualization) return null;
+
+    switch (lesson.visualization) {
+      case "RhythmGrid":
+        return (
+          <div className="my-8">
+            <RhythmGrid />
+          </div>
+        );
+      case "StrummingPattern":
+        return (
+          <div className="my-8">
+            <StrummingPattern />
+          </div>
+        );
+      case "SongStructure":
+        return (
+          <div className="my-8">
+            <SongStructure />
+          </div>
+        );
+      case "CircleOfFifths":
+        return (
+          <div className="my-8">
+            <CircleOfFifths />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -58,6 +95,9 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
             <div dangerouslySetInnerHTML={{ __html: lesson.explanation }} />
           </div>
 
+          {/* Visualization (if any) */}
+          {renderVisualization()}
+
           {/* Key Terms */}
           <div className="space-y-4 pt-4 border-t border-border">
             <h3 className="font-serif font-bold text-xl">Key Terms</h3>
@@ -72,26 +112,28 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           </div>
 
           {/* Guitar Tab */}
-          <div className="space-y-6 pt-4 border-t border-border">
-            <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
-            <TabLegend items={lesson.legend} />
-            <div className="flex flex-wrap gap-8 items-start">
-              {lesson.tabs.map((tab, index) => (
-                <div key={index} className="space-y-3">
-                  {tab.title && (
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
-                  )}
-                  <div className="flex justify-center bg-card border border-border rounded-lg px-4 py-1.5 shadow-sm">
-                    <GuitarTab 
-                      markers={tab.markers} 
-                      startFret={tab.startFret} 
-                      fretCount={tab.fretCount} 
-                    />
+          {lesson.tabs.length > 0 && (
+            <div className="space-y-6 pt-4 border-t border-border">
+              <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
+              {lesson.legend && <TabLegend items={lesson.legend} />}
+              <div className="flex flex-wrap gap-8 items-start">
+                {lesson.tabs.map((tab, index) => (
+                  <div key={index} className="space-y-3">
+                    {tab.title && (
+                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
+                    )}
+                    <div className="flex justify-center bg-card border border-border rounded-lg px-4 py-1.5 shadow-sm">
+                      <GuitarTab 
+                        markers={tab.markers} 
+                        startFret={tab.startFret} 
+                        fretCount={tab.fretCount} 
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Full Width Strudel Editor */}
           <div className="space-y-4 pt-8 border-t border-border">
