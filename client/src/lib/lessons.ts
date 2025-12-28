@@ -818,50 +818,337 @@ note("f3 a3 cs4").s("acoustic").slow(2)
         title: "Sus2 & Sus4 Chords",
         concept: "Suspended resolution.",
         learningGoals: ["Replace the 3rd with 2nd or 4th", "Create movement"],
-        explanation: "Sus chords replace the 3rd with a 2nd or 4th, creating a need to resolve back to the main chord.",
-        tabs: [],
-        strudelCode: "// Sus4 to Major\nnote('f3 e3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Sus2 / Sus4", color: "accent" },
+          { label: "5th", color: "secondary" }
+        ],
+        explanation: "'Sus' stands for **Suspended**. These chords create tension by replacing the 3rd (which defines Major/Minor) with a 2nd (Sus2) or a 4th (Sus4).\n\nBecause they lack a 3rd, they aren't Major or Minor. They sound 'open' and usually want to resolve back to the stable Major chord. This creates movement within a chord shape without changing the root note.",
+        tabs: [
+          {
+            title: "D Sus4 (Add Pinky)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 4, fret: 0, label: "D", color: "primary" },
+              { string: 3, fret: 2, label: "A", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "primary" },
+              { string: 1, fret: 3, label: "G", color: "accent" },
+            ]
+          },
+          {
+            title: "D Sus2 (Lift Middle Finger)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 4, fret: 0, label: "D", color: "primary" },
+              { string: 3, fret: 2, label: "A", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "primary" },
+              { string: 1, fret: 0, label: "E", color: "accent" },
+            ]
+          },
+          {
+            title: "A Sus4 (Shift Ring Finger)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 0, label: "A", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 2, label: "A", color: "primary" },
+              { string: 2, fret: 3, label: "D", color: "accent" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          }
+        ],
+        strudelCode: `// Sus Chord Resolution
+// Listen to the "pull" back to the Major chord
+
+// D Major -> D Sus4 -> D Major -> D Sus2 -> D Major
+note("d3 a3 d4 fs4, d3 a3 d4 g4, d3 a3 d4 fs4, d3 a3 d4 e4, d3 a3 d4 fs4")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// Notice how the melody note moves: F# -> G -> F# -> E -> F#
+// This is "voice leading" within a single chord position.`,
+        keyTerms: [
+          { term: "Suspended Chord", definition: "A chord where the 3rd is replaced by a 2nd or 4th." },
+          { term: "Resolution", definition: "The move from a tense chord (Sus) to a stable chord (Major)." }
+        ]
       },
       {
         id: "7th-chords",
         title: "7th Chords",
         concept: "Adding jazz and blues flavor.",
         learningGoals: ["Major 7 vs Dominant 7", "Minor 7 construction"],
-        explanation: "Adding a 7th note to a triad creates a richer, more complex sound. Essential for jazz, blues, and funk.",
-        tabs: [],
-        strudelCode: "// C Major 7\nnote('c3 e3 g3 b3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "3rd", color: "secondary" },
+          { label: "5th", color: "secondary" },
+          { label: "7th", color: "accent" }
+        ],
+        explanation: "Triads are the skeleton of harmony, but **7th chords** put the meat on the bones. By adding one more note (the 7th degree of the scale), we get a richer, more complex sound.\n\nThere are 3 main types:\n1. **Major 7 (1-3-5-7):** Dreamy, jazzy, romantic.\n2. **Dominant 7 (1-3-5-b7):** Bluesy, tense, wants to resolve.\n3. **Minor 7 (1-b3-5-b7):** Mellow, cool, laid back.",
+        tabs: [
+          {
+            title: "C Major 7 (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 0, label: "B", color: "accent" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "G Dominant 7 (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 3, label: "G", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 0, label: "D", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "primary" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 1, label: "F", color: "accent" },
+            ]
+          },
+          {
+            title: "E Minor 7 (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 0, label: "E", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 0, label: "D", color: "accent" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 0, label: "E", color: "primary" },
+            ]
+          }
+        ],
+        strudelCode: `// 7th Chords Comparison
+// Listen to the different "flavors"
+
+// 1. C Major 7 (Dreamy)
+note("c3 e3 g3 b3").s("acoustic").slow(2),
+
+// 2. C Dominant 7 (Bluesy)
+note("c3 e3 g3 bb3").s("acoustic").slow(2),
+
+// 3. C Minor 7 (Mellow)
+note("c3 eb3 g3 bb3").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Major 7: Natural 7th (B)
+// Dominant 7: Flat 7th (Bb)
+// Minor 7: Flat 3rd (Eb) AND Flat 7th (Bb)`,
+        keyTerms: [
+          { term: "Major 7", definition: "A chord with a Major 3rd and Major 7th. Sounds stable and jazzy." },
+          { term: "Dominant 7", definition: "A chord with a Major 3rd and Minor 7th. The sound of the Blues." },
+          { term: "Minor 7", definition: "A chord with a Minor 3rd and Minor 7th. Sounds smooth and relaxed." }
+        ]
       },
       {
         id: "extensions",
         title: "Extensions (9, 11, 13)",
         concept: "Color notes beyond the octave.",
         learningGoals: ["Understand compound intervals", "Add color to chords"],
-        explanation: "Extensions are notes added beyond the octave (9th, 11th, 13th) to add sophisticated color to chords.",
-        tabs: [],
-        strudelCode: "// C Major 9\nnote('c3 e3 g3 b3 d4').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "3rd / 5th", color: "secondary" },
+          { label: "Extension (9/11/13)", color: "accent" }
+        ],
+        explanation: "Extensions are notes that go beyond the octave (8). They are simply the 2nd, 4th, and 6th notes played higher up.\n\n*   **9th** = 2nd (adds sweetness)\n*   **11th** = 4th (adds space)\n*   **13th** = 6th (adds jazz flavor)\n\nThese 'color notes' turn simple chords into sophisticated sounds used in R&B, Neo-Soul, and Jazz.",
+        tabs: [
+          {
+            title: "C Add9 (The 'Wonderwall' Chord)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "accent" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "A Minor 9 (Jazzy Minor)",
+            startFret: 0,
+            fretCount: 6,
+            markers: [
+              { string: 6, fret: 5, label: "A", color: "primary" },
+              { string: 4, fret: 5, label: "G", color: "secondary" },
+              { string: 3, fret: 5, label: "C", color: "secondary" },
+              { string: 2, fret: 5, label: "E", color: "secondary" },
+              { string: 1, fret: 7, label: "B", color: "accent" },
+            ]
+          },
+          {
+            title: "E7#9 (The 'Hendrix' Chord)",
+            startFret: 0,
+            fretCount: 9,
+            markers: [
+              { string: 5, fret: 7, label: "E", color: "primary" },
+              { string: 4, fret: 6, label: "G#", color: "secondary" },
+              { string: 3, fret: 7, label: "D", color: "secondary" },
+              { string: 2, fret: 8, label: "G", color: "accent" },
+            ]
+          }
+        ],
+        strudelCode: `// Extended Chords
+// Listen to the sophisticated colors
+
+// 1. C Add9 (Sweet and pop-friendly)
+note("c3 e3 g3 d4").s("acoustic").slow(2),
+
+// 2. A Minor 9 (Deep and moody)
+note("a2 g3 c4 e4 b4").s("acoustic").slow(2),
+
+// 3. E7#9 (Tense and aggressive)
+note("e3 gs3 d4 g4").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Add9: Triad + 9th (no 7th)
+// Major 9: Major 7th + 9th
+// #9: Sharp 9 (a bluesy clash against the Major 3rd)`,
+        keyTerms: [
+          { term: "Compound Interval", definition: "An interval larger than an octave (e.g., a 9th is an octave plus a 2nd)." },
+          { term: "Add Chord", definition: "Adding an extension to a simple triad (e.g., Cadd9)." },
+          { term: "Extended Chord", definition: "Stacking extensions on top of a 7th chord (e.g., Cmaj9)." }
+        ]
       },
       {
         id: "inversions",
         title: "Chord Inversions",
         concept: "Changing the bass note.",
         learningGoals: ["Play chords with different bass notes", "Smooth voice leading"],
-        explanation: "An inversion puts a note other than the Root in the bass (lowest position), creating smooth transitions.",
-        tabs: [],
-        strudelCode: "// C Major Inversions\nnote('c3 e3 g3, e3 g3 c4, g3 c4 e4').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "3rd", color: "secondary" },
+          { label: "5th", color: "secondary" }
+        ],
+        explanation: "Normally, the Root note is at the bottom of the chord. But what if we put the 3rd or 5th at the bottom? That's an **Inversion**.\n\n*   **Root Position:** Root is lowest (C-E-G)\n*   **1st Inversion:** 3rd is lowest (E-G-C)\n*   **2nd Inversion:** 5th is lowest (G-C-E)\n\nInversions allow you to play the same chord in different places on the neck, creating smooth 'voice leading' where notes flow logically from one to the next.",
+        tabs: [
+          {
+            title: "D Major (Root Position)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 3, fret: 0, label: "D", color: "primary" },
+              { string: 2, fret: 2, label: "A", color: "secondary" },
+              { string: 1, fret: 2, label: "F#", color: "secondary" },
+            ]
+          },
+          {
+            title: "D Major (1st Inversion)",
+            startFret: 0,
+            fretCount: 5,
+            markers: [
+              { string: 3, fret: 4, label: "F#", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "primary" },
+              { string: 1, fret: 2, label: "A", color: "secondary" },
+            ]
+          },
+          {
+            title: "D Major (2nd Inversion)",
+            startFret: 5,
+            fretCount: 4,
+            markers: [
+              { string: 3, fret: 7, label: "A", color: "secondary" },
+              { string: 2, fret: 7, label: "F#", color: "secondary" },
+              { string: 1, fret: 5, label: "D", color: "primary" },
+            ]
+          }
+        ],
+        strudelCode: `// D Major Inversions
+// Same chord, different "voicings"
+
+// 1. Root Position (D in bass)
+note("d3 a3 fs4").s("acoustic").slow(2),
+
+// 2. 1st Inversion (F# in bass)
+note("fs3 d4 a4").s("acoustic").slow(2),
+
+// 3. 2nd Inversion (A in bass)
+note("a3 fs4 d5").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Notice how the chord gets higher in pitch?
+// We are moving up the neck using inversions.`,
+        keyTerms: [
+          { term: "Inversion", definition: "A chord voicing where a note other than the root is the lowest note." },
+          { term: "Voice Leading", definition: "The smooth movement of individual notes from one chord to the next." },
+          { term: "Slash Chord", definition: "A notation for inversions (e.g., C/E means C Major with E in the bass)." }
+        ]
       },
       {
         id: "slash-chords",
         title: "Slash Chords",
         concept: "Specific bass notes.",
         learningGoals: ["Read slash notation (C/G)", "Create descending basslines"],
-        explanation: "Slash chords specify a bass note that may not be in the chord, often used for walking basslines.",
-        tabs: [],
-        strudelCode: "// C/G Chord\nnote('g2 c3 e3 g3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Bass Note", color: "accent" },
+          { label: "Chord Tone", color: "secondary" }
+        ],
+        explanation: "A **Slash Chord** (e.g., C/G, read as 'C over G') tells you two things:\n1.  Play a **C Major** chord.\n2.  Make sure **G** is the lowest note (bass note).\n\nSlash chords are the secret weapon for creating smooth basslines that walk down step-by-step, connecting chords together seamlessly.",
+        tabs: [
+          {
+            title: "D/F# (D over F#)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 2, label: "F#", color: "accent" },
+              { string: 3, fret: 2, label: "A", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "primary" },
+              { string: 1, fret: 2, label: "F#", color: "secondary" },
+            ]
+          },
+          {
+            title: "C/G (C over G)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 3, label: "G", color: "accent" },
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 1, label: "C", color: "primary" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "G/B (G over B)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 2, label: "B", color: "accent" },
+              { string: 4, fret: 0, label: "D", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "primary" },
+              { string: 2, fret: 3, label: "D", color: "secondary" },
+              { string: 1, fret: 3, label: "G", color: "primary" },
+            ]
+          }
+        ],
+        strudelCode: `// The "Walk Down"
+// Listen to the bassline: G -> F# -> E
+
+// G Major -> D/F# -> E Minor
+note("g2 b2 d3 g3, fs2 a2 d3 fs3, e2 g2 b2 e3")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// This progression is used in thousands of songs.
+// Without the slash chord, the jump from G to D would sound abrupt.`,
+        keyTerms: [
+          { term: "Slash Chord", definition: "A chord symbol where the letter after the slash indicates the bass note." },
+          { term: "Walking Bass", definition: "A bass line that moves stepwise up or down the scale." },
+          { term: "Passing Chord", definition: "A chord used to connect two other chords smoothly." }
+        ]
       }
     ]
   },
