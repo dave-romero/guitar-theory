@@ -28,6 +28,7 @@ export interface LessonContent {
   strudelCode: string;
   keyTerms: { term: string; definition: string }[];
   legend?: LegendItem[];
+  visualization?: "RhythmGrid" | "StrummingPattern" | "SongStructure" | "CircleOfFifths";
 }
 
 export interface Category {
@@ -248,10 +249,10 @@ note("g2 a2 b2 c3 d3 e3 fs3 g3")
         legend: [
           { label: "Octave Note", color: "primary" }
         ],
-        explanation: "An octave is the distance from one note to the next version of that same note (e.g., Low G to High G). On the guitar, there is a consistent shape to find octaves:\n\nFrom E or A string: Go down 2 strings, and up 2 frets.\n\nThis shape is your anchor. If you know where G is on the Low E string, you instantly know where G is on the D string.",
+        explanation: "An octave is the same note, just higher or lower in pitch. On the guitar, there is a consistent shape to find the octave: **Down 2 strings, Up 2 frets**.\n\nThis works for the E and A strings. (Remember the B string shift? For the D and G strings, it's Down 2 strings, Up 3 frets!)",
         tabs: [
           {
-            title: "Octave Shape (E String Root)",
+            title: "Octave Shape (E & A Strings)",
             startFret: 3,
             fretCount: 4,
             markers: [
@@ -260,16 +261,7 @@ note("g2 a2 b2 c3 d3 e3 fs3 g3")
             ]
           },
           {
-            title: "Octave Shape (A String Root)",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 3, fret: 5, label: "C", color: "primary" },
-            ]
-          },
-          {
-            title: "Octave Shape (D String Root)",
+            title: "Octave Shape (D String - The Exception)",
             startFret: 3,
             fretCount: 5,
             markers: [
@@ -279,225 +271,56 @@ note("g2 a2 b2 c3 d3 e3 fs3 g3")
           }
         ],
         strudelCode: `// Octaves
-// The same note, but higher/lower
+// Same note, different pitch (Low vs High)
 
 cat(
-  // Low G and High G (played together)
-  stack(
-    note("g2").s("acoustic"),
-    note("g3").s("acoustic")
-  ),
+  // Low G
+  note("g2").s("acoustic"),
   
-  // Low C and High C (played together)
-  stack(
-    note("c3").s("acoustic"),
-    note("c4").s("acoustic")
-  )
+  // High G (Octave)
+  note("g3").s("acoustic")
 ).slow(2)
 
 // GLOSSARY:
-// stack(...) -> Plays notes at the same time (harmony)
-// g2 vs g3 -> The number indicates the octave range
-// 2 is low, 3 is middle, 4 is high`,
+// note("g2") -> Low G
+// note("g3") -> High G (Octave up)
+// They sound "the same" but one is higher`,
         keyTerms: [
-          { term: "Octave Shape", definition: "The physical pattern of fingers on the fretboard to find the octave of a note." },
-          { term: "Root", definition: "The note you start from." }
+          { term: "Octave", definition: "The interval between one musical pitch and another with double its frequency." },
+          { term: "Shape", definition: "A visual pattern on the fretboard." }
         ]
       },
       {
-        id: "perfect-5ths",
-        title: "Perfect 5ths",
-        concept: "The 'Power Chord' interval.",
+        id: "intervals-intro",
+        title: "Introduction to Intervals",
+        concept: "The DNA of music.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
         legend: [
-          { label: "Root Note", color: "primary" },
-          { label: "Perfect 5th", color: "secondary" }
+          { label: "Root", color: "primary" },
+          { label: "Interval", color: "secondary" }
         ],
-        explanation: "The Perfect 5th is the most stable interval after the octave. It creates a powerful, thick sound used constantly in rock and pop.\n\nShape: From the Low E or A string, go down 1 string and up 2 frets.\n\nWait... that looks like the Octave shape? Close! The Octave is down 2 strings. The 5th is down 1 string.",
+        explanation: "An interval is simply the distance between two notes. We name them by counting letters.\n\nG to A = 2nd (G, A)\nG to B = 3rd (G, A, B)\nG to C = 4th (G, A, B, C)\n\nEvery interval has a unique sound or 'feeling'.",
         tabs: [
           {
-            title: "G Power Chord (Root + 5th)",
+            title: "Major 3rd Interval (G to B)",
             startFret: 3,
             fretCount: 4,
             markers: [
               { string: 6, fret: 3, label: "G", color: "primary" },
-              { string: 5, fret: 5, label: "D", color: "secondary" },
-            ]
-          },
-          {
-            title: "C Power Chord (Root + 5th)",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 5, label: "G", color: "secondary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
             ]
           }
         ],
-        strudelCode: `// Perfect 5ths (Power Chords)
-// Strong, stable, powerful sound
+        strudelCode: `// Intervals
+// The building blocks of melody and harmony
 
 cat(
-  // G Power Chord (G + D)
-  stack(
-    note("g2").s("acoustic"),
-    note("d3").s("acoustic")
-  ),
+  // Perfect 5th (Power Chord sound)
+  note("g2 d3").s("acoustic"),
   
-  // C Power Chord (C + G)
-  stack(
-    note("c3").s("acoustic"),
-    note("g3").s("acoustic")
-  )
+  // Major 3rd (Happy sound)
+  note("g2 b2").s("acoustic")
 ).slow(2)
-
-// GLOSSARY:
-// stack(...) -> Plays notes together
-// These are "dyads" (two-note chords)
-// This interval is the foundation of rock guitar`,
-        keyTerms: [
-          { term: "Perfect 5th", definition: "An interval of 7 half steps. Highly consonant and stable." },
-          { term: "Power Chord", definition: "A chord consisting of only the Root and the 5th. Neither major nor minor." }
-        ]
-      },
-      {
-        id: "major-minor-3rds",
-        title: "Major & Minor 3rds",
-        concept: "The emotional color of music.",
-        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
-        legend: [
-          { label: "Root Note", color: "primary" },
-          { label: "3rd (Major/Minor)", color: "secondary" }
-        ],
-        explanation: "If the Root and 5th are the 'body' of the chord, the 3rd is the 'soul'. It determines if a chord is Happy (Major) or Sad (Minor).\n\nMajor 3rd: Up 1 string, back 1 fret.\nMinor 3rd: Up 1 string, back 2 frets.\n(Relative to the Root on E or A string)",
-        tabs: [
-          {
-            title: "Major 3rd (Happy)",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 5, label: "A", color: "primary" },
-              { string: 5, fret: 4, label: "C#", color: "secondary" },
-            ]
-          },
-          {
-            title: "Minor 3rd (Sad)",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 5, label: "A", color: "primary" },
-              { string: 5, fret: 3, label: "C", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Major vs Minor 3rds
-// Listen to the emotional difference
-
-cat(
-  // Major 3rd (Happy/Bright)
-  stack(
-    note("a2").s("acoustic"),
-    note("cs3").s("acoustic")
-  ),
-  
-  // Minor 3rd (Sad/Dark)
-  stack(
-    note("a2").s("acoustic"),
-    note("c3").s("acoustic")
-  )
-).slow(1.5)
-
-// GLOSSARY:
-// cs3 -> C sharp (Major 3rd of A)
-// c3 -> C natural (Minor 3rd of A)
-// Changing just this one note changes the mood entirely`,
-        keyTerms: [
-          { term: "Major 3rd", definition: "An interval of 4 half steps. Sounds bright and happy." },
-          { term: "Minor 3rd", definition: "An interval of 3 half steps. Sounds dark and sad." }
-        ]
-      },
-      {
-        id: "interval-map",
-        title: "The Interval Map",
-        concept: "Putting it all together around a Root.",
-        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
-        legend: [
-          { label: "Root Note", color: "primary" },
-          { label: "Major 3rd / 5th", color: "secondary" },
-          { label: "Minor 3rd", color: "accent" },
-          { label: "Perfect 4th", color: "muted" }
-        ],
-        explanation: "Now we can map out the key intervals surrounding any root note on the Low E string.\n\nRoot: Index finger\nMinor 3rd: Pinky (same string)\nMajor 3rd: Middle finger (next string)\nPerfect 5th: Ring finger (next string)\nOctave: Ring finger (skip a string)\n\nMemorizing this 'cluster' allows you to build chords and scales anywhere.",
-        tabs: [
-          {
-            title: "Interval Cluster (Root on E)",
-            startFret: 5,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 5, label: "R", color: "primary" },
-              { string: 6, fret: 8, label: "m3", color: "accent" },
-              { string: 5, fret: 4, label: "M3", color: "secondary" },
-              { string: 5, fret: 5, label: "4", color: "muted" },
-              { string: 5, fret: 7, label: "5", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// The Interval Map
-// Playing the intervals around a Root (A)
-
-note("a2 c3 cs3 d3 e3")
-  .s("acoustic")
-  .slow(2)
-
-// GLOSSARY:
-// a2 -> Root
-// c3 -> Minor 3rd
-// cs3 -> Major 3rd
-// d3 -> Perfect 4th
-// e3 -> Perfect 5th
-// These are the building blocks of all chords`,
-        keyTerms: [
-          { term: "Cluster", definition: "A group of intervals located conveniently near a root note." }
-        ]
-      },
-      {
-        id: "interval-shapes",
-        title: "Interval Shapes",
-        concept: "Visualizing distance as geometry.",
-        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
-        legend: [
-          { label: "Root Note", color: "primary" },
-          { label: "Target Interval", color: "secondary" }
-        ],
-        explanation: "Instead of counting frets, guitarists see shapes. A 'Power Chord' isn't '7 semitones', it's 'down one, over two'.\n\nLet's review the shapes we know:\n1. Octave (L-shape)\n2. Power Chord (Diagonal)\n3. Major 3rd (Tight diagonal)\n4. Minor 3rd (Wide diagonal or same string)",
-        tabs: [
-          {
-            title: "Shape 1: Power Chord",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "R", color: "primary" },
-              { string: 5, fret: 5, label: "5", color: "secondary" },
-            ]
-          },
-          {
-            title: "Shape 2: Major 3rd",
-            startFret: 3,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "R", color: "primary" },
-              { string: 5, fret: 2, label: "3", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Hearing the Shapes
-// 1. Power Chord (5th)
-// 2. Major 3rd
-
-cat(
-  stack(note("g2 d3").s("acoustic")),
-  stack(note("g2 b2").s("acoustic"))
-).slow(1.5)
 
 // GLOSSARY:
 // note("g2 d3") -> Root + 5th
@@ -515,40 +338,138 @@ cat(
         legend: [
           { label: "Mystery Note", color: "muted" }
         ],
-        explanation: "The ultimate goal is to hear a sound and know the shape immediately. Try this exercise:\n\n1. Play a Root note.\n2. Hum a pitch above it.\n3. Find that pitch on the guitar.\n4. Identify the interval (Is it a 5th? A 3rd?)\n\nUse the code below to test yourself. It plays a random interval - can you guess which one it is?",
+        explanation: "Music theory is useless if you can't hear it. Try to identify these intervals by ear before looking at the answer.\n\nIs it Happy (Major)? Sad (Minor)? Powerful (5th)?",
+        tabs: [],
+        strudelCode: `// Ear Training Challenge
+// Can you guess the interval?
+
+// Mystery Interval 1
+note("c3 e3").s("acoustic").slow(2),
+
+// Mystery Interval 2
+note("c3 eb3").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Listen closely to the "mood" of the two notes together.`,
+        keyTerms: [
+          { term: "Ear Training", definition: "The practice of identifying music concepts (intervals, chords, rhythms) solely by hearing them." }
+        ]
+      },
+      {
+        id: "triads-intro",
+        title: "Introduction to Triads",
+        concept: "The simplest chords.",
+        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "3rd", color: "secondary" },
+          { label: "5th", color: "secondary" }
+        ],
+        explanation: "A triad is a 3-note chord. It contains a Root, a 3rd, and a 5th.\n\n*   **Major Triad:** Root + Major 3rd + Perfect 5th (Happy)\n*   **Minor Triad:** Root + Minor 3rd + Perfect 5th (Sad)",
         tabs: [
           {
-            title: "Test Yourself",
-            startFret: 0,
-            fretCount: 12,
+            title: "G Major Triad",
+            startFret: 3,
+            fretCount: 4,
             markers: [
-              { string: 6, fret: 5, label: "?", color: "muted" },
-              { string: 5, fret: 7, label: "?", color: "muted" },
-              { string: 4, fret: 6, label: "?", color: "muted" },
+              { string: 6, fret: 3, label: "G", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 0, label: "D", color: "secondary" },
             ]
           }
         ],
-        strudelCode: `// Ear Training Game
-// Plays a Root (A) and then a random interval
-// Is it a 3rd? 5th? Octave?
+        strudelCode: `// Triads
+// 3 notes played together
 
-const root = "a2"
-const intervals = ["cs3", "e3", "a3"] // Maj 3rd, 5th, Octave
+// G Major Triad (G - B - D)
+note("g2 b2 d3").s("acoustic").slow(2),
 
-// Pick a random note from the list
-const target = choose(intervals)
-
-cat(
-  note(root).s("acoustic"),
-  note(target).s("acoustic")
-).slow(2)
+// G Minor Triad (G - Bb - D)
+note("g2 bb2 d3").s("acoustic").slow(2)
 
 // GLOSSARY:
-// choose(...) -> Picks a random item from a list
-// Run the code multiple times to get different intervals!`,
+// note("...") -> Playing notes simultaneously creates a chord
+// Notice the change from B to Bb changes the mood completely`,
         keyTerms: [
-          { term: "Ear Training", definition: "The practice of identifying music solely by hearing it." },
-          { term: "Relative Pitch", definition: "The ability to identify the distance between two notes." }
+          { term: "Triad", definition: "A chord made of three notes: Root, 3rd, and 5th." },
+          { term: "Harmony", definition: "The sound of two or more notes heard simultaneously." }
+        ]
+      },
+      {
+        id: "caged-system-intro",
+        title: "Intro to CAGED System",
+        concept: "5 shapes to rule them all.",
+        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Chord Tone", color: "secondary" }
+        ],
+        explanation: "The CAGED system shows us that there are only 5 main open chord shapes: C, A, G, E, and D. These shapes can be moved up the neck to play ANY chord anywhere.\n\nWe start by mastering these 5 open chords perfectly.",
+        tabs: [
+          {
+            title: "C Major Shape",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 1, label: "C", color: "primary" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          }
+        ],
+        strudelCode: `// The C Major Chord
+// One of the 5 CAGED shapes
+
+note("c3 e3 g3 c4 e4")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// Arpeggio: Playing the notes of a chord one by one.`,
+        keyTerms: [
+          { term: "CAGED System", definition: "A method for visualizing the fretboard using 5 common open chord shapes." },
+          { term: "Open Chord", definition: "A chord that includes one or more open strings." }
+        ]
+      },
+      {
+        id: "pentatonic-intro",
+        title: "Intro to Pentatonic Scale",
+        concept: "The 5-note scale of rock & blues.",
+        learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Scale Note", color: "secondary" }
+        ],
+        explanation: "The Pentatonic scale removes the 2 'tension' notes from the Major scale, leaving only 5 'safe' notes. It's almost impossible to hit a bad note with this scale, which is why it's the foundation of guitar solos.",
+        tabs: [
+          {
+            title: "A Minor Pentatonic (Box 1)",
+            startFret: 5,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 5, label: "A", color: "primary" },
+              { string: 6, fret: 8, label: "C", color: "secondary" },
+              { string: 5, fret: 5, label: "D", color: "secondary" },
+              { string: 5, fret: 7, label: "E", color: "secondary" },
+              { string: 4, fret: 5, label: "G", color: "secondary" },
+              { string: 4, fret: 7, label: "A", color: "primary" },
+            ]
+          }
+        ],
+        strudelCode: `// A Minor Pentatonic
+// The "Guitar Solo" Scale
+
+note("a2 c3 d3 e3 g3 a3")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// Pentatonic: Penta (5) + Tonic (Tones). A 5-note scale.`,
+        keyTerms: [
+          { term: "Pentatonic", definition: "A musical scale with five notes per octave." },
+          { term: "Box Shape", definition: "A common pattern for playing scales on the guitar that stays in one position." }
         ]
       }
     ]
@@ -560,333 +481,233 @@ cat(
       {
         id: "triad-construction",
         title: "Triad Construction",
-        concept: "Building the simplest chords from 3 notes.",
-        learningGoals: ["Understand Root-3rd-5th structure", "Build Major and Minor triads"],
+        concept: "Stacking 3rds.",
+        learningGoals: ["Build Major triads", "Build Minor triads"],
         legend: [
           { label: "Root", color: "primary" },
           { label: "3rd", color: "secondary" },
-          { label: "5th", color: "accent" }
+          { label: "5th", color: "secondary" }
         ],
-        explanation: "A triad is the most basic type of chord, consisting of just three notes stacked in intervals of thirds.\n\n1. **The Root**: The foundation note that names the chord.\n2. **The 3rd**: Determines if the chord is Major (Happy) or Minor (Sad).\n3. **The 5th**: Adds stability and thickness to the sound.\n\n**Formulas:**\n*   **Major Triad**: Root + Major 3rd + Perfect 5th (1 - 3 - 5)\n*   **Minor Triad**: Root + Minor 3rd + Perfect 5th (1 - b3 - 5)",
+        explanation: "Chords are built by stacking every other note from a scale (1-3-5). The distance between the 1 and 3 determines if it's Major or Minor.\n\n*   **Major 3rd** (4 semitones) = Happy\n*   **Minor 3rd** (3 semitones) = Sad",
         tabs: [
           {
-            title: "C Major Triad (C - E - G)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 2, label: "E", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "accent" },
-            ]
-          },
-          {
-            title: "C Minor Triad (C - Eb - G)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 1, label: "Eb", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Triad Construction
-// Listen to the difference between Major and Minor
-
-// 1. C Major Triad (C - E - G)
-// Happy, bright, stable
-note("c3 e3 g3").s("acoustic").slow(2),
-
-// 2. C Minor Triad (C - Eb - G)
-// Sad, dark, serious
-// Only the 3rd (E -> Eb) changes!
-note("c3 eb3 g3").s("acoustic").slow(2)
-
-// GLOSSARY:
-// note("...") -> Plays the notes together as a chord
-// eb3 -> E flat (the minor 3rd)`,
-        keyTerms: [
-          { term: "Triad", definition: "A 3-note chord built from a Root, 3rd, and 5th." },
-          { term: "Major 3rd", definition: "An interval of 4 half steps (2 whole steps) from the root." },
-          { term: "Minor 3rd", definition: "An interval of 3 half steps (1.5 whole steps) from the root." }
-        ]
-      },
-      {
-        id: "major-chords",
-        title: "Major Chords",
-        concept: "The 'Happy' chord shape.",
-        learningGoals: ["Identify Major chord shapes", "Play CAGED major chords"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Chord Tone", color: "secondary" },
-          { label: "Open Chord Tone", color: "secondary", outline: true }
-        ],
-        explanation: "While there are thousands of ways to play a Major chord, they all stem from 5 basic 'Open' shapes: C, A, G, E, and D. This is known as the **CAGED System**.\n\nThese shapes are movable! If you take an E Major shape and move it up 1 fret (using a barre), it becomes F Major. Move it up 3 frets, it becomes G Major.",
-        tabs: [
-          {
-            title: "C Major (Open Shape)",
+            title: "C Major Triad (C-E-G)",
             startFret: 0,
             fretCount: 4,
             markers: [
               { string: 5, fret: 3, label: "C", color: "primary" },
               { string: 4, fret: 2, label: "E", color: "secondary" },
               { string: 3, fret: 0, label: "G", color: "secondary" },
-              { string: 2, fret: 1, label: "C", color: "primary" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
             ]
           },
           {
-            title: "E Major (Open Shape)",
+            title: "C Minor Triad (C-Eb-G)",
             startFret: 0,
             fretCount: 4,
             markers: [
-              { string: 6, fret: 0, label: "E", color: "secondary" },
-              { string: 5, fret: 2, label: "B", color: "secondary" },
-              { string: 4, fret: 2, label: "E", color: "primary" },
-              { string: 3, fret: 1, label: "G#", color: "secondary" },
-              { string: 2, fret: 0, label: "B", color: "secondary" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
-            ]
-          },
-          {
-            title: "G Major (Open Shape)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "G", color: "primary" },
-              { string: 5, fret: 2, label: "B", color: "secondary" },
-              { string: 4, fret: 0, label: "D", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "primary" },
-              { string: 2, fret: 0, label: "B", color: "secondary" },
-              { string: 1, fret: 3, label: "G", color: "primary" },
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 1, label: "Eb", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
             ]
           }
         ],
-        strudelCode: `// Major Chords (CAGED)
-// Listen to the full, rich sound of open chords
+        strudelCode: `// Major vs Minor Triad
+// Listen to the 3rd change
 
-// 1. C Major
-note("c3 e3 g3 c4 e4").s("acoustic").slow(2),
+// C Major (Happy)
+note("c3 e3 g3").s("acoustic").slow(2),
 
-// 2. E Major (Deep and resonant)
-note("e2 b2 e3 gs3 b3 e4").s("acoustic").slow(2),
-
-// 3. G Major (Full 6-string chord)
-note("g2 b2 d3 g3 b3 g4").s("acoustic").slow(2)
+// C Minor (Sad)
+note("c3 eb3 g3").s("acoustic").slow(2)
 
 // GLOSSARY:
-// note("...") -> Plays all notes simultaneously
-// Notice how the Root note is doubled or tripled!`,
+// note("eb3") -> E flat (Minor 3rd of C)`,
         keyTerms: [
-          { term: "Open Chord", definition: "A chord that includes one or more open strings." },
-          { term: "CAGED System", definition: "A method of visualizing the fretboard using 5 basic chord shapes (C, A, G, E, D)." },
-          { term: "Barre Chord", definition: "A chord where one finger presses down multiple strings across the fretboard." }
+          { term: "Root", definition: "The foundation note of the chord." },
+          { term: "Third", definition: "The note that determines the chord's quality (Major or Minor)." },
+          { term: "Fifth", definition: "The stabilizing note of the chord." }
         ]
       },
       {
-        id: "minor-chords",
-        title: "Minor Chords",
-        concept: "The 'Sad' chord shape.",
-        learningGoals: ["Identify Minor chord shapes", "Compare Major vs Minor"],
+        id: "major-chords",
+        title: "Major Chords",
+        concept: "1 - 3 - 5",
+        learningGoals: ["Construct Major chords", "Identify Major sound"],
         legend: [
           { label: "Root", color: "primary" },
-          { label: "Minor 3rd", color: "accent" },
-          { label: "5th", color: "secondary" },
-          { label: "Open String", color: "secondary", outline: true }
+          { label: "Major 3rd", color: "secondary" },
+          { label: "Perfect 5th", color: "secondary" }
         ],
-        explanation: "Minor chords have a darker, sadder, or more serious sound compared to Major chords. The only theoretical difference is the **3rd**: in a Minor chord, the 3rd is lowered by one half step (flattened).\n\nThere are 3 essential 'Open' minor shapes you must know: Em, Am, and Dm.",
+        explanation: "A Major chord is the most stable sound in music. It consists of a Root, a Major 3rd, and a Perfect 5th.\n\nFormula: **R + M3 + P5**",
         tabs: [
           {
-            title: "E Minor (Open Shape)",
+            title: "E Major Shape",
             startFret: 0,
             fretCount: 4,
             markers: [
               { string: 6, fret: 0, label: "E", color: "primary" },
               { string: 5, fret: 2, label: "B", color: "secondary" },
               { string: 4, fret: 2, label: "E", color: "primary" },
-              { string: 3, fret: 0, label: "G", color: "accent" },
+              { string: 3, fret: 1, label: "G#", color: "secondary" },
               { string: 2, fret: 0, label: "B", color: "secondary" },
               { string: 1, fret: 0, label: "E", color: "primary" },
             ]
-          },
+          }
+        ],
+        strudelCode: `// E Major Chord
+// Bright, stable, happy
+
+note("e2 b2 e3 gs3 b3 e4")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// gs3 -> G sharp (The Major 3rd of E)`,
+        keyTerms: [
+          { term: "Major 3rd", definition: "An interval of 4 semitones (2 whole steps)." },
+          { term: "Consonance", definition: "A combination of notes that sounds stable and pleasant." }
+        ]
+      },
+      {
+        id: "minor-chords",
+        title: "Minor Chords",
+        concept: "1 - b3 - 5",
+        learningGoals: ["Construct Minor chords", "Identify Minor sound"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Minor 3rd", color: "secondary" },
+          { label: "Perfect 5th", color: "secondary" }
+        ],
+        explanation: "A Minor chord lowers the 3rd by one half step (flattened 3rd). This small change creates a darker, sadder, or more serious sound.\n\nFormula: **R + b3 + P5**",
+        tabs: [
           {
-            title: "A Minor (Open Shape)",
+            title: "E Minor Shape",
             startFret: 0,
             fretCount: 4,
             markers: [
-              { string: 5, fret: 0, label: "A", color: "primary" },
-              { string: 4, fret: 2, label: "E", color: "secondary" },
-              { string: 3, fret: 2, label: "A", color: "primary" },
-              { string: 2, fret: 1, label: "C", color: "accent" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
+              { string: 6, fret: 0, label: "E", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 2, label: "E", color: "primary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 0, label: "E", color: "primary" },
             ]
-          },
+          }
+        ],
+        strudelCode: `// E Minor Chord
+// Dark, sad, serious
+
+note("e2 b2 e3 g3 b3 e4")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// g3 -> G Natural (The Minor 3rd of E)
+// Compare to G# in E Major`,
+        keyTerms: [
+          { term: "Minor 3rd", definition: "An interval of 3 semitones (1.5 whole steps)." },
+          { term: "Flat (b)", definition: "Lowering a note by one half step." }
+        ]
+      },
+      {
+        id: "diminished-chords",
+        title: "Diminished Chords",
+        concept: "1 - b3 - b5",
+        learningGoals: ["Construct Diminished chords", "Identify tension"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Minor 3rd", color: "secondary" },
+          { label: "Flat 5th", color: "accent" }
+        ],
+        explanation: "If we take a Minor chord and ALSO lower the 5th, we get a Diminished chord. This chord is very unstable and tense. It wants to resolve to a stable chord.\n\nFormula: **R + b3 + b5**",
+        tabs: [
           {
-            title: "D Minor (Open Shape)",
+            title: "B Diminished Triad",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 2, label: "B", color: "primary" },
+              { string: 4, fret: 3, label: "D", color: "secondary" },
+              { string: 3, fret: 4, label: "F", color: "accent" },
+            ]
+          }
+        ],
+        strudelCode: `// Diminished Chord
+// Tense, scary, unstable
+
+note("b2 d3 f3")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// Triton: The interval of a flattened 5th, known as the "Devil's Interval" in history.`,
+        keyTerms: [
+          { term: "Diminished", definition: "Made smaller. Lowering both the 3rd and the 5th." },
+          { term: "Dissonance", definition: "A combination of notes that sounds unstable and harsh." }
+        ]
+      },
+      {
+        id: "augmented-chords",
+        title: "Augmented Chords",
+        concept: "1 - 3 - #5",
+        learningGoals: ["Construct Augmented chords", "Identify dreamlike sound"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Major 3rd", color: "secondary" },
+          { label: "Sharp 5th", color: "accent" }
+        ],
+        explanation: "If we take a Major chord and RAISE the 5th, we get an Augmented chord. It sounds dreamy, floating, or unresolved.\n\nFormula: **R + M3 + #5**",
+        tabs: [
+          {
+            title: "C Augmented",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 1, label: "G#", color: "accent" },
+            ]
+          }
+        ],
+        strudelCode: `// Augmented Chord
+// Dreamy, floating, spacey
+
+note("c3 e3 gs3")
+  .s("acoustic")
+  .slow(2)
+
+// GLOSSARY:
+// Augmented: Made larger. Raising the 5th.`,
+        keyTerms: [
+          { term: "Augmented", definition: "Made larger. Raising the 5th by a half step." },
+          { term: "Whole Tone", definition: "A scale made entirely of whole steps, related to augmented chords." }
+        ]
+      },
+      {
+        id: "sus-chords",
+        title: "Sus Chords (Sus2, Sus4)",
+        concept: "Replacing the 3rd.",
+        learningGoals: ["Construct Sus2/Sus4", "Create movement"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Suspended Note", color: "accent" },
+          { label: "5th", color: "secondary" }
+        ],
+        explanation: "Sus (Suspended) chords replace the 3rd with either a 2nd (Sus2) or a 4th (Sus4). Because there is no 3rd, they are neither Major nor Minor. They sound open and airy.\n\n*   **Sus2:** 1 - 2 - 5\n*   **Sus4:** 1 - 4 - 5",
+        tabs: [
+          {
+            title: "Dsus2",
             startFret: 0,
             fretCount: 4,
             markers: [
               { string: 4, fret: 0, label: "D", color: "primary" },
               { string: 3, fret: 2, label: "A", color: "secondary" },
               { string: 2, fret: 3, label: "D", color: "primary" },
-              { string: 1, fret: 1, label: "F", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Minor Chords
-// Listen to the melancholic sound
-
-// 1. E Minor (Dark and heavy)
-note("e2 b2 e3 g3 b3 e4").s("acoustic").slow(2),
-
-// 2. A Minor (Sad but clear)
-note("a2 e3 a3 c4 e4").s("acoustic").slow(2),
-
-// 3. D Minor (Serious and tight)
-note("d3 a3 d4 f4").s("acoustic").slow(2)
-
-// GLOSSARY:
-// Notice the "G" in E Minor, "C" in A Minor, "F" in D Minor
-// These are the Minor 3rds that give the sad quality`,
-        keyTerms: [
-          { term: "Minor Chord", definition: "A chord built from a Root, Minor 3rd, and Perfect 5th." },
-          { term: "Flattened 3rd", definition: "lowering the 3rd note of a scale by one half step." }
-        ]
-      },
-      {
-        id: "diminished-chords",
-        title: "Diminished Chords",
-        concept: "Tension and instability.",
-        learningGoals: ["Construct diminished triads", "Use as passing chords"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Minor 3rd", color: "accent" },
-          { label: "Diminished 5th", color: "muted" }
-        ],
-        explanation: "Diminished chords sound tense, scary, or unresolved. They are built by stacking two **Minor 3rds** on top of each other.\n\nThe formula is **1 - b3 - b5**. This 'flat 5' interval is also known as the **Tritone** (the Devil's Interval).",
-        tabs: [
-          {
-            title: "B Diminished Triad (Top 3 Strings)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 3, fret: 4, label: "B", color: "primary" },
-              { string: 2, fret: 3, label: "D", color: "accent" },
-              { string: 1, fret: 1, label: "F", color: "muted" },
-            ]
-          },
-          {
-            title: "E Diminished Triad (Movable Shape)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 2, label: "E", color: "primary" },
-              { string: 3, fret: 3, label: "Bb", color: "muted" },
-              { string: 2, fret: 2, label: "C#", color: "accent" }, // Actually C# is dim7, strictly Edim is E-G-Bb. Let's use strict triad.
-              // Correction: E Diminished Triad is E - G - Bb.
-              // Let's use a simpler shape: x-x-2-3-2-x (E-Bb-C# is Edim7).
-              // Let's stick to the Bdim shape moved up or a simple Ddim shape.
-              // Ddim: x-x-0-1-3-x (D-Ab-F).
-              // Let's use the D-G-B string set for Edim: x-x-2-0-x-x (E-G... missing Bb).
-              // Let's use the A string root shape: x-1-2-3-x-x (Bb-E-G... inversion).
-              // Let's use the standard "Staircase" shape for Dim7 which is what guitarists usually play.
-              // But for pure triad: x-x-5-3-5-x (G-Bb-E).
-              // Let's stick to the Bdim shape above, it's a clear triad.
-              // And maybe a D Diminished: x-x-0-1-3-x (D-Ab-F).
-            ]
-          },
-          {
-             title: "D Diminished Triad",
-             startFret: 0,
-             fretCount: 4,
-             markers: [
-               { string: 4, fret: 0, label: "D", color: "primary" },
-               { string: 3, fret: 1, label: "Ab", color: "muted" },
-               { string: 2, fret: 3, label: "D", color: "primary" }, // Doubled root
-               { string: 1, fret: 1, label: "F", color: "accent" }
-             ]
-          }
-        ],
-        strudelCode: `// Diminished Chords
-// Listen to the tension (The "Horror Movie" chord)
-
-// C Major (Happy)
-note("c3 e3 g3").s("acoustic").slow(2),
-
-// C Diminished (Tense)
-note("c3 eb3 gb3").s("acoustic").slow(2)
-
-// GLOSSARY:
-// Tritone: An interval of three whole tones (e.g., C to F#), known for its dissonance.`,
-        keyTerms: [
-          { term: "Diminished Chord", definition: "A triad consisting of two minor thirds above the root." },
-          { term: "Tritone", definition: "An interval of three whole tones, creating strong tension." }
-        ]
-      },
-       {
-        id: "augmented-chords",
-        title: "Augmented Chords",
-        concept: "The 'Dreamy' chord shape.",
-        learningGoals: ["Understand augmented formula", "Play augmented triads"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Major 3rd", color: "accent" },
-          { label: "Augmented 5th", color: "muted" }
-        ],
-        explanation: "Augmented chords sound dreamy, floating, or sometimes anxious. Like diminished chords, they are unstable and want to move.\n\nThe formula is **1 - 3 - #5**. This means you take a Major chord and raise the 5th by one half step (sharpen it).",
-        tabs: [
-          {
-            title: "C Augmented Triad (Top 3 Strings)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 3, fret: 1, label: "G#", color: "muted" },
-              { string: 2, fret: 1, label: "C", color: "primary" },
               { string: 1, fret: 0, label: "E", color: "accent" },
             ]
           },
           {
-            title: "F Augmented Triad (Movable Shape)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 3, label: "F", color: "primary" },
-              { string: 3, fret: 2, label: "A", color: "accent" },
-              { string: 2, fret: 2, label: "C#", color: "muted" },
-            ]
-          }
-        ],
-        strudelCode: `// Augmented Chords
-// Listen to the "floating" quality
-
-// 1. C Augmented (C - E - G#)
-note("c3 e3 gs3").s("acoustic").slow(2),
-
-// 2. F Augmented (F - A - C#)
-note("f3 a3 cs4").s("acoustic").slow(2)
-
-// GLOSSARY:
-// Augmented chords are symmetrical (Major 3rd + Major 3rd)
-// They are often used in movie soundtracks for dream sequences.`,
-        keyTerms: [
-          { term: "Augmented 5th", definition: "A Perfect 5th raised by one half step (#5)." },
-          { term: "Whole Tone Scale", definition: "A scale made entirely of whole steps, closely related to augmented chords." }
-        ]
-      },
-      {
-        id: "sus-chords",
-        title: "Sus2 & Sus4 Chords",
-        concept: "Suspended resolution.",
-        learningGoals: ["Replace the 3rd with 2nd or 4th", "Create movement"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Sus2 / Sus4", color: "accent" },
-          { label: "5th", color: "secondary" }
-        ],
-        explanation: "'Sus' stands for **Suspended**. These chords create tension by replacing the 3rd (which defines Major/Minor) with a 2nd (Sus2) or a 4th (Sus4).\n\nBecause they lack a 3rd, they aren't Major or Minor. They sound 'open' and usually want to resolve back to the stable Major chord. This creates movement within a chord shape without changing the root note.",
-        tabs: [
-          {
-            title: "D Sus4 (Add Pinky)",
+            title: "Dsus4",
             startFret: 0,
             fretCount: 4,
             markers: [
@@ -895,62 +716,41 @@ note("f3 a3 cs4").s("acoustic").slow(2)
               { string: 2, fret: 3, label: "D", color: "primary" },
               { string: 1, fret: 3, label: "G", color: "accent" },
             ]
-          },
-          {
-            title: "D Sus2 (Lift Middle Finger)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 0, label: "D", color: "primary" },
-              { string: 3, fret: 2, label: "A", color: "secondary" },
-              { string: 2, fret: 3, label: "D", color: "primary" },
-              { string: 1, fret: 0, label: "E", color: "accent" },
-            ]
-          },
-          {
-            title: "A Sus4 (Shift Ring Finger)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 0, label: "A", color: "primary" },
-              { string: 4, fret: 2, label: "E", color: "secondary" },
-              { string: 3, fret: 2, label: "A", color: "primary" },
-              { string: 2, fret: 3, label: "D", color: "accent" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
-            ]
           }
         ],
-        strudelCode: `// Sus Chord Resolution
-// Listen to the "pull" back to the Major chord
+        strudelCode: `// Suspended Chords
+// Open, airy, unresolved
 
-// D Major -> D Sus4 -> D Major -> D Sus2 -> D Major
-note("d3 a3 d4 fs4, d3 a3 d4 g4, d3 a3 d4 fs4, d3 a3 d4 e4, d3 a3 d4 fs4")
-  .s("acoustic")
-  .slow(2)
+// D Major (Reference)
+note("d3 a3 d4 fs4").s("acoustic").slow(2),
+
+// Dsus2 (Replaces F# with E)
+note("d3 a3 d4 e4").s("acoustic").slow(2),
+
+// Dsus4 (Replaces F# with G)
+note("d3 a3 d4 g4").s("acoustic").slow(2)
 
 // GLOSSARY:
-// Notice how the melody note moves: F# -> G -> F# -> E -> F#
-// This is "voice leading" within a single chord position.`,
+// Suspension: A note that creates tension by delaying a resolution.`,
         keyTerms: [
-          { term: "Suspended Chord", definition: "A chord where the 3rd is replaced by a 2nd or 4th." },
-          { term: "Resolution", definition: "The move from a tense chord (Sus) to a stable chord (Major)." }
+          { term: "Suspended", definition: "Replacing the 3rd of a chord with a 2nd or 4th." },
+          { term: "Resolution", definition: "Moving from a tense or suspended note to a stable chord tone." }
         ]
       },
       {
         id: "7th-chords",
         title: "7th Chords",
-        concept: "Adding jazz and blues flavor.",
-        learningGoals: ["Major 7 vs Dominant 7", "Minor 7 construction"],
+        concept: "Adding a 4th note.",
+        learningGoals: ["Construct Major 7", "Construct Dominant 7", "Construct Minor 7"],
         legend: [
           { label: "Root", color: "primary" },
           { label: "3rd", color: "secondary" },
-          { label: "5th", color: "secondary" },
           { label: "7th", color: "accent" }
         ],
-        explanation: "Triads are the skeleton of harmony, but **7th chords** put the meat on the bones. By adding one more note (the 7th degree of the scale), we get a richer, more complex sound.\n\nThere are 3 main types:\n1. **Major 7 (1-3-5-7):** Dreamy, jazzy, romantic.\n2. **Dominant 7 (1-3-5-b7):** Bluesy, tense, wants to resolve.\n3. **Minor 7 (1-b3-5-b7):** Mellow, cool, laid back.",
+        explanation: "7th chords add a 4th note to the triad (the 7th note of the scale). This adds richness and complexity.\n\n*   **Major 7:** Major Triad + Major 7th (Jazzy/Pretty)\n*   **Dominant 7:** Major Triad + Minor 7th (Bluesy/Tense)\n*   **Minor 7:** Minor Triad + Minor 7th (Smooth/Mellow)",
         tabs: [
           {
-            title: "C Major 7 (Open Shape)",
+            title: "C Major 7",
             startFret: 0,
             fretCount: 4,
             markers: [
@@ -958,46 +758,30 @@ note("d3 a3 d4 fs4, d3 a3 d4 g4, d3 a3 d4 fs4, d3 a3 d4 e4, d3 a3 d4 fs4")
               { string: 4, fret: 2, label: "E", color: "secondary" },
               { string: 3, fret: 0, label: "G", color: "secondary" },
               { string: 2, fret: 0, label: "B", color: "accent" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
             ]
           },
           {
-            title: "G Dominant 7 (Open Shape)",
+            title: "C Dominant 7",
             startFret: 0,
             fretCount: 4,
             markers: [
-              { string: 6, fret: 3, label: "G", color: "primary" },
-              { string: 5, fret: 2, label: "B", color: "secondary" },
-              { string: 4, fret: 0, label: "D", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "primary" },
-              { string: 2, fret: 0, label: "B", color: "secondary" },
-              { string: 1, fret: 1, label: "F", color: "accent" },
-            ]
-          },
-          {
-            title: "E Minor 7 (Open Shape)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "E", color: "primary" },
-              { string: 5, fret: 2, label: "B", color: "secondary" },
-              { string: 4, fret: 0, label: "D", color: "accent" },
-              { string: 3, fret: 0, label: "G", color: "secondary" },
-              { string: 2, fret: 0, label: "B", color: "secondary" },
-              { string: 1, fret: 0, label: "E", color: "primary" },
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 3, label: "Bb", color: "accent" },
+              { string: 2, fret: 1, label: "C", color: "primary" },
             ]
           }
         ],
-        strudelCode: `// 7th Chords Comparison
-// Listen to the different "flavors"
+        strudelCode: `// 7th Chords
+// Adding richness
 
-// 1. C Major 7 (Dreamy)
+// C Major 7 (C-E-G-B)
 note("c3 e3 g3 b3").s("acoustic").slow(2),
 
-// 2. C Dominant 7 (Bluesy)
+// C Dominant 7 (C-E-G-Bb)
 note("c3 e3 g3 bb3").s("acoustic").slow(2),
 
-// 3. C Minor 7 (Mellow)
+// C Minor 7 (C-Eb-G-Bb)
 note("c3 eb3 g3 bb3").s("acoustic").slow(2)
 
 // GLOSSARY:
@@ -1168,19 +952,6 @@ note("a3 fs4 d5").s("acoustic").slow(2)
             ]
           },
           {
-            title: "C/G (C over G)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "G", color: "accent" },
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 2, label: "E", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "secondary" },
-              { string: 2, fret: 1, label: "C", color: "primary" },
-              { string: 1, fret: 0, label: "E", color: "secondary" },
-            ]
-          },
-          {
             title: "G/B (G over B)",
             startFret: 0,
             fretCount: 4,
@@ -1193,500 +964,182 @@ note("a3 fs4 d5").s("acoustic").slow(2)
             ]
           }
         ],
-        strudelCode: `// The "Walk Down"
-// Listen to the bassline: G -> F# -> E
+        strudelCode: `// Slash Chords
+// Creating a walking bassline
 
-// G Major -> D/F# -> E Minor
-note("g2 b2 d3 g3, fs2 a2 d3 fs3, e2 g2 b2 e3")
-  .s("acoustic")
-  .slow(2)
+// G -> D/F# -> Em
+// Bass: G -> F# -> E
+
+cat(
+  note("g2 b2 d3 g3").s("acoustic"), // G
+  note("fs2 a2 d3 a3").s("acoustic"), // D/F#
+  note("e2 g2 b2 e3").s("acoustic")  // Em
+).slow(2)
 
 // GLOSSARY:
-// This progression is used in thousands of songs.
-// Without the slash chord, the jump from G to D would sound abrupt.`,
+// Walking Bass: A bass line that moves stepwise up or down the scale.`,
         keyTerms: [
-          { term: "Slash Chord", definition: "A chord symbol where the letter after the slash indicates the bass note." },
-          { term: "Walking Bass", definition: "A bass line that moves stepwise up or down the scale." },
-          { term: "Passing Chord", definition: "A chord used to connect two other chords smoothly." }
+          { term: "Slash Chord", definition: "A chord symbol indicating a specific bass note (Chord / Bass)." },
+          { term: "Stepwise Motion", definition: "Moving from one note to the adjacent note in the scale." }
         ]
       }
     ]
   },
   {
-    id: "keys-numbers",
-    title: "Keys & Numbers",
+    id: "number-system",
+    title: "The Number System",
     lessons: [
       {
         id: "nashville-numbers",
-        title: "The Nashville Number System",
-        concept: "Universal language of chords.",
-        learningGoals: ["Convert chords to numbers", "Transpose instantly"],
-        legend: [
-          { label: "1 Chord (Root)", color: "primary" },
-          { label: "4 Chord", color: "secondary" },
-          { label: "5 Chord", color: "accent" }
-        ],
-        explanation: "The **Nashville Number System** replaces chord names with numbers based on the scale. In the key of C, C is 1, F is 4, and G is 5.\n\nWhy do this? Because the *relationship* between the 1, 4, and 5 chords sounds the same in every key. If you learn a song as '1 - 4 - 5', you can instantly play it in G, D, or A just by shifting the starting note.",
-        tabs: [
-          {
-            title: "Key of C (1-4-5)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "1 (C)", color: "primary" },
-              { string: 4, fret: 3, label: "4 (F)", color: "secondary" },
-              { string: 6, fret: 3, label: "5 (G)", color: "accent" },
-            ]
-          },
-          {
-            title: "Key of G (1-4-5)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "1 (G)", color: "primary" },
-              { string: 5, fret: 3, label: "4 (C)", color: "secondary" },
-              { string: 4, fret: 0, label: "5 (D)", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// The "1 - 4 - 5" Progression
-// Listen: It sounds the same in both keys!
+        title: "Nashville Number System",
+        concept: "The universal language of musicians.",
+        learningGoals: ["Understand I-IV-V", "Transpose songs instantly"],
+        explanation: "Instead of calling chords by their names (C, F, G), we call them by their number in the scale (1, 4, 5). This allows us to play the same song in ANY key without relearning it.\n\nIn Major keys:\n*   **I, IV, V** are Major\n*   **ii, iii, vi** are Minor\n*   **vii°** is Diminished",
+        tabs: [],
+        strudelCode: `// The I - IV - V Progression
+// The most common progression in music
 
-// Key of C: C -> F -> G
+// Key of C: C - F - G
 note("c3 f3 g3").s("acoustic").slow(2),
 
-// Key of G: G -> C -> D
-note("g2 c3 d3").s("acoustic").slow(2)
+// Key of G: G - C - D
+note("g3 c4 d4").s("acoustic").slow(2)
 
 // GLOSSARY:
-// 1 (Tonic): Home base
-// 4 (Subdominant): Moving away
-// 5 (Dominant): Tension, wants to go home`,
+// Notice the relationship sounds the same?
+// That's because the intervals (numbers) are identical.`,
         keyTerms: [
-          { term: "Number System", definition: "A method of transcribing music by denoting the scale degree on which a chord is built." },
-          { term: "Tonic", definition: "The first note (degree) of a scale, or the '1' chord." }
-        ]
+          { term: "Nashville Number System", definition: "A method of transcribing music by denoting the scale degree on which a chord is built." },
+          { term: "Diatonic", definition: "Involving only notes proper to the prevailing key without chromatic alteration." }
+        ],
+        visualization: "CircleOfFifths"
       },
       {
         id: "diatonic-chords",
         title: "Diatonic Chords",
-        concept: "Chords that belong to a key.",
-        learningGoals: ["Build chords on every scale degree", "Know the Major Key pattern"],
-        legend: [
-          { label: "Major Chord", color: "primary" },
-          { label: "Minor Chord", color: "secondary" },
-          { label: "Diminished", color: "muted" }
-        ],
-        explanation: "If you build a chord on every note of the Major Scale using only the notes *in* that scale, you get a specific pattern that never changes:\n\n1.  **Major**\n2.  **Minor**\n3.  **Minor**\n4.  **Major**\n5.  **Major**\n6.  **Minor**\n7.  **Diminished**\n\nMemorize this: **M - m - m - M - M - m - dim**.",
-        tabs: [
-          {
-            title: "Key of C Diatonic Chords",
-            startFret: 0,
-            fretCount: 13,
-            markers: [
-              { string: 5, fret: 3, label: "C (M)", color: "primary" },
-              { string: 5, fret: 5, label: "Dm", color: "secondary" },
-              { string: 5, fret: 7, label: "Em", color: "secondary" },
-              { string: 5, fret: 8, label: "F (M)", color: "primary" },
-              { string: 5, fret: 10, label: "G (M)", color: "primary" },
-              { string: 5, fret: 12, label: "Am", color: "secondary" },
-              { string: 5, fret: 14, label: "Bdim", color: "muted" },
-            ]
-          }
-        ],
-        strudelCode: `// The Sound of a Key
-// Walking up the C Major Scale with Chords
+        concept: "Chords that belong to the key.",
+        learningGoals: ["Build chords from scales", "Know the pattern"],
+        explanation: "Diatonic chords are the family of chords that naturally occur in a key. If you stick to these chords, everything will sound 'correct'.\n\nThe pattern for Major keys is always:\n**Major - Minor - Minor - Major - Major - Minor - Diminished**",
+        tabs: [],
+        strudelCode: `// Diatonic Chords in C Major
+// All white keys on the piano
 
-// C, Dm, Em, F, G, Am, Bdim, C
-note("c3 d3 e3 f3 g3 a3 b3 c4")
-  .s("acoustic")
-  .slow(2)
+// I (Major) - ii (Minor) - V (Major)
+note("c3 d3 g3").s("acoustic").slow(2)
 
 // GLOSSARY:
-// Diatonic: "Of the key". Notes or chords that belong to the scale.
-// Notice how the 7th chord (Bdim) sounds the most tense.`,
+// Diatonic: "Through the tones". Notes that belong to the key.`,
         keyTerms: [
-          { term: "Diatonic", definition: "Involving only notes proper to the prevailing key without chromatic alteration." },
-          { term: "Roman Numerals", definition: "Used to represent chords: Uppercase (I, IV, V) for Major, lowercase (ii, iii, vi) for Minor." }
-        ]
-      },
-      {
-        id: "identifying-key",
-        title: "Identifying the Key",
-        concept: "Finding 'Home'.",
-        learningGoals: ["Find the tonic center", "Analyze chord progressions"],
-        legend: [
-          { label: "Tension (V)", color: "accent" },
-          { label: "Resolution (I)", color: "primary" }
-        ],
-        explanation: "The **Key** is the gravitational center of a song. All chords feel like they are pulling towards one specific chord: the **Tonic** (or 1 chord).\n\nThe strongest pull in music is from the **5 chord (V)** to the **1 chord (I)**. If you hear a G7 chord resolving to C, you are likely in the key of C.",
-        tabs: [
-          {
-            title: "V to I Resolution (G7 -> C)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "G", color: "accent" },
-              { string: 5, fret: 3, label: "C", color: "primary" },
-            ]
-          }
-        ],
-        strudelCode: `// Tension and Resolution
-// Feel the pull of the V chord (G) to the I chord (C)
-
-// G Major (Tension) -> C Major (Home)
-note("g3 b3 d4, c3 e3 g3")
-  .s("acoustic")
-  .slow(1.5)
-
-// GLOSSARY:
-// Resolution: The relief of tension when moving to a stable chord.
-// Cadence: A sequence of chords that brings a phrase to a close.`,
-        keyTerms: [
-          { term: "Tonic Center", definition: "The main note or chord that a piece of music resolves to." },
-          { term: "Cadence", definition: "A melodic or harmonic configuration that creates a sense of resolution." }
-        ]
-      },
-      {
-        id: "circle-of-fifths",
-        title: "The Circle of Fifths",
-        concept: "The map of all keys.",
-        learningGoals: ["Navigate key signatures", "Predict chord changes"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Perfect 5th", color: "secondary" }
-        ],
-        explanation: "The **Circle of Fifths** is a diagram that arranges the 12 keys in a circle. Moving clockwise, each key is a **Perfect 5th** higher than the last and adds one sharp (#) to the key signature.\n\n*   C (0 sharps)\n*   G (1 sharp)\n*   D (2 sharps)\n*   A (3 sharps)\n*   E (4 sharps)\n\nThis map tells you which chords are likely to appear together.",
-        tabs: [
-          {
-            title: "Moving by 5ths (C -> G -> D -> A)",
-            startFret: 0,
-            fretCount: 6,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 6, fret: 3, label: "G", color: "secondary" },
-              { string: 4, fret: 0, label: "D", color: "secondary" },
-              { string: 5, fret: 0, label: "A", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Walking the Circle
-// Each step is a Perfect 5th
-
-// C -> G -> D -> A -> E
-note("c3 g3 d3 a3 e3")
-  .s("acoustic")
-  .slow(2)
-
-// GLOSSARY:
-// Notice how the sound gets "brighter" as we move up.
-// This is adding sharps to the key signature.`,
-        keyTerms: [
-          { term: "Circle of Fifths", definition: "A visual representation of the relationships among the 12 tones of the chromatic scale." },
-          { term: "Key Signature", definition: "A set of sharps or flats placed on the staff to indicate the key." }
-        ]
-      },
-      {
-        id: "relative-minor",
-        title: "Relative Minor",
-        concept: "The sad twin of every major key.",
-        learningGoals: ["Find the relative minor (6th degree)", "Switch between Major/Minor"],
-        legend: [
-          { label: "Major Root (1)", color: "primary" },
-          { label: "Minor Root (6)", color: "accent" }
-        ],
-        explanation: "Every Major key has a **Relative Minor** key that shares the *exact same notes*. It is always the **6th degree** of the Major scale.\n\n*   Key of C Major (C-D-E-F-G-A-B)\n*   Key of A Minor (A-B-C-D-E-F-G)\n\nThey are the same family, just with a different 'head of household'.",
-        tabs: [
-          {
-            title: "C Major and A Minor Roots",
-            startFret: 0,
-            fretCount: 6,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 6, fret: 5, label: "A", color: "accent" },
-              { string: 5, fret: 0, label: "A", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Same Notes, Different Mood
-// C Major Scale vs A Minor Scale
-
-// C Major (Happy/Bright)
-note("c3 d3 e3 f3 g3 a3 b3 c4").s("acoustic").slow(4),
-
-// A Minor (Sad/Dark) - Same notes!
-note("a2 b2 c3 d3 e3 f3 g3 a3").s("acoustic").slow(4)
-
-// GLOSSARY:
-// Relative Minor: The minor key that shares the same key signature as a major key.`,
-        keyTerms: [
-          { term: "Relative Minor", definition: "The minor key based on the sixth note of the major scale." },
-          { term: "Parallel Minor", definition: "A minor key that starts on the same root note as the major key (e.g., C Major vs C Minor)." }
+          { term: "Key Signature", definition: "A set of sharps or flats that defines the key." },
+          { term: "Roman Numerals", definition: "Used to represent chords (Uppercase = Major, Lowercase = Minor)." }
         ]
       },
       {
         id: "transposing",
         title: "Transposing",
         concept: "Changing the key.",
-        learningGoals: ["Move songs to fit your voice", "Use a capo effectively"],
-        legend: [
-          { label: "Original Key (C)", color: "primary" },
-          { label: "New Key (D)", color: "accent" }
-        ],
-        explanation: "**Transposing** is the art of moving a piece of music up or down in pitch without changing the relationship between the notes. It's like taking a picture and moving it to a different frame—the picture stays the same, but the location changes.\n\nThis is crucial for singers. If a song is too high, you transpose it down. If it's too low, you transpose it up.",
-        tabs: [
-          {
-            title: "Transposing C to D (Up a Whole Step)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 0, label: "D", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Same Melody, Different Key
-// Listen to "Twinkle Twinkle Little Star"
+        learningGoals: ["Shift keys mentally", "Use a capo"],
+        explanation: "Transposing is simply moving a song up or down in pitch. If you know the numbers (I-IV-V), you can move the song to G, D, or A instantly to fit a singer's voice.",
+        tabs: [],
+        strudelCode: `// Transposing
+// Same song, different key
 
-// Key of C
-note("c3 c3 g3 g3 a3 a3 g3").s("acoustic").slow(2),
+// Key of C (I-V-vi-IV)
+note("c3 g3 a3 f3").s("acoustic").slow(2),
 
-// Key of D (Everything moves up 2 frets)
-note("d3 d3 a3 a3 b3 b3 a3").s("acoustic").slow(2)
+// Key of G (I-V-vi-IV)
+note("g3 d4 e4 c4").s("acoustic").slow(2)
 
 // GLOSSARY:
 // Capo: A device used to transpose the guitar without changing chord shapes.`,
         keyTerms: [
-          { term: "Transposition", definition: "The process of moving a collection of notes up or down in pitch by a constant interval." },
+          { term: "Transpose", definition: "To change the key of a piece of music." },
           { term: "Capo", definition: "A clamp fastened across all the strings of a fretted musical instrument to raise their tuning." }
         ]
       },
       {
-        id: "modulation",
-        title: "Modulation",
-        concept: "Changing key within a song.",
-        learningGoals: ["Recognize key changes", "Use pivot chords"],
-        legend: [
-          { label: "Key 1", color: "primary" },
-          { label: "Key 2", color: "accent" }
-        ],
-        explanation: "**Modulation** is when the key center shifts *in the middle* of a song. It's often used in the final chorus to create a lift in energy (the 'Truck Driver's Gear Change').\n\nTo modulate smoothly, we often use a **Pivot Chord**—a chord that exists in both the old key and the new key.",
-        tabs: [
-          {
-            title: "Direct Modulation (C -> D)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 0, label: "D", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// The "Gear Change" Modulation
-// Often used in the final chorus
+        id: "circle-of-fifths",
+        title: "Circle of Fifths",
+        concept: "The map of all keys.",
+        learningGoals: ["Find related keys", "Understand sharps/flats"],
+        explanation: "The Circle of Fifths organizes all 12 keys like a clock. Adjacent keys share 6 out of 7 notes, making them closely related. It's the ultimate cheat sheet for songwriting and modulation.",
+        tabs: [],
+        strudelCode: `// Circle of Fifths Motion
+// Moving by 5ths is very strong
 
-// Chorus in C Major
-note("c3 e3 g3 c4").s("acoustic").slow(2),
-
-// SUDDENLY: Chorus in D Major!
-note("d3 fs3 a3 d4").s("acoustic").slow(2)
+// C -> G -> D -> A -> E
+note("c3 g3 d4 a4 e5").s("acoustic").slow(2)
 
 // GLOSSARY:
-// Pivot Chord: A chord common to both keys used to smooth the transition.`,
+// Modulation: Changing from one key to another within a piece of music.`,
         keyTerms: [
-          { term: "Modulation", definition: "The act or process of changing from one key (tonic, or tonal center) to another." },
-          { term: "Pivot Chord", definition: "A chord that is common to both the original key and the new key." }
-        ]
+          { term: "Circle of Fifths", definition: "A visual representation of the relationships among the 12 tones of the chromatic scale." },
+          { term: "Key Signature", definition: "The sharps or flats at the beginning of a staff indicating the key." }
+        ],
+        visualization: "CircleOfFifths"
       },
       {
-        id: "secondary-dominants",
-        title: "Secondary Dominants",
-        concept: "Borrowing the V of V.",
-        learningGoals: ["Create stronger resolutions", "Spice up progressions"],
-        legend: [
-          { label: "Diatonic Chord", color: "primary" },
-          { label: "Secondary Dominant", color: "accent" }
-        ],
-        explanation: "A **Secondary Dominant** is a fancy way of saying: 'Let's make a minor chord Major for a second to create tension.'\n\nIn the key of C, the A chord is normally minor (Am). But if we play **A Major (A7)**, it pulls strongly to D Minor. We call this the 'V of ii' (Five of Two).",
-        tabs: [
-          {
-            title: "C -> A7 -> Dm (The Jazz Turnaround)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 2, label: "A7", color: "accent" },
-              { string: 4, fret: 0, label: "Dm", color: "primary" },
-            ]
-          }
-        ],
-        strudelCode: `// Secondary Dominant Example
-// Listen to the A7 pull to Dm
+        id: "relative-minor",
+        title: "Relative Minor",
+        concept: "The sad twin.",
+        learningGoals: ["Find the vi chord", "Switch between Major/Minor"],
+        explanation: "Every Major key has a 'Relative Minor' key that shares the EXACT same notes. The Relative Minor is always the 6th note (vi) of the Major scale.\n\nC Major's relative minor is A Minor. They are two sides of the same coin.",
+        tabs: [],
+        strudelCode: `// Relative Minor
+// Same notes, different center
 
-// Normal: C -> Am -> Dm -> G
-note("c3 a2 d3 g2").s("acoustic").slow(2),
+// C Major (Happy)
+note("c3 e3 g3").s("acoustic").slow(2),
 
-// Spiced Up: C -> A7 -> Dm -> G
-note("c3 a2 cs3 d3 g2").s("acoustic").slow(2)
+// A Minor (Sad)
+note("a2 c3 e3").s("acoustic").slow(2)
 
 // GLOSSARY:
-// The C# in the A7 chord is the "leading tone" to D.`,
+// Aeolian Mode: Another name for the Natural Minor scale.`,
         keyTerms: [
-          { term: "Secondary Dominant", definition: "An altered chord (major or dominant seventh) that is the dominant of a diatonic chord other than the tonic." },
-          { term: "Leading Tone", definition: "A note that resolves by rising a semitone to the target note." }
-        ]
-      },
-      {
-        id: "borrowed-chords",
-        title: "Borrowed Chords",
-        concept: "Modal Interchange.",
-        learningGoals: ["Use the minor iv chord", "Mix Major and Minor"],
-        legend: [
-          { label: "Major Key", color: "primary" },
-          { label: "Borrowed (Minor Key)", color: "accent" }
-        ],
-        explanation: "**Borrowed Chords** (or Modal Interchange) involves taking a chord from the parallel minor key and using it in a major key song.\n\nThe most famous example is the **Minor 4 (iv)** chord. In C Major, the 4 chord is F Major. But if we play **F Minor**, it creates a heartbreaking, nostalgic sound.",
-        tabs: [
-          {
-            title: "The 'Beatles' Cadence (IV -> iv -> I)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 3, label: "F", color: "primary" },
-              { string: 4, fret: 3, label: "Fm", color: "accent" },
-              { string: 5, fret: 3, label: "C", color: "primary" },
-            ]
-          }
-        ],
-        strudelCode: `// The "Minor 4" Trick
-// C -> F -> Fm -> C
-
-// F Major (Happy)
-note("f3 a3 c4").s("acoustic").slow(2),
-
-// F Minor (Sad/Nostalgic)
-note("f3 ab3 c4").s("acoustic").slow(2),
-
-// Resolve to C
-note("c3 e3 g3").s("acoustic").slow(2)
-
-// GLOSSARY:
-// The Ab note in Fm slides down to G in the C chord.`,
-        keyTerms: [
-          { term: "Modal Interchange", definition: "Borrowing chords from a parallel mode (e.g., using chords from C Minor in a C Major song)." },
-          { term: "Picardy Third", definition: "Ending a minor key song with a major chord." }
-        ]
-      },
-      {
-        id: "common-progressions",
-        title: "Common Progressions",
-        concept: "The DNA of pop music.",
-        learningGoals: ["Play the '4 Chords'", "Recognize common patterns"],
-        legend: [
-          { label: "I", color: "primary" },
-          { label: "V", color: "secondary" },
-          { label: "vi", color: "accent" },
-          { label: "IV", color: "muted" }
-        ],
-        explanation: "If you learn just **four chords**, you can play thousands of pop songs. The progression **I - V - vi - IV** (1-5-6-4) is the most popular sequence in modern music history.\n\nIn the key of C: **C - G - Am - F**.",
-        tabs: [
-          {
-            title: "The 'Axis of Awesome' (C-G-Am-F)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 6, fret: 3, label: "G", color: "secondary" },
-              { string: 5, fret: 0, label: "Am", color: "accent" },
-              { string: 4, fret: 3, label: "F", color: "muted" },
-            ]
-          }
-        ],
-        strudelCode: `// The "4 Chords" Loop
-// Used by: Journey, Beatles, Adele, Lady Gaga...
-
-// C -> G -> Am -> F
-note("c3 g2 a2 f2")
-  .s("acoustic")
-  .slow(1)
-  .repeat(2)
-
-// GLOSSARY:
-// Try singing "Let It Be" or "No Woman No Cry" over this.`,
-        keyTerms: [
-          { term: "Pop Punk Progression", definition: "A variation (I-V-vi-IV) common in pop punk music." },
-          { term: "Doo-Wop Progression", definition: "I-vi-IV-V (C-Am-F-G), popular in the 50s." }
+          { term: "Relative Minor", definition: "The minor key that shares the same key signature as a major key." },
+          { term: "Parallel Minor", definition: "A minor key that starts on the same root note as a major key (e.g., C Major vs C Minor)." }
         ]
       }
     ]
   },
   {
-    id: "rhythm-timing",
-    title: "Rhythm & Timing",
+    id: "phrasing",
+    title: "Phrasing (Rhythm)",
     lessons: [
       {
         id: "time-signatures",
         title: "Time Signatures",
         concept: "The heartbeat of music.",
-        learningGoals: ["Understand 4/4 vs 3/4", "Count beats per measure"],
-        legend: [
-          { label: "Strong Beat (1)", color: "primary" },
-          { label: "Weak Beat", color: "secondary" }
-        ],
-        explanation: "The **Time Signature** appears at the start of a piece of music. The top number tells you **how many beats** are in each measure.\n\n*   **4/4 (Common Time):** Count '1, 2, 3, 4'. Used in 99% of Rock/Pop.\n*   **3/4 (Waltz Time):** Count '1, 2, 3'. Used in ballads and waltzes.",
-        tabs: [
-          {
-            title: "4/4 Pulse (ONE two three four)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "primary" },
-              { string: 6, fret: 0, label: "2", color: "secondary" },
-              { string: 6, fret: 0, label: "3", color: "secondary" },
-              { string: 6, fret: 0, label: "4", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Feel the Pulse
-// 4/4 vs 3/4
+        learningGoals: ["Feel 4/4 time", "Feel 3/4 time"],
+        explanation: "The Time Signature tells you how many beats are in a bar. \n\n*   **4/4 (Common Time):** ONE-two-three-four. Used in 90% of rock/pop.\n*   **3/4 (Waltz):** ONE-two-three. Has a swaying feel.",
+        tabs: [],
+        strudelCode: `// Time Signatures
+// Listen to the accent on the "1"
 
-// 4/4 (Rock Beat)
-note("c2 c2 c2 c2").s("sawtooth").slow(1),
+// 4/4 Time (Rock)
+note("c3 c3 c3 c3").s("acoustic").velocity("1 0.5 0.8 0.5").slow(1),
 
-// 3/4 (Waltz Feel)
-note("c2 c3 c3").s("sawtooth").slow(1)
+// 3/4 Time (Waltz)
+note("c3 c3 c3").s("acoustic").velocity("1 0.5 0.5").slow(1)
 
 // GLOSSARY:
-// Measure (Bar): A segment of time defined by a given number of beats.`,
+// Downbeat: The first beat of the measure.`,
         keyTerms: [
-          { term: "Time Signature", definition: "A numerical sign indicating the meter of a musical composition." },
-          { term: "Downbeat", definition: "The first beat of a measure." }
-        ]
+          { term: "Time Signature", definition: "A fraction that indicates the meter of a piece of music (top number = beats per bar)." },
+          { term: "Tempo", definition: "The speed of the music (BPM)." }
+        ],
+        visualization: "RhythmGrid"
       },
       {
         id: "note-values",
         title: "Note Values",
-        concept: "How long a note lasts.",
-        learningGoals: ["Read rhythm notation", "Understand subdivision"],
-        legend: [
-          { label: "Whole Note", color: "primary" },
-          { label: "Quarter Note", color: "accent" }
-        ],
-        explanation: "Rhythm is math. Each note has a specific duration relative to the beat.\n\n*   **Whole Note:** Lasts 4 beats.\n*   **Half Note:** Lasts 2 beats.\n*   **Quarter Note:** Lasts 1 beat.\n*   **Eighth Note:** Lasts 1/2 beat.\n*   **Sixteenth Note:** Lasts 1/4 beat.",
-        tabs: [
-          {
-            title: "Rhythm Pyramid",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Whole (4)", color: "primary" },
-              { string: 5, fret: 0, label: "Half (2)", color: "secondary" },
-              { string: 4, fret: 0, label: "Quarter (1)", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Subdivision
-// Dividing the beat into smaller chunks
+        concept: "Whole, Half, Quarter, Eighth.",
+        learningGoals: ["Count rhythms", "Subdivide the beat"],
+        explanation: "Rhythm is math. \n\n*   **Whole Note:** Lasts 4 beats.\n*   **Half Note:** Lasts 2 beats.\n*   **Quarter Note:** Lasts 1 beat.\n*   **Eighth Note:** Lasts 1/2 beat (counted '1 & 2 &').",
+        tabs: [],
+        strudelCode: `// Note Values
+// Dividing time
 
 // Quarter Notes (1, 2, 3, 4)
 note("c3 c3 c3 c3").s("acoustic").slow(1),
@@ -1695,355 +1148,88 @@ note("c3 c3 c3 c3").s("acoustic").slow(1),
 note("c3 c3 c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
 
 // GLOSSARY:
-// Tempo: The speed of the music, measured in Beats Per Minute (BPM).`,
+// Subdivision: Breaking the beat into smaller parts.`,
         keyTerms: [
-          { term: "Subdivision", definition: "Breaking down a beat into smaller rhythmic units." },
-          { term: "Rest", definition: "A musical symbol marking a period of silence." }
-        ]
+          { term: "Note Value", definition: "The duration of a note relative to the tempo." },
+          { term: "Rest", definition: "A period of silence in music." }
+        ],
+        visualization: "RhythmGrid"
       },
       {
         id: "strumming-patterns",
         title: "Strumming Patterns",
-        concept: "The engine of the guitar.",
-        learningGoals: ["Master the 'Island Strum'", "Control Down/Up strokes"],
-        legend: [
-          { label: "Down Stroke", color: "primary" },
-          { label: "Up Stroke", color: "accent" },
-          { label: "Miss", color: "muted" }
-        ],
-        explanation: "Strumming is about keeping your hand moving constantly like a pendulum. **Down** on the beat (1, 2, 3, 4), **Up** on the 'and' (&).\n\nThe most famous pattern is the **Island Strum**:\n**D - D U - U D U**\n(Down, Miss, Down-Up, Miss-Up, Down-Up)",
-        tabs: [
-          {
-            title: "The Island Strum (D - DU - UDU)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// The "Island Strum"
-// Used in: "Somewhere Over The Rainbow", "I'm Yours"
+        concept: "Downs and Ups.",
+        learningGoals: ["Master D-D-U-U-D-U", "Keep the hand moving"],
+        explanation: "The golden rule of strumming: **Keep your hand moving like a pendulum.**\n\n*   Down strokes on the beat (1, 2, 3, 4)\n*   Up strokes on the 'and' (&)\n\nThe most famous pattern is the 'Island Strum': D - D U - U D U",
+        tabs: [],
+        strudelCode: `// Strumming Pattern
+// Down - Down Up - Up Down Up
 
-// D - DU - UDU
-note("c3 ~ c3 c3 ~ c3 c3 c3")
+note("c3 [c3,e3] ~ [c3,e3] [c3,e3] [c3,e3]")
   .s("acoustic")
   .slow(1)
 
 // GLOSSARY:
-// Keep your hand moving even when you don't hit the strings!`,
+// Ghost Strum: Keeping the hand moving without hitting the strings.`,
         keyTerms: [
-          { term: "Strumming", definition: "A sweeping action where a finger or plectrum brushes over several strings." },
-          { term: "Ghost Strum", definition: "Moving the hand as if to strum but missing the strings intentionally to keep time." }
-        ]
+          { term: "Strumming", definition: "Sweeping the pick or fingers across the strings." },
+          { term: "Syncopation", definition: "Accenting the weak beats or off-beats." }
+        ],
+        visualization: "StrummingPattern"
       },
       {
         id: "syncopation",
         title: "Syncopation",
         concept: "Playing off the beat.",
-        learningGoals: ["Feel the 'and' of the beat", "Create groove"],
-        legend: [
-          { label: "On Beat", color: "secondary" },
-          { label: "Off Beat (Syncopated)", color: "accent" }
-        ],
-        explanation: "**Syncopation** involves accenting the weak beats or the 'off-beats' (the 'and's). This is what makes music feel funky, groovy, or surprising.\n\nIn Reggae, the guitar almost *never* plays on the 1. It plays on the 'and' of every beat.",
-        tabs: [
-          {
-            title: "Reggae Chop (The 'Skank')",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1 (Rest)", color: "muted" },
-              { string: 6, fret: 0, label: "& (Chop)", color: "accent" },
-              { string: 6, fret: 0, label: "2 (Rest)", color: "muted" },
-              { string: 6, fret: 0, label: "& (Chop)", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Reggae Rhythm
-// Listen to the "Chop" on the off-beats
+        learningGoals: ["Feel the 'and'", "Create groove"],
+        explanation: "Syncopation means accenting the weak beats (the '&'s) instead of the strong beats. This creates a funky, groovy feel that makes people want to dance.",
+        tabs: [],
+        strudelCode: `// Syncopation
+// Accenting the off-beats
 
-// Rest - Chop - Rest - Chop
-note("~ c3 ~ c3 ~ c3 ~ c3")
-  .s("acoustic")
-  .slow(1)
+note("~ c3 ~ c3").s("acoustic").slow(1)
 
 // GLOSSARY:
-// The "One Drop": A reggae drum beat where the kick drum lands on beat 3, leaving beat 1 empty.`,
+// Groove: The rhythmic 'feel' or 'swing' of a piece.`,
         keyTerms: [
           { term: "Syncopation", definition: "A disturbance or interruption of the regular flow of rhythm." },
-          { term: "Off-beat", definition: "The points of time between the main beats." }
-        ]
-      },
-      {
-        id: "triplets",
-        title: "Triplets",
-        concept: "3 notes in the space of 2.",
-        learningGoals: ["Count 'Trip-a-let'", "Feel the shuffle"],
-        legend: [
-          { label: "1", color: "primary" },
-          { label: "2", color: "secondary" },
-          { label: "3", color: "secondary" }
+          { term: "Off-beat", definition: "The points between the main beats." }
         ],
-        explanation: "**Triplets** divide a beat into three equal parts instead of two. We count this as **'1-trip-let, 2-trip-let'**.\n\nThis feel is the foundation of Blues and Shuffle rhythms. It creates a rolling, swinging motion.",
-        tabs: [
-          {
-            title: "Triplet Feel (1-trip-let)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "primary" },
-              { string: 6, fret: 0, label: "trip", color: "secondary" },
-              { string: 6, fret: 0, label: "let", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Straight vs Triplet
-// Feel the difference
-
-// Straight 8ths (Rock)
-note("c3 c3 c3 c3").s("acoustic").slow(1),
-
-// Triplets (Blues Shuffle)
-note("c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
-
-// GLOSSARY:
-// Shuffle: A rhythm based on triplets where the middle note is often skipped.`,
-        keyTerms: [
-          { term: "Triplet", definition: "A group of three notes played inside the length of two notes." },
-          { term: "Shuffle", definition: "A rhythmic feel based on triplets, common in blues and jazz." }
-        ]
-      },
-      {
-        id: "odd-meters",
-        title: "Odd Meters",
-        concept: "Beyond 4/4.",
-        learningGoals: ["Count 5/4 and 7/8", "Feel complex grooves"],
-        legend: [
-          { label: "Beat", color: "primary" },
-          { label: "Accent", color: "accent" }
-        ],
-        explanation: "Most music is in 4/4, but **Odd Meters** like 5/4 or 7/8 create a unique, uneven feel. They are common in Progressive Rock, Jazz, and Folk music.\n\n*   **5/4 (Take Five):** Count '1-2-3, 1-2'.\n*   **7/8 (Money):** Count '1-2-3-4, 1-2-3'.",
-        tabs: [
-          {
-            title: "5/4 Pulse (1-2-3, 1-2)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "accent" },
-              { string: 6, fret: 0, label: "2", color: "primary" },
-              { string: 6, fret: 0, label: "3", color: "primary" },
-              { string: 6, fret: 0, label: "4", color: "accent" },
-              { string: 6, fret: 0, label: "5", color: "primary" },
-            ]
-          }
-        ],
-        strudelCode: `// 5/4 Time Signature
-// "Take Five" Feel
-
-// Count: ONE two three FOUR five
-note("c2 c2 c2 c2 c2")
-  .s("sawtooth")
-  .slow(1.25) // 5 beats per cycle
-
-// GLOSSARY:
-// Compound Meter: Meters that can be divided into groups of 2 and 3 (like 5/4 or 7/8).`,
-        keyTerms: [
-          { term: "Odd Meter", definition: "A time signature where the number of beats in a bar is not divisible by 2 or 3." },
-          { term: "Compound Meter", definition: "A time signature where the beat is divided into three equal parts." }
-        ]
-      },
-      {
-        id: "tempo-dynamics",
-        title: "Tempo & Dynamics",
-        concept: "Speed and volume.",
-        learningGoals: ["Control speed (BPM)", "Use volume for expression"],
-        legend: [
-          { label: "Soft (p)", color: "secondary" },
-          { label: "Loud (f)", color: "accent" }
-        ],
-        explanation: "Music isn't just about notes; it's about **how** you play them.\n\n*   **Tempo:** The speed (BPM). Fast = Excitement, Slow = Sadness/Grandeur.\n*   **Dynamics:** The volume. Getting louder (**Crescendo**) builds tension; getting softer (**Decrescendo**) creates intimacy.",
-        tabs: [
-          {
-            title: "Dynamics Control",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "p", color: "secondary" },
-              { string: 6, fret: 0, label: "mp", color: "secondary" },
-              { string: 6, fret: 0, label: "mf", color: "primary" },
-              { string: 6, fret: 0, label: "f", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Dynamics (Volume)
-// Getting louder (Crescendo)
-
-note("c3 c3 c3 c3")
-  .s("acoustic")
-  .velocity("0.2 0.4 0.7 1") // Increasing volume
-  .slow(1)
-
-// GLOSSARY:
-// BPM: Beats Per Minute.
-// Piano (p): Soft.
-// Forte (f): Loud.`,
-        keyTerms: [
-          { term: "Tempo", definition: "The speed at which a passage of music is or should be played." },
-          { term: "Dynamics", definition: "The variation in loudness between notes or phrases." }
-        ]
-      },
-      {
-        id: "groove",
-        title: "Finding the Groove",
-        concept: "Locking in.",
-        learningGoals: ["Play in the pocket", "Listen to the drums"],
-        legend: [
-          { label: "Kick Drum", color: "primary" },
-          { label: "Snare", color: "accent" },
-          { label: "Guitar", color: "secondary" }
-        ],
-        explanation: "**Groove** (or 'The Pocket') is when the band locks together so tightly it feels like one giant instrument. As a guitarist, your job is to lock in with the **Kick Drum** and **Snare**.\n\nIf the drummer hits the kick, you hit a bass note. If they hit the snare, you chop a chord.",
-        tabs: [
-          {
-            title: "Locking with the Kick",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Kick", color: "primary" },
-              { string: 6, fret: 0, label: "Kick", color: "primary" },
-              { string: 6, fret: 0, label: "Snare", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// In The Pocket
-// Guitar locking with Drums
-
-// Drums: Kick - Snare - Kick - Snare
-// Guitar: Root - Chord - Root - Chord
-
-stack(
-  note("c2 ~ c2 ~").s("sawtooth"), // Bass/Kick
-  note("~ [e3,g3] ~ [e3,g3]").s("acoustic") // Chord/Snare
-).slow(1)
-
-// GLOSSARY:
-// Pocket: The perfect synchronization of the rhythm section.`,
-        keyTerms: [
-          { term: "Groove", definition: "The sense of propulsive rhythmic 'feel' or sense of 'swing'." },
-          { term: "Pocket", definition: "When the rhythm section is playing perfectly in time with one another." }
-        ]
+        visualization: "RhythmGrid"
       },
       {
         id: "percussive-guitar",
         title: "Percussive Guitar",
         concept: "The guitar as a drum.",
-        learningGoals: ["Muted strums (chucks)", "Slap techniques"],
-        legend: [
-          { label: "Strum", color: "primary" },
-          { label: "Percussive Slap (X)", color: "accent" }
-        ],
-        explanation: "The guitar is also a percussion instrument. You can use **Percussive Slaps** (hitting the strings with your thumb or palm) to create a backbeat, simulating a snare drum.\n\nThis is the secret to the 'John Mayer' or 'Ed Sheeran' acoustic style.",
-        tabs: [
-          {
-            title: "Slap Strum Technique",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Strum", color: "primary" },
-              { string: 6, fret: 0, label: "X", color: "accent" },
-              { string: 6, fret: 0, label: "Strum", color: "primary" },
-              { string: 6, fret: 0, label: "X", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Percussive Guitar
-// Strum - Slap - Strum - Slap
+        learningGoals: ["Slap strum", "Palm mute"],
+        explanation: "You can add rhythm by hitting the strings without playing notes. The 'Slap' (marked with an X) adds a snare drum sound to your strumming.",
+        tabs: [],
+        strudelCode: `// Percussive Slap
+// Adding a "snare" sound
 
-// The "x" note represents a percussive hit
-note("c3 x c3 x")
-  .s("acoustic")
-  .slow(1)
+note("c3 ~ x ~").s("acoustic").slow(1)
 
 // GLOSSARY:
-// Chuck: A percussive sound made by muting the strings with the palm while strumming.`,
+// Palm Mute: Resting the palm on the bridge to dampen the strings.`,
         keyTerms: [
-          { term: "Percussive Guitar", definition: "Using the body of the guitar or muted strings to create rhythmic sounds." },
-          { term: "Backbeat", definition: "A strong accent on one of the normally unaccented beats of the bar." }
-        ]
-      },
-      {
-        id: "rubato",
-        title: "Rubato",
-        concept: "Free time.",
-        learningGoals: ["Play expressively", "Ignore the metronome"],
-        legend: [
-          { label: "Slow", color: "secondary" },
-          { label: "Fast", color: "accent" }
+          { term: "Percussive", definition: "Sounding like a drum or percussion instrument." },
+          { term: "Slap", definition: "Hitting the strings with the picking hand to create a percussive sound." }
         ],
-        explanation: "**Rubato** (Italian for 'robbed') means playing without a strict beat. You 'rob' time from one phrase and give it to another.\n\nThis is how you make a solo sound like a human voice—speeding up for excitement, slowing down for emphasis.",
-        tabs: [
-          {
-            title: "Free Flow",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Slow", color: "secondary" },
-              { string: 6, fret: 1, label: "Fast", color: "accent" },
-              { string: 6, fret: 2, label: "Fast", color: "accent" },
-              { string: 6, fret: 3, label: "Slow", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Rubato (Free Time)
-// Notice the tempo fluctuation
-
-note("c3 d3 e3 f3 g3")
-  .s("acoustic")
-  .cps("0.5 0.6 0.8 0.6 0.4") // Changing speed per note
-  .slow(2)
-
-// GLOSSARY:
-// Ad Lib: At liberty. Playing freely.`,
-        keyTerms: [
-          { term: "Rubato", definition: "The temporary disregarding of strict tempo to allow an expressive quickening or slackening, usually without altering the overall pace." },
-          { term: "Ad Libitum", definition: "At one's pleasure; freely." }
-        ]
+        visualization: "StrummingPattern"
       }
     ]
   },
   {
-    id: "song-structure",
-    title: "Song Structure",
+    id: "song-architecture",
+    title: "Song Architecture",
     lessons: [
       {
         id: "verse-chorus",
         title: "Verse & Chorus",
         concept: "The basic building blocks.",
         learningGoals: ["Identify song sections", "Understand energy flow"],
-        legend: [
-          { label: "Verse (Story)", color: "secondary" },
-          { label: "Chorus (Anthem)", color: "primary" }
-        ],
         explanation: "Most songs are built on two main pillars:\n\n1.  **The Verse:** Tells the story. The lyrics change each time. The energy is usually lower.\n2.  **The Chorus:** The main message or 'hook'. The lyrics are the same each time. The energy is high and anthemic.",
-        tabs: [
-          {
-            title: "Energy Flow",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Verse", color: "secondary" },
-              { string: 6, fret: 1, label: "Verse", color: "secondary" },
-              { string: 6, fret: 2, label: "Chorus", color: "primary" },
-              { string: 6, fret: 2, label: "Chorus", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Verse vs Chorus Dynamics
 // Listen to the lift in energy
 
@@ -2058,30 +1244,16 @@ note("c3 e3 g3 c4").s("acoustic").velocity(1).slow(1)
         keyTerms: [
           { term: "Verse", definition: "A section of a song where the melody stays the same but lyrics change, telling the story." },
           { term: "Chorus", definition: "The repeated section of a song that contains the main message and hook." }
-        ]
+        ],
+        visualization: "SongStructure"
       },
       {
         id: "bridge",
         title: "The Bridge",
         concept: "Taking the listener somewhere new.",
         learningGoals: ["Write a contrasting section", "Build tension"],
-        legend: [
-          { label: "Main Key", color: "primary" },
-          { label: "Bridge (New Feel)", color: "accent" }
-        ],
         explanation: "The **Bridge** (or 'Middle 8') usually happens after the second chorus. Its job is to break the repetition and take the listener somewhere new before the final chorus.\n\nBridges often use different chords, a new melody, or even a key change.",
-        tabs: [
-          {
-            title: "Bridge Progression (vi - IV)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 0, label: "Am", color: "accent" },
-              { string: 4, fret: 3, label: "F", color: "accent" },
-              { string: 6, fret: 3, label: "G", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Bridge Section
 // Breaking away from the main theme
 
@@ -2096,30 +1268,16 @@ note("a2 c3 e3").s("acoustic").slow(2)
         keyTerms: [
           { term: "Bridge", definition: "A contrasting section that prepares for the return of the original material section." },
           { term: "Release", definition: "Another term for the bridge, providing relief from the verse/chorus repetition." }
-        ]
+        ],
+        visualization: "SongStructure"
       },
       {
         id: "intros-outros",
         title: "Intros & Outros",
         concept: "First and last impressions.",
         learningGoals: ["Create hooks", "End songs smoothly"],
-        legend: [
-          { label: "Intro", color: "primary" },
-          { label: "Outro", color: "secondary" }
-        ],
         explanation: "**Intros** set the mood and establish the key. **Outros** bring the song to a satisfying close (or a fade out).\n\nA great intro is instantly recognizable (think 'Sweet Child O' Mine' or 'Stairway to Heaven').",
-        tabs: [
-          {
-            title: "Iconic Intro Riff Idea",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 2, label: "E", color: "primary" },
-              { string: 3, fret: 0, label: "G", color: "primary" },
-              { string: 2, fret: 1, label: "C", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Intro
 // Setting the scene
 
@@ -2133,31 +1291,16 @@ note("e3 g3 c4 e4")
         keyTerms: [
           { term: "Intro", definition: "The opening section of a piece of music, usually instrumental." },
           { term: "Outro", definition: "The concluding section of a piece of music." }
-        ]
+        ],
+        visualization: "SongStructure"
       },
       {
         id: "pre-chorus",
         title: "The Pre-Chorus",
         concept: "The ramp up.",
         learningGoals: ["Build anticipation", "Connect verse to chorus"],
-        legend: [
-          { label: "Verse", color: "secondary" },
-          { label: "Pre-Chorus (Build)", color: "accent" },
-          { label: "Chorus", color: "primary" }
-        ],
         explanation: "The **Pre-Chorus** is the link between the Verse and the Chorus. Its job is to **build anticipation**.\n\nIt often uses rising chords or a melody that climbs higher in pitch, making the listener crave the release of the Chorus.",
-        tabs: [
-          {
-            title: "The Build Up",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Low", color: "secondary" },
-              { string: 6, fret: 2, label: "Build", color: "accent" },
-              { string: 6, fret: 4, label: "High", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Pre-Chorus Lift
 // Building tension...
 
@@ -2175,33 +1318,16 @@ note("c4 e4 g4").s("acoustic").slow(2)
         keyTerms: [
           { term: "Pre-Chorus", definition: "A section that builds tension and leads into the chorus." },
           { term: "Build-up", definition: "Increasing intensity, volume, or tempo to prepare for a drop or chorus." }
-        ]
+        ],
+        visualization: "SongStructure"
       },
       {
         id: "hooks-riffs",
         title: "Hooks & Riffs",
         concept: "The earworm.",
         learningGoals: ["Write memorable melodies", "Create signature riffs"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Pentatonic Note", color: "secondary" },
-          { label: "Blue Note", color: "accent" }
-        ],
         explanation: "A **Hook** is the catchy part of the song you can't stop singing (usually the vocal melody). A **Riff** is a repeated instrumental pattern (like the guitar intro to 'Smoke on the Water').\n\nGreat riffs are often simple, rhythmic, and use the **Pentatonic Scale**.",
-        tabs: [
-          {
-            title: "Classic Rock Riff (E Minor Pentatonic)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "E", color: "primary" },
-              { string: 6, fret: 3, label: "G", color: "secondary" },
-              { string: 5, fret: 0, label: "A", color: "secondary" },
-              { string: 5, fret: 1, label: "Bb", color: "accent" }, // Blue note
-              { string: 5, fret: 2, label: "B", color: "secondary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Iconic Riff Idea
 // Simple, repetitive, catchy
 
@@ -2223,24 +1349,8 @@ note("e2 g2 a2 e2 g2 bb2 a2")
         title: "Arrangement",
         concept: "Putting it all together.",
         learningGoals: ["Layer instruments", "Create space"],
-        legend: [
-          { label: "Bass", color: "primary" },
-          { label: "Chords", color: "secondary" },
-          { label: "Melody", color: "accent" }
-        ],
         explanation: "**Arrangement** is the art of deciding *who plays what and when*. A common mistake is everyone playing at once.\n\nThink of it like a conversation: if everyone shouts, it's noise. If people take turns and support each other, it's harmony.",
-        tabs: [
-          {
-            title: "Layering Example",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "Bass", color: "primary" },
-              { string: 4, fret: 0, label: "Chord", color: "secondary" },
-              { string: 2, fret: 1, label: "Melody", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Building an Arrangement
 // 1. Bass -> 2. Chords -> 3. Melody
 
@@ -2255,154 +1365,52 @@ stack(
         keyTerms: [
           { term: "Arrangement", definition: "The adaptation of a composition for performance by different instruments or voices." },
           { term: "Texture", definition: "How the melodic, rhythmic, and harmonic materials are combined in a composition." }
-        ]
+        ],
+        visualization: "SongStructure"
       },
       {
         id: "dynamics-flow",
         title: "Dynamics & Flow",
         concept: "The emotional journey.",
         learningGoals: ["Map song intensity", "Create peaks and valleys"],
-        legend: [
-          { label: "Low Energy", color: "secondary" },
-          { label: "High Energy", color: "accent" }
-        ],
         explanation: "A great song takes the listener on a journey. It shouldn't be at '10' the whole time.\n\n*   **Start Low:** Draw the listener in.\n*   **Build:** Create tension in the Pre-Chorus.\n*   **Peak:** Release the energy in the Chorus.\n*   **Drop:** Bring it down for the Bridge.",
-        tabs: [
-          {
-            title: "Intensity Map",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Verse", color: "secondary" },
-              { string: 6, fret: 1, label: "Pre", color: "primary" },
-              { string: 6, fret: 2, label: "Chorus", color: "accent" },
-              { string: 6, fret: 0, label: "Bridge", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// The Emotional Arc
-// Quiet -> Build -> Loud
+        tabs: [],
+        strudelCode: `// Dynamics (Volume)
+// Controlling the intensity
 
 note("c3 c3 c3 c3")
   .s("acoustic")
-  .velocity("0.3 0.5 0.8 1") // Growing louder
+  .velocity("0.2 0.4 0.6 1") // Getting louder
   .slow(1)
 
 // GLOSSARY:
-// Contour: The shape of the melody or dynamic curve over time.`,
+// Crescendo: Gradually getting louder.`,
         keyTerms: [
           { term: "Dynamics", definition: "The variation in loudness between notes or phrases." },
-          { term: "Contour", definition: "The shape of a melody or the rise and fall of intensity in a piece." }
-        ]
+          { term: "Crescendo", definition: "A gradual increase in loudness." }
+        ],
+        visualization: "SongStructure"
       },
       {
-        id: "improvisation",
-        title: "Improvisation",
-        concept: "Composing on the spot.",
-        learningGoals: ["Use scales creatively", "Sing with the guitar"],
-        legend: [
-          { label: "Root (Home)", color: "primary" },
-          { label: "Safe Note", color: "secondary" },
-          { label: "Blue Note", color: "accent" }
-        ],
-        explanation: "**Improvisation** is just spontaneous composition. You aren't just playing random notes; you are 'speaking' with your instrument.\n\nThe best way to start is to **sing a melody in your head**, then try to find it on the fretboard.",
-        tabs: [
-          {
-            title: "Safe Notes (C Major Pentatonic)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 0, label: "D", color: "secondary" },
-              { string: 4, fret: 2, label: "E", color: "secondary" },
-              { string: 3, fret: 0, label: "G", color: "secondary" },
-              { string: 3, fret: 2, label: "A", color: "secondary" },
-            ]
-          }
-        ],
-        strudelCode: `// Jamming Track
-// Try playing C, D, E, G, A over this
+        id: "rubato",
+        title: "Rubato (Free Time)",
+        concept: "Stealing time.",
+        learningGoals: ["Play expressively", "Break the grid"],
+        explanation: "**Rubato** means 'robbed time'. It's when you speed up or slow down expressively, ignoring the strict beat. This is common in solo guitar intros or emotional ballads.",
+        tabs: [],
+        strudelCode: `// Rubato (Free Time)
+// Notice the tempo fluctuation
 
-note("c2 g2 a2 f2")
-  .s("sawtooth")
-  .slow(2)
-  .repeat(4)
-
-// GLOSSARY:
-// Lick: A short, recognizable musical phrase or pattern.`,
-        keyTerms: [
-          { term: "Improvisation", definition: "Creating music spontaneously without a written score." },
-          { term: "Lick", definition: "A stock pattern or phrase consisting of a short series of notes." }
-        ]
-      },
-      {
-        id: "ear-training",
-        title: "Ear Training",
-        concept: "Listening deep.",
-        learningGoals: ["Identify intervals", "Transcribe songs"],
-        legend: [
-          { label: "Root", color: "primary" },
-          { label: "Target Note", color: "accent" }
-        ],
-        explanation: "**Ear Training** is the superpower of great musicians. It's the ability to hear a sound and know exactly where it is on the guitar.\n\nStart by identifying **Intervals** using famous songs:\n*   **Perfect 5th:** Star Wars Theme\n*   **Major 3rd:** When The Saints Go Marching In\n*   **Perfect 4th:** Here Comes The Bride",
-        tabs: [
-          {
-            title: "Perfect 5th (Star Wars)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 0, label: "G", color: "accent" },
-            ]
-          }
-        ],
-        strudelCode: `// Interval Quiz
-// What is this interval? (Perfect 5th)
-
-note("c3 g3").s("acoustic").slow(1)
-
-// GLOSSARY:
-// Relative Pitch: The ability to identify the interval between two notes.`,
-        keyTerms: [
-          { term: "Ear Training", definition: "The practice of learning to recognize pitches, intervals, chords, and rhythms by ear." },
-          { term: "Relative Pitch", definition: "The ability to identify or re-create a given musical note by comparing it to a reference note." }
-        ]
-      },
-      {
-        id: "songwriting",
-        title: "Songwriting Basics",
-        concept: "Creating your own music.",
-        learningGoals: ["Write a chord progression", "Craft a melody"],
-        legend: [
-          { label: "Chord", color: "primary" },
-          { label: "Melody", color: "accent" }
-        ],
-        explanation: "**Songwriting** is the ultimate goal of theory. Theory isn't a rulebook; it's a toolkit to help you express your ideas.\n\n**Simple Recipe:**\n1.  Pick a Key (e.g., G Major).\n2.  Pick 3 chords (e.g., G, C, D).\n3.  Hum a melody over them.\n4.  Write words that match the feeling.",
-        tabs: [
-          {
-            title: "Blank Canvas (I - IV - V)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "G", color: "primary" },
-              { string: 5, fret: 3, label: "C", color: "primary" },
-              { string: 4, fret: 0, label: "D", color: "primary" },
-            ]
-          }
-        ],
-        strudelCode: `// Inspiration Loop
-// Write your own melody over this!
-
-note("g2 c3 d3 g2")
+note("c3 d3 e3 f3 g3")
   .s("acoustic")
+  .cps("0.5 0.6 0.8 0.6 0.4") // Changing speed per note
   .slow(2)
-  .repeat(4)
 
 // GLOSSARY:
-// Prosody: The rhythm and sound of the lyrics matching the music.`,
+// Ad Lib: At liberty. Playing freely.`,
         keyTerms: [
-          { term: "Composition", definition: "The act of creating a new piece of music." },
-          { term: "Prosody", definition: "The appropriate relationship between lyrics and music." }
+          { term: "Rubato", definition: "The temporary disregarding of strict tempo to allow an expressive quickening or slackening, usually without altering the overall pace." },
+          { term: "Ad Libitum", definition: "At one's pleasure; freely." }
         ]
       }
     ]
