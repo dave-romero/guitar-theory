@@ -61,10 +61,7 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           {/* Guitar Tab */}
           <div className="space-y-6">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
-            <TabLegend 
-              primaryLabel={lesson.legend?.primary} 
-              secondaryLabel={lesson.legend?.secondary} 
-            />
+            <TabLegend items={lesson.legend} />
             <div className="flex flex-wrap gap-8 items-start">
               {lesson.tabs.map((tab, index) => (
                 <div key={index} className="space-y-3">

@@ -4,7 +4,7 @@ export interface Marker {
   string: number; // 1 (High E) to 6 (Low E)
   fret: number;   // 0 for open, 1+ for frets
   label?: string; // Optional text inside the marker (e.g., "R", "3", "5")
-  color?: "primary" | "secondary" | "accent" | "muted"; // Theme colors
+  color?: "primary" | "secondary" | "accent" | "muted" | "blue"; // Theme colors
 }
 
 interface GuitarTabProps {
@@ -133,12 +133,15 @@ interface GuitarTabProps {
             if (marker.color === "secondary") { fillClass = "fill-secondary"; textClass = "fill-secondary-foreground"; }
             if (marker.color === "accent") { fillClass = "fill-accent"; textClass = "fill-accent-foreground"; }
             if (marker.color === "muted") { fillClass = "fill-muted"; textClass = "fill-muted-foreground"; }
+            if (marker.color === "blue") { fillClass = "fill-[var(--color-blue)]"; textClass = "fill-[var(--color-blue-foreground)]"; }
 
             // Special styling for open strings (fret 0)
             if (marker.fret === 0) {
               fillClass = "fill-background"; // Use background color (cream) instead of transparent to hide line behind it
-              // Dynamic border color: Primary (Orange) or Secondary (Gray)
-              strokeClass = marker.color === "primary" ? "stroke-primary" : "stroke-secondary";
+              // Dynamic border color: Primary (Orange), Blue, or Secondary (Gray)
+              if (marker.color === "primary") strokeClass = "stroke-primary";
+              else if (marker.color === "blue") strokeClass = "stroke-[var(--color-blue)]";
+              else strokeClass = "stroke-secondary";
             }
 
             return (
