@@ -79,7 +79,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             y="30"
             textAnchor="middle"
             fill="var(--muted-foreground)"
-            fontSize="16"
+            fontSize="24"
           >
             &
           </text>
