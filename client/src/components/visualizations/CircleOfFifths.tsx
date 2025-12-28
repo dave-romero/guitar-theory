@@ -64,6 +64,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
               fontWeight="bold"
               fontSize="22"
               fill={isActive ? "var(--primary)" : "var(--foreground)"}
+              fillOpacity={isActive ? 1 : 0.8}
             >
               {key}
             </text>
@@ -77,6 +78,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
               fontSize="16"
               fontWeight="500"
               fill={isActive ? "var(--primary)" : "var(--foreground)"}
+              fillOpacity={isActive ? 1 : 0.8}
             >
               {minorKeys[i]}
             </text>
@@ -97,7 +99,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
       
       {/* Center Label */}
       <circle cx={center} cy={center} r={radius * 0.25} fill="var(--background)" stroke="var(--border)" />
-      <text x={center} y={center} dy="6" textAnchor="middle" fontSize="14" fontWeight="bold" fill="var(--foreground)">
+      <text x={center} y={center} dy="6" textAnchor="middle" fontSize="14" fontWeight="bold" fill="var(--muted-foreground)">
         KEY
       </text>
     </svg>
