@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { BookOpen, ChevronRight, Guitar, Menu, Music, Settings } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { lessons } from "@/lib/lessons";
 
@@ -20,11 +20,8 @@ const categoryIcons: Record<string, any> = {
   "song-structure": BookOpen,
 };
 
-export default function Layout({ children }: LayoutProps) {
-  const [location] = useLocation();
-  const [open, setOpen] = useState(false);
-
-  const SidebarContent = () => (
+function SidebarContent({ location, setOpen }: { location: string; setOpen: (open: boolean) => void }) {
+  return (
     <div className="flex flex-col h-full bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
       <div className="p-6 border-b border-sidebar-border">
         <Link href="/">
@@ -50,36 +47,36 @@ export default function Layout({ children }: LayoutProps) {
                   {Icon && <Icon className="w-3 h-3" />}
                   {category.title}
                 </h3>
-              <div className="space-y-1">
-                {category.lessons.length > 0 ? (
-                  category.lessons.map((lesson, index) => {
-                    const path = `/${category.id}/${lesson.id}`;
-                    const isActive = location === path;
-                    return (
-                      <Link key={lesson.id} href={path}>
-                        <Button
-                          variant={isActive ? "secondary" : "ghost"}
-                          className={cn(
-                            "w-full justify-start font-sans text-sm h-9",
-                            isActive 
-                              ? "bg-primary/10 text-primary font-medium hover:bg-primary/15" 
-                              : "text-muted-foreground hover:text-foreground"
-                          )}
-                          onClick={() => setOpen(false)}
-                        >
-                          <span className="mr-2 text-xs opacity-50">{index + 1}.</span>
-                          <span className="truncate">{lesson.title}</span>
-                          {isActive && <ChevronRight className="ml-auto w-3 h-3 opacity-50" />}
-                        </Button>
-                      </Link>
-                    );
-                  })
-                ) : (
-                  <div className="px-2 py-1 text-xs text-muted-foreground/50 italic">
-                    Coming soon
-                  </div>
-                )}
-              </div>
+                <div className="space-y-1">
+                  {category.lessons.length > 0 ? (
+                    category.lessons.map((lesson, index) => {
+                      const path = `/${category.id}/${lesson.id}`;
+                      const isActive = location === path;
+                      return (
+                        <Link key={lesson.id} href={path}>
+                          <Button
+                            variant={isActive ? "secondary" : "ghost"}
+                            className={cn(
+                              "w-full justify-start font-sans text-sm h-9",
+                              isActive
+                                ? "bg-primary/10 text-primary font-medium hover:bg-primary/15"
+                                : "text-muted-foreground hover:text-foreground"
+                            )}
+                            onClick={() => setOpen(false)}
+                          >
+                            <span className="mr-2 text-xs opacity-50">{index + 1}.</span>
+                            <span className="truncate">{lesson.title}</span>
+                            {isActive && <ChevronRight className="ml-auto w-3 h-3 opacity-50" />}
+                          </Button>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <div className="px-2 py-1 text-xs text-muted-foreground/50 italic">
+                      Coming soon
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -93,12 +90,22 @@ export default function Layout({ children }: LayoutProps) {
       </div>
     </div>
   );
+}
+
+export default function Layout({ children }: LayoutProps) {
+  const [location] = useLocation();
+  const [open, setOpen] = useState(false);
+
+  // Scroll to top on route change
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="flex min-h-screen bg-background">
       {/* Desktop Sidebar */}
       <aside className="hidden md:block w-72 fixed inset-y-0 z-30">
-        <SidebarContent />
+        <SidebarContent location={location} setOpen={setOpen} />
       </aside>
 
       {/* Mobile Sidebar */}
@@ -109,7 +116,7 @@ export default function Layout({ children }: LayoutProps) {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-72 border-r border-sidebar-border">
-          <SidebarContent />
+          <SidebarContent location={location} setOpen={setOpen} />
         </SheetContent>
       </Sheet>
 
