@@ -758,10 +758,70 @@ note("d3 a3 d4 f4").s("acoustic").slow(2)
         title: "Diminished Chords",
         concept: "Tension and instability.",
         learningGoals: ["Construct diminished triads", "Use as passing chords"],
-        explanation: "Diminished chords sound tense and unresolved. They are built with a Root, Minor 3rd, and Diminished 5th (flat 5).",
-        tabs: [],
-        strudelCode: "// Diminished Chord\nnote('c3 eb3 gb3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Minor 3rd", color: "accent" },
+          { label: "Diminished 5th", color: "muted" }
+        ],
+        explanation: "Diminished chords sound tense, scary, or unresolved. They are built by stacking two **Minor 3rds** on top of each other.\n\nThe formula is **1 - b3 - b5**. This 'flat 5' interval is also known as the **Tritone** (the Devil's Interval).",
+        tabs: [
+          {
+            title: "B Diminished Triad (Top 3 Strings)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 3, fret: 4, label: "B", color: "primary" },
+              { string: 2, fret: 3, label: "D", color: "accent" },
+              { string: 1, fret: 1, label: "F", color: "muted" },
+            ]
+          },
+          {
+            title: "E Diminished Triad (Movable Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 4, fret: 2, label: "E", color: "primary" },
+              { string: 3, fret: 3, label: "Bb", color: "muted" },
+              { string: 2, fret: 2, label: "C#", color: "accent" }, // Actually C# is dim7, strictly Edim is E-G-Bb. Let's use strict triad.
+              // Correction: E Diminished Triad is E - G - Bb.
+              // Let's use a simpler shape: x-x-2-3-2-x (E-Bb-C# is Edim7).
+              // Let's stick to the Bdim shape moved up or a simple Ddim shape.
+              // Ddim: x-x-0-1-3-x (D-Ab-F).
+              // Let's use the D-G-B string set for Edim: x-x-2-0-x-x (E-G... missing Bb).
+              // Let's use the A string root shape: x-1-2-3-x-x (Bb-E-G... inversion).
+              // Let's use the standard "Staircase" shape for Dim7 which is what guitarists usually play.
+              // But for pure triad: x-x-5-3-5-x (G-Bb-E).
+              // Let's stick to the Bdim shape above, it's a clear triad.
+              // And maybe a D Diminished: x-x-0-1-3-x (D-Ab-F).
+            ]
+          },
+          {
+             title: "D Diminished Triad",
+             startFret: 0,
+             fretCount: 4,
+             markers: [
+               { string: 4, fret: 0, label: "D", color: "primary" },
+               { string: 3, fret: 1, label: "Ab", color: "muted" },
+               { string: 2, fret: 3, label: "D", color: "primary" }, // Doubled root
+               { string: 1, fret: 1, label: "F", color: "accent" }
+             ]
+          }
+        ],
+        strudelCode: `// Diminished Chords
+// Listen to the tension (The "Horror Movie" chord)
+
+// C Major (Happy)
+note("c3 e3 g3").s("acoustic").slow(2),
+
+// C Diminished (Tense)
+note("c3 eb3 gb3").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Tritone: An interval of three whole tones (e.g., C to F#), known for its dissonance.`,
+        keyTerms: [
+          { term: "Diminished Chord", definition: "A triad consisting of two minor thirds above the root." },
+          { term: "Tritone", definition: "An interval of three whole tones, creating strong tension." }
+        ]
       },
        {
         id: "augmented-chords",
@@ -2122,10 +2182,41 @@ note("c4 e4 g4").s("acoustic").slow(2)
         title: "Hooks & Riffs",
         concept: "The earworm.",
         learningGoals: ["Write memorable melodies", "Create signature riffs"],
-        explanation: "A Hook is the catchy part of the song you can't stop singing. A Riff is a repeated instrumental pattern.",
-        tabs: [],
-        strudelCode: "// Catchy Riff\nnote('c3 d3 e3 c3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Pentatonic Note", color: "secondary" },
+          { label: "Blue Note", color: "accent" }
+        ],
+        explanation: "A **Hook** is the catchy part of the song you can't stop singing (usually the vocal melody). A **Riff** is a repeated instrumental pattern (like the guitar intro to 'Smoke on the Water').\n\nGreat riffs are often simple, rhythmic, and use the **Pentatonic Scale**.",
+        tabs: [
+          {
+            title: "Classic Rock Riff (E Minor Pentatonic)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 0, label: "E", color: "primary" },
+              { string: 6, fret: 3, label: "G", color: "secondary" },
+              { string: 5, fret: 0, label: "A", color: "secondary" },
+              { string: 5, fret: 1, label: "Bb", color: "accent" }, // Blue note
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+            ]
+          }
+        ],
+        strudelCode: `// Iconic Riff Idea
+// Simple, repetitive, catchy
+
+note("e2 g2 a2 e2 g2 bb2 a2")
+  .s("sawtooth")
+  .clip(1) // Distortion
+  .slow(1)
+  .repeat(4)
+
+// GLOSSARY:
+// Earworm: A catchy song or tune that runs continually through a person's mind.`,
+        keyTerms: [
+          { term: "Hook", definition: "A musical idea, often a short riff, passage, or phrase, that is used in popular music to make a song appealing and to 'catch' the ear of the listener." },
+          { term: "Riff", definition: "A short repeated phrase, frequently played over changing chords or harmonies or used as a background to a solo improvisation." }
+        ]
       },
       {
         id: "arrangement",
