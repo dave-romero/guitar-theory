@@ -41,7 +41,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             return (
                 <g key={i} transform={`translate(${x}, ${y})`} opacity="0.3">
                     <circle r="4" fill="var(--muted-foreground)" />
-                    <text y="50" textAnchor="middle" fill="var(--muted-foreground)" fontSize="14" fontWeight="bold">
+                    <text y="50" textAnchor="middle" fill="var(--muted-foreground)" fontSize="18" fontWeight="bold">
                         {getCountLabel(i, pattern.length)}
                     </text>
                 </g>
@@ -53,7 +53,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             {/* Strum Arrow */}
             {strum === "D" && (
               <path
-                d="M -15 -30 L 15 -30 L 0 30 Z"
+                d="M -20 -35 L 20 -35 L 0 35 Z"
                 fill="var(--primary)"
                 stroke="var(--background)"
                 strokeWidth="3"
@@ -62,7 +62,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             )}
             {strum === "U" && (
               <path
-                d="M -12 20 L 12 20 L 0 -20 Z"
+                d="M -20 35 L 20 35 L 0 -35 Z"
                 fill="var(--accent)"
                 stroke="var(--background)"
                 strokeWidth="3"
@@ -90,7 +90,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
               x="0"
               y="-45"
               textAnchor="middle"
-              fontSize="12"
+              fontSize="20"
               fontWeight="bold"
               fill="var(--foreground)"
               className="uppercase tracking-wider"
@@ -103,7 +103,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
               x="0"
               y="60"
               textAnchor="middle"
-              fontSize="16"
+              fontSize="20"
               fontWeight="bold"
               fill="var(--foreground)"
             >

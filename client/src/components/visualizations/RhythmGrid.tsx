@@ -16,7 +16,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
   return (
     <svg width="100%" viewBox={`0 0 ${gridWidth} ${height + 40}`} className="w-full max-w-2xl mx-auto drop-shadow-sm">
       {/* Background Container */}
-      <rect x="0" y="0" width={gridWidth} height={height + 40} fill="var(--card)" rx="12" stroke="var(--border)" strokeWidth="1" />
+      {/* Background Container Removed */}\n      <rect x="0" y="0" width={gridWidth} height={height + 40} fill="transparent" />
 
       {/* Beat Backgrounds (Alternating) */}
       {Array.from({ length: totalBeats }).map((_, i) => (
@@ -54,7 +54,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             y="30"
             textAnchor="start"
             fill="var(--foreground)"
-            fontSize="16"
+            fontSize="24"
             fontWeight="bold"
           >
             {i + 1}
@@ -65,7 +65,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             y="30"
             textAnchor="start"
             fill="var(--muted-foreground)"
-            fontSize="12"
+            fontSize="16"
           >
             &
           </text>
@@ -90,10 +90,10 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
           {note.type === "note" && (
             <text
               x={note.start * beatWidth + (note.duration * beatWidth) / 2}
-              y="95"
+              y="98"
               textAnchor="middle"
               fill="var(--primary-foreground)"
-              fontSize="12"
+              fontSize="16"
               fontWeight="bold"
             >
               {note.duration >= 1 ? "Whole" : note.duration >= 0.5 ? "Half" : "Hit"}

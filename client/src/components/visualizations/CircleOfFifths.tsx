@@ -13,7 +13,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
     "Am", "Em", "Bm", "F#m", "C#m", "G#m", "D#m", "Bbm", "Fm", "Cm", "Gm", "Dm"
   ];
   
-  const radius = 180;
+  const radius = 195;
   const center = 200;
   const sliceAngle = 360 / 12;
 
