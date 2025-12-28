@@ -81,7 +81,7 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
                   {tab.title && (
                     <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
                   )}
-                  <div className="flex justify-center bg-card border border-border rounded-lg p-4 shadow-sm">
+                  <div className="flex justify-center bg-card border border-border rounded-lg px-4 py-1.5 shadow-sm">
                     <GuitarTab 
                       markers={tab.markers} 
                       startFret={tab.startFret} 
