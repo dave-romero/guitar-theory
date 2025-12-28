@@ -5,52 +5,100 @@ interface CircleOfFifthsProps {
 }
 
 export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
-  const keys = [
+  const majorKeys = [
     "C", "G", "D", "A", "E", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"
   ];
   
-  const radius = 150;
+  const minorKeys = [
+    "Am", "Em", "Bm", "F#m", "C#m", "G#m", "D#m", "Bbm", "Fm", "Cm", "Gm", "Dm"
+  ];
+  
+  const radius = 180;
   const center = 200;
   const sliceAngle = 360 / 12;
 
   return (
-    <svg width="100%" viewBox="0 0 400 400" className="w-full max-w-md mx-auto">
-      {/* Background Circle */}
-      <circle cx={center} cy={center} r={radius} fill="none" stroke="hsl(var(--border))" strokeWidth="2" />
+    <svg width="100%" viewBox="0 0 400 400" className="w-full max-w-md mx-auto drop-shadow-md">
+      {/* Outer Ring (Major) */}
+      <circle cx={center} cy={center} r={radius} fill="hsl(var(--card))" stroke="hsl(var(--border))" strokeWidth="1" />
+      
+      {/* Inner Ring (Minor) */}
+      <circle cx={center} cy={center} r={radius * 0.65} fill="hsl(var(--muted)/0.3)" stroke="hsl(var(--border))" strokeWidth="1" />
 
-      {keys.map((key, i) => {
-        const angle = (i * sliceAngle - 90) * (Math.PI / 180);
-        const x = center + Math.cos(angle) * (radius - 30);
-        const y = center + Math.sin(angle) * (radius - 30);
+      {majorKeys.map((key, i) => {
+        const angleDeg = i * sliceAngle - 90;
+        const angleRad = angleDeg * (Math.PI / 180);
+        
+        // Major Key Position
+        const xMaj = center + Math.cos(angleRad) * (radius * 0.82);
+        const yMaj = center + Math.sin(angleRad) * (radius * 0.82);
+        
+        // Minor Key Position
+        const xMin = center + Math.cos(angleRad) * (radius * 0.5);
+        const yMin = center + Math.sin(angleRad) * (radius * 0.5);
         
         const isActive = key === activeKey;
+        const isSharp = ["G", "D", "A", "E", "B", "F#"].includes(key);
+        const isFlat = ["F", "Bb", "Eb", "Ab", "Db"].includes(key);
 
         return (
           <g key={key}>
             {/* Slice Highlight (if active) */}
             {isActive && (
               <path
-                d={`M ${center} ${center} L ${center + Math.cos(angle - 0.26) * radius} ${center + Math.sin(angle - 0.26) * radius} A ${radius} ${radius} 0 0 1 ${center + Math.cos(angle + 0.26) * radius} ${center + Math.sin(angle + 0.26) * radius} Z`}
+                d={`M ${center} ${center} 
+                   L ${center + Math.cos((angleDeg - 15) * Math.PI / 180) * radius} ${center + Math.sin((angleDeg - 15) * Math.PI / 180) * radius} 
+                   A ${radius} ${radius} 0 0 1 ${center + Math.cos((angleDeg + 15) * Math.PI / 180) * radius} ${center + Math.sin((angleDeg + 15) * Math.PI / 180) * radius} 
+                   Z`}
                 fill="hsl(var(--primary))"
                 opacity="0.2"
               />
             )}
             
-            {/* Key Label */}
-            <circle cx={x} cy={y} r="20" fill={isActive ? "hsl(var(--primary))" : "hsl(var(--card))"} stroke="hsl(var(--border))" />
+            {/* Major Key Label */}
             <text
-              x={x}
-              y={y}
+              x={xMaj}
+              y={yMaj}
               dy="5"
               textAnchor="middle"
               fontWeight="bold"
-              fill={isActive ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))"}
+              fontSize="18"
+              fill={isActive ? "hsl(var(--primary))" : isSharp ? "hsl(var(--accent))" : isFlat ? "hsl(var(--secondary))" : "hsl(var(--foreground))"}
             >
               {key}
             </text>
+
+            {/* Minor Key Label */}
+            <text
+              x={xMin}
+              y={yMin}
+              dy="4"
+              textAnchor="middle"
+              fontSize="14"
+              fill={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))"}
+            >
+              {minorKeys[i]}
+            </text>
+            
+            {/* Divider Lines */}
+            <line
+                x1={center + Math.cos((angleDeg + 15) * Math.PI / 180) * (radius * 0.65)}
+                y1={center + Math.sin((angleDeg + 15) * Math.PI / 180) * (radius * 0.65)}
+                x2={center + Math.cos((angleDeg + 15) * Math.PI / 180) * radius}
+                y2={center + Math.sin((angleDeg + 15) * Math.PI / 180) * radius}
+                stroke="hsl(var(--border))"
+                strokeWidth="1"
+                opacity="0.5"
+            />
           </g>
         );
       })}
+      
+      {/* Center Label */}
+      <circle cx={center} cy={center} r={radius * 0.25} fill="hsl(var(--background))" stroke="hsl(var(--border))" />
+      <text x={center} y={center} dy="5" textAnchor="middle" fontSize="12" fontWeight="bold" fill="hsl(var(--muted-foreground))">
+        KEY
+      </text>
     </svg>
   );
 }
