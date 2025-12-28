@@ -24,8 +24,8 @@ interface GuitarTabProps {
   const padding = { top: 25, right: 30, bottom: 35, left: 50 };
   const height = 200;
   
-  // Dynamic width based on fret count (min 60px per fret)
-  const fretWidth = 60;
+  // Dynamic width based on fret count (min 50px per fret)
+  const fretWidth = 50;
   const width = padding.left + padding.right + (fretCount * fretWidth);
   
   const drawingWidth = width - padding.left - padding.right;
