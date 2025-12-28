@@ -41,7 +41,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             return (
                 <g key={i} transform={`translate(${x}, ${y})`} opacity="0.3">
                     <circle r="4" fill="var(--muted-foreground)" />
-                    <text y="60" textAnchor="middle" fill="var(--muted-foreground)" fontSize="24" fontWeight="bold">
+                    <text y="65" textAnchor="middle" fill="var(--muted-foreground)" fontSize="24" fontWeight="bold">
                         {getCountLabel(i, pattern.length)}
                     </text>
                 </g>
@@ -71,14 +71,14 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             )}
             {strum === "x" && (
               <g>
-                <circle r="25" fill="var(--destructive)" opacity="0.2" />
+                <circle r="25" fill="var(--primary)" opacity="0.2" />
                 <text
                     x="0"
                     y="10"
                     textAnchor="middle"
                     fontSize="30"
                     fontWeight="bold"
-                    fill="var(--destructive)"
+                    fill="var(--primary)"
                 >
                     ×
                 </text>
@@ -88,7 +88,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             {/* Label */}
             <text
               x="0"
-              y="-45"
+              y="-50"
               textAnchor="middle"
               fontSize="20"
               fontWeight="bold"
@@ -101,7 +101,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             {/* Count (1 e & a) */}
             <text
               x="0"
-              y="60"
+              y="65"
               textAnchor="middle"
               fontSize="24"
               fontWeight="bold"
