@@ -28,52 +28,35 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
   const renderVisualization = () => {
     if (!lesson.visualization) return null;
 
-    // Common wrapper for consistent height and styling
-    const Wrapper = ({ children }: { children: React.ReactNode }) => (
-      <div className="my-8 p-6 border rounded-lg bg-card flex items-center justify-center h-[300px] overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center">
-          {children}
-        </div>
-      </div>
-    );
-
     switch (lesson.visualization) {
       case "RhythmGrid":
         return lesson.rhythmGridData ? (
           <>
             <RhythmLegend />
-            <Wrapper>
-              <RhythmGrid 
-                timeSignature={lesson.rhythmGridData.timeSignature}
-                notes={lesson.rhythmGridData.notes}
-                activeBeat={lesson.rhythmGridData.activeBeat}
-              />
-            </Wrapper>
+            <RhythmGrid 
+              timeSignature={lesson.rhythmGridData.timeSignature}
+              notes={lesson.rhythmGridData.notes}
+              activeBeat={lesson.rhythmGridData.activeBeat}
+            />
           </>
         ) : null;
       case "StrummingPattern":
         return lesson.strummingPatternData ? (
-          <Wrapper>
-            <StrummingPattern 
-              pattern={lesson.strummingPatternData.pattern}
-            />
-          </Wrapper>
+          <StrummingPattern 
+            pattern={lesson.strummingPatternData.pattern}
+          />
         ) : null;
       case "SongStructure":
         return lesson.songStructureData ? (
-          <Wrapper>
-            <SongStructure 
-              sections={lesson.songStructureData.sections}
-            />
-          </Wrapper>
+          <SongStructure 
+            sections={lesson.songStructureData.sections}
+          />
         ) : null;
       case "CircleOfFifths":
         return lesson.circleOfFifthsData ? (
-          <Wrapper>
-            <CircleOfFifths 
-              activeKey={lesson.circleOfFifthsData.activeKey}
-            />
-          </Wrapper>
+          <CircleOfFifths 
+            activeKey={lesson.circleOfFifthsData.activeKey}
+          />
         ) : null;
       default:
         return null;
