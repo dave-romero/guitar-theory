@@ -34,8 +34,8 @@ export function SongStructure({ sections }: SongStructureProps) {
   return (
     <svg width="100%" viewBox={`0 -20 ${width} ${height - 20}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
       {/* Energy Axis */}
-      <line x1="50" y1="40" x2="50" y2={height - 40} stroke="var(--border)" strokeWidth="2" />
-      <text x="40" y="50" textAnchor="end" fontSize="12" fill="var(--muted-foreground)">High</text>
+      <line x1="50" y1="10" x2="50" y2={height - 40} stroke="var(--border)" strokeWidth="2" />
+      <text x="40" y="20" textAnchor="end" fontSize="12" fill="var(--muted-foreground)">High</text>
       <text x="40" y={height - 50} textAnchor="end" fontSize="12" fill="var(--muted-foreground)">Low</text>
       <text x="20" y={height / 2} textAnchor="middle" transform={`rotate(-90, 20, ${height / 2})`} fontSize="14" fontWeight="bold" fill="var(--muted-foreground)">Energy</text>
 
