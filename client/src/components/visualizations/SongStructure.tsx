@@ -84,7 +84,7 @@ export function SongStructure({ sections }: SongStructureProps) {
               y={height - 40}
               textAnchor="middle"
               fontSize="12"
-              fill="var(--primary-foreground)"
+              fill={section.color === "primary" ? "var(--primary-foreground)" : "var(--foreground)"}
               opacity="0.8"
             >
               {section.duration} Bars
