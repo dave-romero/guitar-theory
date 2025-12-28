@@ -14,21 +14,24 @@ interface GuitarTabProps {
   title?: string;
 }
 
-export function GuitarTab({ 
+  export function GuitarTab({ 
   startFret = 1, 
   fretCount = 5, 
   markers,
   title 
 }: GuitarTabProps) {
   // Dimensions
-  const width = 300;
+  const padding = { top: 25, right: 30, bottom: 35, left: 50 };
   const height = 200;
-  const padding = { top: 25, right: 30, bottom: 35, left: 50 }; // Shifted up by 15px
+  
+  // Dynamic width based on fret count (min 60px per fret)
+  const fretWidth = 60;
+  const width = padding.left + padding.right + (fretCount * fretWidth);
   
   const drawingWidth = width - padding.left - padding.right;
   const drawingHeight = height - padding.top - padding.bottom;
   
-  const stringSpacing = drawingHeight / 5; // 6 strings = 5 spaces
+  const stringSpacing = drawingHeight / 5;
   const fretSpacing = drawingWidth / fretCount;
 
   // Helper to get Y coordinate for a string (1-6)
@@ -57,7 +60,7 @@ export function GuitarTab({
         width={width} 
         height={height} 
         viewBox={`0 0 ${width} ${height}`}
-        className="bg-card rounded-lg border border-border shadow-sm"
+        className="overflow-visible" // Allow labels to extend slightly if needed
       >
         <g transform={`translate(${padding.left}, ${padding.top})`}>
           {/* Draw Frets (Vertical Lines) */}
@@ -133,8 +136,8 @@ export function GuitarTab({
 
             // Special styling for open strings (fret 0)
             if (marker.fret === 0) {
-              fillClass = "fill-transparent";
-              strokeClass = marker.color === "primary" ? "stroke-primary" : "stroke-secondary";
+              fillClass = "fill-background"; // Use background color (cream) instead of transparent to hide line behind it
+              strokeClass = "stroke-muted-foreground"; // Always gray border to match key
             }
 
             return (

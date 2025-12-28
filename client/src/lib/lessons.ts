@@ -42,15 +42,23 @@ export const lessons: Category[] = [
         explanation: "The musical alphabet consists of 7 natural notes: A, B, C, D, E, F, G. Between most of these notes are sharps (#) or flats (b). The distance between any two adjacent notes (like A to A#) is called a half step (or semitone). On the guitar, one fret equals one half step.\n\nThe full chromatic scale is: A, A#, B, C, C#, D, D#, E, F, F#, G, G#.\n\nNotice that B to C and E to F do NOT have sharps between them. This is the most important rule to memorize!",
         tabs: [
           {
-            title: "Chromatic Scale on A String",
+            title: "Chromatic Scale on A String (Full Octave)",
             startFret: 0,
-            fretCount: 5,
+            fretCount: 13,
             markers: [
               { string: 5, fret: 0, label: "A", color: "primary" },
               { string: 5, fret: 1, label: "A#", color: "secondary" },
               { string: 5, fret: 2, label: "B", color: "secondary" },
               { string: 5, fret: 3, label: "C", color: "primary" },
               { string: 5, fret: 4, label: "C#", color: "secondary" },
+              { string: 5, fret: 5, label: "D", color: "primary" },
+              { string: 5, fret: 6, label: "D#", color: "secondary" },
+              { string: 5, fret: 7, label: "E", color: "primary" },
+              { string: 5, fret: 8, label: "F", color: "primary" },
+              { string: 5, fret: 9, label: "F#", color: "secondary" },
+              { string: 5, fret: 10, label: "G", color: "primary" },
+              { string: 5, fret: 11, label: "G#", color: "secondary" },
+              { string: 5, fret: 12, label: "A", color: "primary" },
             ]
           }
         ],

@@ -62,16 +62,13 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           <div className="space-y-6">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
             <TabLegend />
-            <div className={cn(
-              "grid gap-8",
-              lesson.tabs.length > 1 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
-            )}>
+            <div className="flex flex-wrap gap-8 items-start">
               {lesson.tabs.map((tab, index) => (
                 <div key={index} className="space-y-3">
                   {tab.title && (
                     <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
                   )}
-                  <div className="bg-card border border-border rounded-lg p-4 flex justify-center">
+                  <div className="flex justify-center">
                     <GuitarTab 
                       markers={tab.markers} 
                       startFret={tab.startFret} 
