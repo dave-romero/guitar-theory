@@ -1,5 +1,6 @@
 import React from "react";
 import { GuitarTab } from "@/components/GuitarTab";
+import { TabLegend } from "@/components/TabLegend";
 
 export default function TestTabs() {
   return (
@@ -10,6 +11,10 @@ export default function TestTabs() {
           Comparing the new SVG rendering system against the traditional ASCII tabs.
           SVGs allow for better scaling, color coding, and semantic labeling.
         </p>
+        
+        <div className="pt-4">
+          <TabLegend />
+        </div>
       </div>
 
       {/* Example 1: C Major Chord */}

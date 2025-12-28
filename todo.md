@@ -1,5 +1,3 @@
-- [ ] Prototype SVG Guitar Tabs:
-    - [ ] Create `client/src/components/GuitarTab.tsx` (SVG renderer)
-    - [ ] Create `client/src/pages/TestTabs.tsx` (Comparison page)
-    - [ ] Add `/test-tabs` route to `App.tsx`
-    - [ ] Implement examples: C Major Chord, A Minor Pentatonic Scale
+- [ ] Refine SVG Tabs:
+    - [ ] Create `client/src/components/TabLegend.tsx`
+    - [ ] Update `client/src/pages/TestTabs.tsx` to include the legend
