@@ -39,7 +39,7 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           
           {/* Learning Goals */}
           <Card className="bg-secondary/30 border-none shadow-none p-6 rounded-lg">
-            <h3 className="font-serif font-bold text-lg mb-3 flex items-center gap-2">
+            <h3 className="font-serif font-bold text-lg mb-0 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs">✓</span>
               Learning Goals
             </h3>
