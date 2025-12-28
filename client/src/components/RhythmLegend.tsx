@@ -13,7 +13,7 @@ export function RhythmLegend({ items }: RhythmLegendProps) {
   const displayItems: RhythmLegendItem[] = items || [
     { label: "Note (Sound)", type: "note" },
     { label: "Rest (Silence)", type: "rest" },
-    { label: "Beat Line", type: "beat" },
+    { label: "Main Beat", type: "beat" },
     { label: "Subdivision (&)", type: "subdivision" }
   ];
 
@@ -32,10 +32,10 @@ export function RhythmLegend({ items }: RhythmLegendProps) {
               <div className="w-4 h-1 rounded bg-secondary opacity-80"></div>
             )}
             {item.type === "beat" && (
-              <div className="h-6 border-l-2 border-border opacity-50"></div>
+              <div className="w-4 h-6 bg-muted opacity-50 border border-border"></div>
             )}
             {item.type === "subdivision" && (
-              <div className="h-6 border-l border-dashed border-border"></div>
+              <div className="h-6 border-l-2 border-dashed border-foreground opacity-30"></div>
             )}
           </div>
           

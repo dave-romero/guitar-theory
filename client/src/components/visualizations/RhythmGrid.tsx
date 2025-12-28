@@ -14,7 +14,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
   const height = 120;
 
   return (
-    <svg width="100%" viewBox={`0 0 ${gridWidth} ${height + 40}`} className="w-full max-w-2xl mx-auto drop-shadow-sm">
+    <svg width="100%" viewBox={`0 0 ${gridWidth} ${height + 40}`} className="w-full max-w-2xl mx-auto">
       {/* Background Container */}
       {/* Background Container Removed */}\n      <rect x="0" y="0" width={gridWidth} height={height + 40} fill="transparent" />
 
@@ -53,10 +53,10 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
           y1="40"
           x2={i * beatWidth + (beatWidth / 2)}
           y2={height + 40}
-          stroke="var(--border)"
-          strokeWidth="1"
+          stroke="var(--foreground)"
+          strokeWidth="2"
           strokeDasharray="4 4"
-          opacity="0.5"
+          opacity="0.3"
         />
       ))}
 
