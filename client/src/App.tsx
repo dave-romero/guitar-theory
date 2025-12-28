@@ -8,15 +8,13 @@ import LessonPage from "./components/LessonPage";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { lessons } from "./lib/lessons";
 import Home from "./pages/Home";
-import DesignLab from "./pages/DesignLab";
 import TestTabs from "./pages/TestTabs";
 
 function Router() {
   return (
     <Layout>
       <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/design-lab" component={DesignLab} />
+      <Route path={"/"} component={Home} />
       <Route path={"/test-tabs"} component={TestTabs} />
         
         {/* Dynamic Lesson Route */}

@@ -5,11 +5,6 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { GuitarTab } from "./GuitarTab";
 import { TabLegend } from "./TabLegend";
-import { RhythmLegend } from "./RhythmLegend";
-import { RhythmGrid } from "./visualizations/RhythmGrid";
-import { StrummingPattern } from "./visualizations/StrummingPattern";
-import { SongStructure } from "./visualizations/SongStructure";
-import { CircleOfFifths } from "./visualizations/CircleOfFifths";
 import { LessonContent } from "@/lib/lessons";
 
 interface LessonPageProps {
@@ -79,244 +74,23 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           {/* Guitar Tab */}
           <div className="space-y-6 pt-4 border-t border-border">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
-            
-            {/* Show RhythmLegend if this is a rhythm lesson (Category 4) */}
-            {categoryTitle.includes("Phrasing") && <RhythmLegend />}
-            
-            {/* Show TabLegend if not a rhythm lesson */}
-            {!categoryTitle.includes("Phrasing") && !lesson.visualization && <TabLegend items={lesson.legend} />}
-
-            {/* Render Visualization if present */}
-            {lesson.visualization === "RhythmGrid" && (
-              <div className="space-y-8">
-                {lesson.id === "time-signatures" && (
-                  <>
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">4/4 Time (Common Time)</h4>
-                      <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                        <RhythmGrid 
-                          timeSignature={[4, 4]} 
-                          notes={[
-                            { start: 0, duration: 1, type: "note" },
-                            { start: 1, duration: 1, type: "note" },
-                            { start: 2, duration: 1, type: "note" },
-                            { start: 3, duration: 1, type: "note" }
-                          ]} 
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">3/4 Time (Waltz)</h4>
-                      <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                        <RhythmGrid 
-                          timeSignature={[3, 4]} 
-                          notes={[
-                            { start: 0, duration: 1, type: "note" },
-                            { start: 1, duration: 1, type: "note" },
-                            { start: 2, duration: 1, type: "note" }
-                          ]} 
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-                {lesson.id === "note-values" && (
-                  <>
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Whole Note (4 Beats)</h4>
-                      <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                        <RhythmGrid 
-                          timeSignature={[4, 4]} 
-                          notes={[
-                            { start: 0, duration: 4, type: "note" }
-                          ]} 
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Quarter Notes (1 Beat Each)</h4>
-                      <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                        <RhythmGrid 
-                          timeSignature={[4, 4]} 
-                          notes={[
-                            { start: 0, duration: 1, type: "note" },
-                            { start: 1, duration: 1, type: "note" },
-                            { start: 2, duration: 1, type: "note" },
-                            { start: 3, duration: 1, type: "note" }
-                          ]} 
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-                {lesson.id === "syncopation" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Syncopated Rhythm (Off-beats)</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                      <RhythmGrid 
-                        timeSignature={[4, 4]} 
-                        notes={[
-                          { start: 0, duration: 0.5, type: "rest" },
-                          { start: 0.5, duration: 0.5, type: "note" },
-                          { start: 1, duration: 1, type: "rest" },
-                          { start: 2, duration: 0.5, type: "rest" },
-                          { start: 2.5, duration: 0.5, type: "note" },
-                          { start: 3, duration: 1, type: "rest" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {lesson.visualization === "StrummingPattern" && (
-              <div className="space-y-8">
-                {lesson.id === "strumming-patterns" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">The "Island Strum" (D - D U - U D U)</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                      <StrummingPattern pattern={["D", "-", "D", "U", "-", "U", "D", "U"]} />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "percussive-guitar" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Percussive Slap Pattern</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
-                      <StrummingPattern pattern={["D", "x", "D", "U", "x", "U", "D", "x"]} />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {lesson.visualization === "SongStructure" && (
-              <div className="space-y-8">
-                {lesson.id === "verse-chorus" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Energy Flow: Verse vs Chorus</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Verse 1", duration: 8, intensity: 0.4, color: "secondary" },
-                          { name: "Chorus 1", duration: 8, intensity: 0.8, color: "primary" },
-                          { name: "Verse 2", duration: 8, intensity: 0.4, color: "secondary" },
-                          { name: "Chorus 2", duration: 8, intensity: 0.9, color: "primary" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "bridge" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">The Bridge (Contrast)</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Chorus 2", duration: 8, intensity: 0.9, color: "primary" },
-                          { name: "Bridge", duration: 8, intensity: 0.6, color: "accent" },
-                          { name: "Chorus 3", duration: 16, intensity: 1.0, color: "primary" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "intros-outros" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Full Song Arc</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Intro", duration: 4, intensity: 0.5, color: "muted" },
-                          { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
-                          { name: "Chorus", duration: 8, intensity: 0.8, color: "primary" },
-                          { name: "Outro", duration: 4, intensity: 0.3, color: "muted" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "pre-chorus" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">The Build Up</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
-                          { name: "Pre-Chorus", duration: 4, intensity: 0.6, color: "accent" },
-                          { name: "Chorus", duration: 8, intensity: 0.9, color: "primary" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "arrangement" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Layering Instruments</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Drums Only", duration: 4, intensity: 0.3, color: "muted" },
-                          { name: "+ Bass", duration: 4, intensity: 0.5, color: "secondary" },
-                          { name: "+ Guitar", duration: 4, intensity: 0.7, color: "accent" },
-                          { name: "Full Band", duration: 4, intensity: 0.9, color: "primary" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-                {lesson.id === "dynamics-flow" && (
-                  <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">The Emotional Journey</h4>
-                    <div className="bg-card border border-border rounded-lg p-6 shadow-sm overflow-x-auto">
-                      <SongStructure 
-                        sections={[
-                          { name: "Verse 1", duration: 8, intensity: 0.3, color: "secondary" },
-                          { name: "Chorus 1", duration: 8, intensity: 0.7, color: "primary" },
-                          { name: "Verse 2", duration: 8, intensity: 0.4, color: "secondary" },
-                          { name: "Chorus 2", duration: 8, intensity: 0.8, color: "primary" },
-                          { name: "Bridge", duration: 8, intensity: 0.5, color: "accent" },
-                          { name: "Chorus 3", duration: 16, intensity: 1.0, color: "primary" },
-                          { name: "Outro", duration: 4, intensity: 0.2, color: "muted" }
-                        ]} 
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {lesson.visualization === "CircleOfFifths" && (
-              <div className="space-y-8">
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">The Circle of Fifths</h4>
-                  <div className="bg-card border border-border rounded-lg p-6 shadow-sm flex justify-center">
-                    <CircleOfFifths activeKey={lesson.id === "nashville-numbers" ? "C" : undefined} />
+            <TabLegend items={lesson.legend} />
+            <div className="flex flex-wrap gap-8 items-start">
+              {lesson.tabs.map((tab, index) => (
+                <div key={index} className="space-y-3">
+                  {tab.title && (
+                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
+                  )}
+                  <div className="flex justify-center bg-card border border-border rounded-lg px-4 py-1.5 shadow-sm">
+                    <GuitarTab 
+                      markers={tab.markers} 
+                      startFret={tab.startFret} 
+                      fretCount={tab.fretCount} 
+                    />
                   </div>
                 </div>
-              </div>
-            )}
-
-            {/* Render Tabs if no specific visualization is set or if tabs exist alongside */}
-            {!lesson.visualization && lesson.tabs.length > 0 && (
-              <div className="flex flex-wrap gap-8 items-start">
-                {lesson.tabs.map((tab, index) => (
-                  <div key={index} className="space-y-3">
-                    {tab.title && (
-                      <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
-                    )}
-                    <div className="flex justify-center bg-card border border-border rounded-lg px-4 py-1.5 shadow-sm">
-                      <GuitarTab 
-                        markers={tab.markers} 
-                        startFret={tab.startFret} 
-                        fretCount={tab.fretCount} 
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+              ))}
+            </div>
           </div>
 
           {/* Full Width Strudel Editor */}
