@@ -1,39 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { GuitarTab } from "./GuitarTab";
 import { TabLegend } from "./TabLegend";
-
-import { Marker } from "./GuitarTab";
-
-export interface TabData {
-  title?: string;
-  startFret: number;
-  fretCount: number;
-  markers: Marker[];
-}
-
-export interface LessonContent {
-  id: string;
-  title: string;
-  category: string;
-  concept: string;
-  learningGoals: string[];
-  keyTerms: { term: string; definition: string }[];
-  tabs: TabData[];
-  explanation: string;
-  strudelCode: string;
-  prevLesson?: string;
-  nextLesson?: string;
-}
+import { LessonContent } from "@/lib/lessons";
 
 interface LessonPageProps {
   lesson: LessonContent;
+  categoryTitle: string;
+  prevLessonUrl?: string;
+  nextLessonUrl?: string;
 }
 
-export default function LessonPage({ lesson }: LessonPageProps) {
+export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextLessonUrl }: LessonPageProps) {
   // Encode Strudel code for the iframe URL
   // We use the hash-based format which is more reliable for embedding
   const encodedCode = btoa(lesson.strudelCode);
@@ -44,7 +25,7 @@ export default function LessonPage({ lesson }: LessonPageProps) {
       {/* Header */}
       <div className="space-y-2 border-b border-border pb-6">
         <div className="flex items-center gap-2 text-sm text-primary font-medium uppercase tracking-wider">
-          <span>{lesson.category}</span>
+          <span>{categoryTitle}</span>
           <span>•</span>
           <span>Lesson {lesson.id}</span>
         </div>
@@ -151,8 +132,8 @@ export default function LessonPage({ lesson }: LessonPageProps) {
 
           {/* Navigation Buttons */}
           <div className="flex justify-between pt-8 border-t border-border">
-            {lesson.prevLesson ? (
-              <Link href={lesson.prevLesson}>
+            {prevLessonUrl ? (
+              <Link href={prevLessonUrl}>
                 <Button variant="outline" className="group">
                   <ArrowLeft className="mr-2 w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   Previous Lesson
@@ -162,8 +143,8 @@ export default function LessonPage({ lesson }: LessonPageProps) {
               <div /> // Spacer
             )}
             
-            {lesson.nextLesson ? (
-              <Link href={lesson.nextLesson}>
+            {nextLessonUrl ? (
+              <Link href={nextLessonUrl}>
                 <Button className="group bg-primary text-primary-foreground hover:bg-primary/90">
                   Next Lesson
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -5,54 +5,20 @@ import { cn } from "@/lib/utils";
 import { BookOpen, ChevronRight, Guitar, Menu, Music, Settings } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { lessons } from "@/lib/lessons";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-const categories = [
-  {
-    id: "cat1",
-    title: "1. The Fretboard Map",
-    icon: Guitar,
-    lessons: [
-      { id: "1", title: "The Musical Alphabet" },
-      { id: "2", title: "Same Note, Different String" },
-      { id: "3", title: "Half Steps & Whole Steps" },
-      { id: "4", title: "The Major Scale Pattern" },
-      { id: "5", title: "Octaves" },
-      { id: "6", title: "Perfect 5ths" },
-      { id: "7", title: "Major & Minor 3rds" },
-      { id: "8", title: "The Interval Map" },
-      { id: "9", title: "Interval Shapes" },
-      { id: "10", title: "Ear Training" },
-    ],
-  },
-  {
-    id: "cat2",
-    title: "2. Building Chords",
-    icon: Music,
-    lessons: [], // Placeholder
-  },
-  {
-    id: "cat3",
-    title: "3. Keys & Numbers",
-    icon: BookOpen,
-    lessons: [], // Placeholder
-  },
-  {
-    id: "cat4",
-    title: "4. Rhythm & Timing",
-    icon: Settings, // Placeholder icon
-    lessons: [], // Placeholder
-  },
-  {
-    id: "cat5",
-    title: "5. Song Structure",
-    icon: BookOpen, // Placeholder icon
-    lessons: [], // Placeholder
-  },
-];
+// Map icons to category IDs
+const categoryIcons: Record<string, any> = {
+  "fretboard-map": Guitar,
+  "building-chords": Music,
+  "keys-numbers": BookOpen,
+  "rhythm-timing": Settings,
+  "song-structure": BookOpen,
+};
 
 export default function Layout({ children }: LayoutProps) {
   const [location] = useLocation();
@@ -76,15 +42,18 @@ export default function Layout({ children }: LayoutProps) {
 
       <ScrollArea className="flex-1 py-4">
         <div className="px-4 space-y-6">
-          {categories.map((category) => (
-            <div key={category.id}>
-              <h3 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                {category.title}
-              </h3>
+          {lessons.map((category) => {
+            const Icon = categoryIcons[category.id];
+            return (
+              <div key={category.id}>
+                <h3 className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                  {Icon && <Icon className="w-3 h-3" />}
+                  {category.title}
+                </h3>
               <div className="space-y-1">
                 {category.lessons.length > 0 ? (
-                  category.lessons.map((lesson) => {
-                    const path = `/lesson/${category.id}/${lesson.id}`;
+                  category.lessons.map((lesson, index) => {
+                    const path = `/${category.id}/${lesson.id}`;
                     const isActive = location === path;
                     return (
                       <Link key={lesson.id} href={path}>
@@ -98,7 +67,7 @@ export default function Layout({ children }: LayoutProps) {
                           )}
                           onClick={() => setOpen(false)}
                         >
-                          <span className="mr-2 text-xs opacity-50">{lesson.id}.</span>
+                          <span className="mr-2 text-xs opacity-50">{index + 1}.</span>
                           <span className="truncate">{lesson.title}</span>
                           {isActive && <ChevronRight className="ml-auto w-3 h-3 opacity-50" />}
                         </Button>
@@ -111,8 +80,9 @@ export default function Layout({ children }: LayoutProps) {
                   </div>
                 )}
               </div>
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </ScrollArea>
 

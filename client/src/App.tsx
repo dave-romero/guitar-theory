@@ -18,16 +18,50 @@ function Router() {
       <Route path={"/test-tabs"} component={TestTabs} />
         
         {/* Dynamic Lesson Route */}
-        <Route path="/lesson/:catId/:lessonId">
+        <Route path="/:categoryId/:lessonId">
           {(params) => {
-            const lessonKey = `${params.catId}-${params.lessonId}`;
-            const lesson = lessons[lessonKey];
+            // Find the category index
+            const catIndex = lessons.findIndex(c => c.id === params.categoryId);
+            if (catIndex === -1) return <NotFound />;
+            const category = lessons[catIndex];
+
+            // Find the lesson index within the category
+            const lessonIndex = category.lessons.findIndex(l => l.id === params.lessonId);
+            if (lessonIndex === -1) return <NotFound />;
+            const lesson = category.lessons[lessonIndex];
             
-            if (!lesson) {
-              return <NotFound />;
+            // Calculate Previous Lesson URL
+            let prevLessonUrl: string | undefined;
+            if (lessonIndex > 0) {
+              prevLessonUrl = `/${category.id}/${category.lessons[lessonIndex - 1].id}`;
+            } else if (catIndex > 0) {
+              const prevCategory = lessons[catIndex - 1];
+              if (prevCategory.lessons.length > 0) {
+                const lastLessonOfPrev = prevCategory.lessons[prevCategory.lessons.length - 1];
+                prevLessonUrl = `/${prevCategory.id}/${lastLessonOfPrev.id}`;
+              }
             }
-            
-            return <LessonPage lesson={lesson} />;
+
+            // Calculate Next Lesson URL
+            let nextLessonUrl: string | undefined;
+            if (lessonIndex < category.lessons.length - 1) {
+              nextLessonUrl = `/${category.id}/${category.lessons[lessonIndex + 1].id}`;
+            } else if (catIndex < lessons.length - 1) {
+              const nextCategory = lessons[catIndex + 1];
+              if (nextCategory.lessons.length > 0) {
+                const firstLessonOfNext = nextCategory.lessons[0];
+                nextLessonUrl = `/${nextCategory.id}/${firstLessonOfNext.id}`;
+              }
+            }
+
+            return (
+              <LessonPage 
+                lesson={lesson} 
+                categoryTitle={category.title}
+                prevLessonUrl={prevLessonUrl}
+                nextLessonUrl={nextLessonUrl}
+              />
+            );
           }}
         </Route>
 

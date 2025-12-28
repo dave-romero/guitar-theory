@@ -1,3 +1,5 @@
-- [ ] Standardize SVG Tabs:
-    - [ ] Update `client/src/lib/lessons.ts`: Convert all ASCII tabs to `GuitarTabProps` objects
-    - [ ] Update `client/src/components/LessonPage.tsx`: Replace ASCII rendering with `<GuitarTab />` and add `<TabLegend />`
+- [ ] Fix Routing & SEO URLs:
+    - [ ] Update `App.tsx` to support `/:categoryId/:lessonId`
+    - [ ] Update `Layout.tsx` sidebar links
+    - [ ] Update `LessonPage.tsx` next/prev links
+    - [ ] Update `lessons.ts` lookup logic

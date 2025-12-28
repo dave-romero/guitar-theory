@@ -24,7 +24,7 @@ export default function Home() {
           </p>
           
           <div className="flex flex-wrap gap-4 pt-4">
-            <Link href="/lesson/cat1/1">
+            <Link href="/fretboard-map/musical-alphabet">
               <Button size="lg" className="bg-white text-primary hover:bg-amber-50 font-semibold text-base h-12 px-8 shadow-lg hover:shadow-xl transition-all">
                 Start Lesson 1
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -116,7 +116,7 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">{cat.desc}</p>
               </div>
               {cat.active ? (
-                <Link href="/lesson/cat1/1">
+                <Link href="/fretboard-map/musical-alphabet">
                   <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80 hover:bg-primary/10">
                     Start
                   </Button>
