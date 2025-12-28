@@ -1,5 +1,6 @@
 import React from "react";
 import { RhythmGrid } from "../components/visualizations/RhythmGrid";
+import { RhythmLegend } from "../components/RhythmLegend";
 import { StrummingPattern } from "../components/visualizations/StrummingPattern";
 import { SongStructure } from "../components/visualizations/SongStructure";
 import { CircleOfFifths } from "../components/visualizations/CircleOfFifths";
@@ -35,6 +36,7 @@ export default function DesignLab() {
                 ]}
                 activeBeat={2}
               />
+              <RhythmLegend />
             </div>
           </div>
           <div className="space-y-2">
