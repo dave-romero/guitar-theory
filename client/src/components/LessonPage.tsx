@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { GuitarTab } from "./GuitarTab";
 import { TabLegend } from "./TabLegend";
+import { RhythmLegend } from "./RhythmLegend";
 import { LessonContent } from "@/lib/lessons";
 
 interface LessonPageProps {
@@ -74,7 +75,13 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
           {/* Guitar Tab */}
           <div className="space-y-6 pt-4 border-t border-border">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
-            <TabLegend items={lesson.legend} />
+            
+            {/* Show RhythmLegend if this is a rhythm lesson (Category 4) */}
+            {categoryTitle.includes("Phrasing") && <RhythmLegend />}
+            
+            {/* Show TabLegend if not a rhythm lesson */}
+            {!categoryTitle.includes("Phrasing") && <TabLegend items={lesson.legend} />}
+
             <div className="flex flex-wrap gap-8 items-start">
               {lesson.tabs.map((tab, index) => (
                 <div key={index} className="space-y-3">

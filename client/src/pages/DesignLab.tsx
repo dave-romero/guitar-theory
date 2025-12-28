@@ -21,6 +21,12 @@ export default function DesignLab() {
           <h2 className="text-2xl font-semibold">1. RhythmGrid</h2>
           <p className="text-muted-foreground">Intended for: Time Signatures, Note Values, Syncopation</p>
         </div>
+        
+        {/* Global Legend for RhythmGrid */}
+        <div className="flex justify-center">
+          <RhythmLegend />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <h3 className="font-medium">4/4 Time (Standard)</h3>
@@ -36,7 +42,6 @@ export default function DesignLab() {
                 ]}
                 activeBeat={2}
               />
-              <RhythmLegend />
             </div>
           </div>
           <div className="space-y-2">
