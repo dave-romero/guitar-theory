@@ -562,30 +562,196 @@ cat(
         title: "Triad Construction",
         concept: "Building the simplest chords from 3 notes.",
         learningGoals: ["Understand Root-3rd-5th structure", "Build Major and Minor triads"],
-        explanation: "Triads are the foundation of harmony. A major triad is Root + Major 3rd + Perfect 5th. A minor triad is Root + Minor 3rd + Perfect 5th.",
-        tabs: [],
-        strudelCode: "// Triad Example\nnote('c3 e3 g3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "3rd", color: "secondary" },
+          { label: "5th", color: "accent" }
+        ],
+        explanation: "A triad is the most basic type of chord, consisting of just three notes stacked in intervals of thirds.\n\n1. **The Root**: The foundation note that names the chord.\n2. **The 3rd**: Determines if the chord is Major (Happy) or Minor (Sad).\n3. **The 5th**: Adds stability and thickness to the sound.\n\n**Formulas:**\n*   **Major Triad**: Root + Major 3rd + Perfect 5th (1 - 3 - 5)\n*   **Minor Triad**: Root + Minor 3rd + Perfect 5th (1 - b3 - 5)",
+        tabs: [
+          {
+            title: "C Major Triad (C - E - G)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "accent" },
+            ]
+          },
+          {
+            title: "C Minor Triad (C - Eb - G)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 1, label: "Eb", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "accent" },
+            ]
+          }
+        ],
+        strudelCode: `// Triad Construction
+// Listen to the difference between Major and Minor
+
+// 1. C Major Triad (C - E - G)
+// Happy, bright, stable
+note("c3 e3 g3").s("acoustic").slow(2),
+
+// 2. C Minor Triad (C - Eb - G)
+// Sad, dark, serious
+// Only the 3rd (E -> Eb) changes!
+note("c3 eb3 g3").s("acoustic").slow(2)
+
+// GLOSSARY:
+// note("...") -> Plays the notes together as a chord
+// eb3 -> E flat (the minor 3rd)`,
+        keyTerms: [
+          { term: "Triad", definition: "A 3-note chord built from a Root, 3rd, and 5th." },
+          { term: "Major 3rd", definition: "An interval of 4 half steps (2 whole steps) from the root." },
+          { term: "Minor 3rd", definition: "An interval of 3 half steps (1.5 whole steps) from the root." }
+        ]
       },
       {
         id: "major-chords",
         title: "Major Chords",
         concept: "The 'Happy' chord shape.",
         learningGoals: ["Identify Major chord shapes", "Play CAGED major chords"],
-        explanation: "Major chords sound bright and stable. We'll explore the 5 main shapes (CAGED system) to play them anywhere.",
-        tabs: [],
-        strudelCode: "// Major Chord\nnote('c3 e3 g3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Chord Tone", color: "secondary" },
+          { label: "Open Chord Tone", color: "secondary", outline: true }
+        ],
+        explanation: "While there are thousands of ways to play a Major chord, they all stem from 5 basic 'Open' shapes: C, A, G, E, and D. This is known as the **CAGED System**.\n\nThese shapes are movable! If you take an E Major shape and move it up 1 fret (using a barre), it becomes F Major. Move it up 3 frets, it becomes G Major.",
+        tabs: [
+          {
+            title: "C Major (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 3, label: "C", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "secondary" },
+              { string: 2, fret: 1, label: "C", color: "primary" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "E Major (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 0, label: "E", color: "secondary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 2, label: "E", color: "primary" },
+              { string: 3, fret: 1, label: "G#", color: "secondary" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "G Major (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 3, label: "G", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 0, label: "D", color: "secondary" },
+              { string: 3, fret: 0, label: "G", color: "primary" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 3, label: "G", color: "primary" },
+            ]
+          }
+        ],
+        strudelCode: `// Major Chords (CAGED)
+// Listen to the full, rich sound of open chords
+
+// 1. C Major
+note("c3 e3 g3 c4 e4").s("acoustic").slow(2),
+
+// 2. E Major (Deep and resonant)
+note("e2 b2 e3 gs3 b3 e4").s("acoustic").slow(2),
+
+// 3. G Major (Full 6-string chord)
+note("g2 b2 d3 g3 b3 g4").s("acoustic").slow(2)
+
+// GLOSSARY:
+// note("...") -> Plays all notes simultaneously
+// Notice how the Root note is doubled or tripled!`,
+        keyTerms: [
+          { term: "Open Chord", definition: "A chord that includes one or more open strings." },
+          { term: "CAGED System", definition: "A method of visualizing the fretboard using 5 basic chord shapes (C, A, G, E, D)." },
+          { term: "Barre Chord", definition: "A chord where one finger presses down multiple strings across the fretboard." }
+        ]
       },
       {
         id: "minor-chords",
         title: "Minor Chords",
         concept: "The 'Sad' chord shape.",
         learningGoals: ["Identify Minor chord shapes", "Compare Major vs Minor"],
-        explanation: "Minor chords sound darker or sadder. The only difference from Major is the 3rd is lowered by one half step.",
-        tabs: [],
-        strudelCode: "// Minor Chord\nnote('c3 eb3 g3').s('acoustic')",
-        keyTerms: []
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Minor 3rd", color: "accent" },
+          { label: "5th", color: "secondary" },
+          { label: "Open String", color: "secondary", outline: true }
+        ],
+        explanation: "Minor chords have a darker, sadder, or more serious sound compared to Major chords. The only theoretical difference is the **3rd**: in a Minor chord, the 3rd is lowered by one half step (flattened).\n\nThere are 3 essential 'Open' minor shapes you must know: Em, Am, and Dm.",
+        tabs: [
+          {
+            title: "E Minor (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 6, fret: 0, label: "E", color: "primary" },
+              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 4, fret: 2, label: "E", color: "primary" },
+              { string: 3, fret: 0, label: "G", color: "accent" },
+              { string: 2, fret: 0, label: "B", color: "secondary" },
+              { string: 1, fret: 0, label: "E", color: "primary" },
+            ]
+          },
+          {
+            title: "A Minor (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 5, fret: 0, label: "A", color: "primary" },
+              { string: 4, fret: 2, label: "E", color: "secondary" },
+              { string: 3, fret: 2, label: "A", color: "primary" },
+              { string: 2, fret: 1, label: "C", color: "accent" },
+              { string: 1, fret: 0, label: "E", color: "secondary" },
+            ]
+          },
+          {
+            title: "D Minor (Open Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 4, fret: 0, label: "D", color: "primary" },
+              { string: 3, fret: 2, label: "A", color: "secondary" },
+              { string: 2, fret: 3, label: "D", color: "primary" },
+              { string: 1, fret: 1, label: "F", color: "accent" },
+            ]
+          }
+        ],
+        strudelCode: `// Minor Chords
+// Listen to the melancholic sound
+
+// 1. E Minor (Dark and heavy)
+note("e2 b2 e3 g3 b3 e4").s("acoustic").slow(2),
+
+// 2. A Minor (Sad but clear)
+note("a2 e3 a3 c4 e4").s("acoustic").slow(2),
+
+// 3. D Minor (Serious and tight)
+note("d3 a3 d4 f4").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Notice the "G" in E Minor, "C" in A Minor, "F" in D Minor
+// These are the Minor 3rds that give the sad quality`,
+        keyTerms: [
+          { term: "Minor Chord", definition: "A chord built from a Root, Minor 3rd, and Perfect 5th." },
+          { term: "Flattened 3rd", definition: "lowering the 3rd note of a scale by one half step." }
+        ]
       },
       {
         id: "diminished-chords",
@@ -597,15 +763,55 @@ cat(
         strudelCode: "// Diminished Chord\nnote('c3 eb3 gb3').s('acoustic')",
         keyTerms: []
       },
-      {
+       {
         id: "augmented-chords",
         title: "Augmented Chords",
-        concept: "Dreamy and floating.",
-        learningGoals: ["Construct augmented triads", "Recognize the sound"],
-        explanation: "Augmented chords sound dreamy or unsettled. They are built with a Root, Major 3rd, and Augmented 5th (sharp 5).",
-        tabs: [],
-        strudelCode: "// Augmented Chord\nnote('c3 e3 gs3').s('acoustic')",
-        keyTerms: []
+        concept: "The 'Dreamy' chord shape.",
+        learningGoals: ["Understand augmented formula", "Play augmented triads"],
+        legend: [
+          { label: "Root", color: "primary" },
+          { label: "Major 3rd", color: "accent" },
+          { label: "Augmented 5th", color: "muted" }
+        ],
+        explanation: "Augmented chords sound dreamy, floating, or sometimes anxious. Like diminished chords, they are unstable and want to move.\n\nThe formula is **1 - 3 - #5**. This means you take a Major chord and raise the 5th by one half step (sharpen it).",
+        tabs: [
+          {
+            title: "C Augmented Triad (Top 3 Strings)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 3, fret: 1, label: "G#", color: "muted" },
+              { string: 2, fret: 1, label: "C", color: "primary" },
+              { string: 1, fret: 0, label: "E", color: "accent" },
+            ]
+          },
+          {
+            title: "F Augmented Triad (Movable Shape)",
+            startFret: 0,
+            fretCount: 4,
+            markers: [
+              { string: 4, fret: 3, label: "F", color: "primary" },
+              { string: 3, fret: 2, label: "A", color: "accent" },
+              { string: 2, fret: 2, label: "C#", color: "muted" },
+            ]
+          }
+        ],
+        strudelCode: `// Augmented Chords
+// Listen to the "floating" quality
+
+// 1. C Augmented (C - E - G#)
+note("c3 e3 gs3").s("acoustic").slow(2),
+
+// 2. F Augmented (F - A - C#)
+note("f3 a3 cs4").s("acoustic").slow(2)
+
+// GLOSSARY:
+// Augmented chords are symmetrical (Major 3rd + Major 3rd)
+// They are often used in movie soundtracks for dream sequences.`,
+        keyTerms: [
+          { term: "Augmented 5th", definition: "A Perfect 5th raised by one half step (#5)." },
+          { term: "Whole Tone Scale", definition: "A scale made entirely of whole steps, closely related to augmented chords." }
+        ]
       },
       {
         id: "sus-chords",
