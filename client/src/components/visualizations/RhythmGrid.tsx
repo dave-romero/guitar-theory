@@ -107,7 +107,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
               y="98"
               textAnchor="middle"
               fill="var(--primary-foreground)"
-              fontSize="16"
+              fontSize="20"
               fontWeight="bold"
             >
               {note.duration >= 1 ? "Whole" : note.duration >= 0.5 ? "Half" : "Hit"}
