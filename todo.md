@@ -1,4 +1,5 @@
-- [ ] Troubleshoot Strudel audio:
-    - [ ] Verify correct guitar instrument name (try `nylon-guitar`, `clean-guitar`, or fallback to `sawtooth` if needed)
-    - [ ] Update `LessonPage.tsx` iframe `allow` attribute to include `autoplay`
-    - [ ] Test if `.s("guitar")` is valid in the embedded version
+- [ ] Prototype SVG Guitar Tabs:
+    - [ ] Create `client/src/components/GuitarTab.tsx` (SVG renderer)
+    - [ ] Create `client/src/pages/TestTabs.tsx` (Comparison page)
+    - [ ] Add `/test-tabs` route to `App.tsx`
+    - [ ] Implement examples: C Major Chord, A Minor Pentatonic Scale

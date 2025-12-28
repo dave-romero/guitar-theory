@@ -1,0 +1,158 @@
+import React from "react";
+
+interface Marker {
+  string: number; // 1 (High E) to 6 (Low E)
+  fret: number;   // 0 for open, 1+ for frets
+  label?: string; // Optional text inside the marker (e.g., "R", "3", "5")
+  color?: "primary" | "secondary" | "accent" | "muted"; // Theme colors
+}
+
+interface GuitarTabProps {
+  startFret?: number;
+  fretCount?: number;
+  markers: Marker[];
+  title?: string;
+}
+
+export function GuitarTab({ 
+  startFret = 1, 
+  fretCount = 5, 
+  markers,
+  title 
+}: GuitarTabProps) {
+  // Dimensions
+  const width = 300;
+  const height = 200;
+  const padding = { top: 40, right: 30, bottom: 20, left: 40 };
+  
+  const drawingWidth = width - padding.left - padding.right;
+  const drawingHeight = height - padding.top - padding.bottom;
+  
+  const stringSpacing = drawingHeight / 5; // 6 strings = 5 spaces
+  const fretSpacing = drawingWidth / fretCount;
+
+  // Helper to get Y coordinate for a string (1-6)
+  // String 1 is top visually in standard tab, but let's stick to standard diagram view:
+  // Usually diagrams show High E at top or bottom? 
+  // Standard Chord Boxes: Vertical.
+  // Standard Tabs: Horizontal, High E at top.
+  // Let's do Horizontal Tab style since that's what we're replacing.
+  // String 1 (High E) = Top (y = 0)
+  const getStringY = (stringNum: number) => (stringNum - 1) * stringSpacing;
+
+  // Helper to get X coordinate for a fret
+  // Fret 0 is to the left of the nut (or start).
+  // Fret 1 is in the middle of the first fret block.
+  const getFretX = (fretNum: number) => {
+    if (fretNum === 0) return -15; // Open string marker position
+    const relativeFret = fretNum - startFret + 1;
+    return (relativeFret * fretSpacing) - (fretSpacing / 2);
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      {title && <h4 className="font-serif text-lg text-foreground">{title}</h4>}
+      
+      <svg 
+        width={width} 
+        height={height} 
+        viewBox={`0 0 ${width} ${height}`}
+        className="bg-card rounded-lg border border-border shadow-sm"
+      >
+        <g transform={`translate(${padding.left}, ${padding.top})`}>
+          {/* Draw Frets (Vertical Lines) */}
+          {Array.from({ length: fretCount + 1 }).map((_, i) => (
+            <line
+              key={`fret-${i}`}
+              x1={i * fretSpacing}
+              y1={0}
+              x2={i * fretSpacing}
+              y2={drawingHeight}
+              stroke="currentColor"
+              strokeWidth={i === 0 && startFret === 1 ? 4 : 1} // Nut is thicker
+              className="text-muted-foreground"
+            />
+          ))}
+
+          {/* Draw Strings (Horizontal Lines) */}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <line
+              key={`string-${i}`}
+              x1={0}
+              y1={i * stringSpacing}
+              x2={drawingWidth}
+              y2={i * stringSpacing}
+              stroke="currentColor"
+              strokeWidth={i + 1} // Thicker for lower strings
+              className="text-foreground"
+            />
+          ))}
+
+          {/* Fret Numbers (Bottom) */}
+          {Array.from({ length: fretCount }).map((_, i) => (
+            <text
+              key={`fret-num-${i}`}
+              x={(i * fretSpacing) + (fretSpacing / 2)}
+              y={drawingHeight + 20}
+              textAnchor="middle"
+              className="text-xs fill-muted-foreground font-mono"
+            >
+              {startFret + i}
+            </text>
+          ))}
+
+          {/* String Names (Left) */}
+          {['e', 'B', 'G', 'D', 'A', 'E'].map((note, i) => (
+            <text
+              key={`string-name-${i}`}
+              x={-10}
+              y={i * stringSpacing + 4}
+              textAnchor="end"
+              className="text-xs fill-muted-foreground font-mono"
+            >
+              {note}
+            </text>
+          ))}
+
+          {/* Markers */}
+          {markers.map((marker, i) => {
+            // Filter out markers not in current view
+            if (marker.fret !== 0 && (marker.fret < startFret || marker.fret >= startFret + fretCount)) return null;
+
+            const cx = getFretX(marker.fret);
+            const cy = getStringY(marker.string);
+            
+            // Color logic
+            let fillClass = "fill-primary";
+            let textClass = "fill-primary-foreground";
+            
+            if (marker.color === "secondary") { fillClass = "fill-secondary"; textClass = "fill-secondary-foreground"; }
+            if (marker.color === "accent") { fillClass = "fill-accent"; textClass = "fill-accent-foreground"; }
+            if (marker.color === "muted") { fillClass = "fill-muted"; textClass = "fill-muted-foreground"; }
+
+            return (
+              <g key={`marker-${i}`}>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={marker.fret === 0 ? 6 : 10} // Smaller for open strings
+                  className={`${fillClass} stroke-background stroke-2`}
+                />
+                {marker.label && marker.fret !== 0 && (
+                  <text
+                    x={cx}
+                    y={cy + 4}
+                    textAnchor="middle"
+                    className={`text-[10px] font-bold ${textClass}`}
+                  >
+                    {marker.label}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+    </div>
+  );
+}
