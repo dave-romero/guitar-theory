@@ -14,7 +14,7 @@ interface SongStructureProps {
 export function SongStructure({ sections }: SongStructureProps) {
   const totalDuration = sections.reduce((sum, s) => sum + s.duration, 0);
   const width = 860;
-  const height = 200;
+  const height = 240;
   const gap = 6;
 
   let currentX = 60;
@@ -32,11 +32,11 @@ export function SongStructure({ sections }: SongStructureProps) {
   currentX = 60;
 
   return (
-    <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
+    <svg width="100%" viewBox={`0 -20 ${width} ${height - 20}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
       {/* Energy Axis */}
       <line x1="50" y1="40" x2="50" y2={height - 40} stroke="var(--border)" strokeWidth="2" />
       <text x="40" y="50" textAnchor="end" fontSize="12" fill="var(--muted-foreground)">High</text>
-      <text x="40" y={height - 40} textAnchor="end" fontSize="12" fill="var(--muted-foreground)">Low</text>
+      <text x="40" y={height - 50} textAnchor="end" fontSize="12" fill="var(--muted-foreground)">Low</text>
       <text x="20" y={height / 2} textAnchor="middle" transform={`rotate(-90, 20, ${height / 2})`} fontSize="14" fontWeight="bold" fill="var(--muted-foreground)">Energy</text>
 
       {/* Background Grid */}
@@ -55,7 +55,7 @@ export function SongStructure({ sections }: SongStructureProps) {
       {sections.map((section, i) => {
         const sectionWidth = (section.duration / totalDuration) * (width - 60);
         const sectionHeight = section.intensity * (height - 50); 
-        const y = height - sectionHeight - 30; // Bottom aligned
+        const y = height - sectionHeight - 40; // Bottom aligned
 
         const rect = (
           <g key={i}>
@@ -91,7 +91,7 @@ export function SongStructure({ sections }: SongStructureProps) {
             {/* Inner Label (Bars) */}
             <text
               x={currentX + (sectionWidth - gap) / 2}
-              y={height - 40}
+              y={height - 50}
               textAnchor="middle"
               fontSize="12"
               fill={section.color === "primary" ? "var(--primary-foreground)" : "var(--foreground)"}
