@@ -11,7 +11,7 @@ export interface LessonContent {
   concept: string;
   learningGoals: string[];
   keyTerms: { term: string; definition: string }[];
-  tab: string;
+  tabs: { title?: string; content: string }[];
   explanation: string;
   strudelCode: string;
   prevLesson?: string;
@@ -24,9 +24,9 @@ interface LessonPageProps {
 
 export default function LessonPage({ lesson }: LessonPageProps) {
   // Encode Strudel code for the iframe URL
-  // We use the official Strudel REPL embed URL format
+  // We use the hash-based format which is more reliable for embedding
   const encodedCode = btoa(lesson.strudelCode);
-  const strudelUrl = `https://strudel.cc/?embed=1&code=${encodedCode}`;
+  const strudelUrl = `https://strudel.cc/?embed=1#${encodedCode}`;
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -41,9 +41,9 @@ export default function LessonPage({ lesson }: LessonPageProps) {
         <p className="text-xl text-muted-foreground font-light max-w-2xl">{lesson.concept}</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        {/* Left Column: Content (7 cols) */}
-        <div className="lg:col-span-7 space-y-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-12">
+        {/* Left Column: Content (50%) */}
+        <div className="space-y-8">
           
           {/* Learning Goals */}
           <Card className="bg-secondary/30 border-none shadow-none p-6 rounded-lg">
@@ -67,10 +67,22 @@ export default function LessonPage({ lesson }: LessonPageProps) {
           </div>
 
           {/* Guitar Tab */}
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
-            <div className="guitar-tab text-xs md:text-sm overflow-x-auto">
-              {lesson.tab}
+            <div className={cn(
+              "grid gap-4",
+              lesson.tabs.length > 1 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+            )}>
+              {lesson.tabs.map((tab, index) => (
+                <div key={index} className="space-y-2">
+                  {tab.title && (
+                    <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{tab.title}</h4>
+                  )}
+                  <div className="guitar-tab text-xs overflow-x-auto">
+                    {tab.content}
+                  </div>
+                </div>
+              ))}
             </div>
             <p className="text-xs text-muted-foreground italic text-center mt-2">
               Standard Tuning: E A D G B E
@@ -116,8 +128,8 @@ export default function LessonPage({ lesson }: LessonPageProps) {
           </div>
         </div>
 
-        {/* Right Column: Strudel (5 cols) - Sticky */}
-        <div className="lg:col-span-5">
+        {/* Right Column: Strudel (50%) - Sticky */}
+        <div>
           <div className="sticky top-8 space-y-4">
             <div className="bg-card border border-border rounded-xl shadow-lg overflow-hidden">
               <div className="bg-muted/50 p-3 border-b border-border flex items-center justify-between">
@@ -129,12 +141,14 @@ export default function LessonPage({ lesson }: LessonPageProps) {
                 <span className="text-xs font-mono text-muted-foreground">Interactive Example</span>
               </div>
               
-              <div className="relative aspect-[4/5] w-full bg-black">
+              <div className="relative aspect-[16/10] xl:aspect-[4/5] w-full bg-black group">
                 <iframe
                   src={strudelUrl}
                   className="absolute inset-0 w-full h-full"
                   title="Strudel Live Code"
-                  allow="midi"
+                  allow="midi; clipboard-write"
+                  // Use CSS zoom to fit more content if needed, though Strudel is responsive
+                  style={{ border: 0 }}
                 />
               </div>
               
