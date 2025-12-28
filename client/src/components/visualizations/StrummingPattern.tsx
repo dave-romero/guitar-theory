@@ -41,7 +41,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             return (
                 <g key={i} transform={`translate(${x}, ${y})`} opacity="0.3">
                     <circle r="4" fill="var(--muted-foreground)" />
-                    <text y="50" textAnchor="middle" fill="var(--muted-foreground)" fontSize="18" fontWeight="bold">
+                    <text y="60" textAnchor="middle" fill="var(--muted-foreground)" fontSize="24" fontWeight="bold">
                         {getCountLabel(i, pattern.length)}
                     </text>
                 </g>
@@ -103,7 +103,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
               x="0"
               y="60"
               textAnchor="middle"
-              fontSize="20"
+              fontSize="24"
               fontWeight="bold"
               fill="var(--foreground)"
             >
