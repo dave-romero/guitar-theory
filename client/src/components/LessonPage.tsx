@@ -58,8 +58,21 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
             <div dangerouslySetInnerHTML={{ __html: lesson.explanation }} />
           </div>
 
+          {/* Key Terms */}
+          <div className="space-y-4 pt-4 border-t border-border">
+            <h3 className="font-serif font-bold text-xl">Key Terms</h3>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {lesson.keyTerms.map((term, i) => (
+                <div key={i} className="bg-card border border-border p-4 rounded-md shadow-sm hover:shadow-md transition-shadow">
+                  <dt className="font-bold text-primary mb-1">{term.term}</dt>
+                  <dd className="text-sm text-muted-foreground leading-snug">{term.definition}</dd>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Guitar Tab */}
-          <div className="space-y-6">
+          <div className="space-y-6 pt-4 border-t border-border">
             <h3 className="font-serif font-bold text-xl">Fretboard Visualization</h3>
             <TabLegend items={lesson.legend} />
             <div className="flex flex-wrap gap-8 items-start">
@@ -75,19 +88,6 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
                       fretCount={tab.fretCount} 
                     />
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Key Terms */}
-          <div className="space-y-4 pt-4 border-t border-border">
-            <h3 className="font-serif font-bold text-xl">Key Terms</h3>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {lesson.keyTerms.map((term, i) => (
-                <div key={i} className="bg-card border border-border p-4 rounded-md shadow-sm hover:shadow-md transition-shadow">
-                  <dt className="font-bold text-primary mb-1">{term.term}</dt>
-                  <dd className="text-sm text-muted-foreground leading-snug">{term.definition}</dd>
                 </div>
               ))}
             </div>
