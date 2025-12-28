@@ -34,13 +34,13 @@ export function SongStructure({ sections }: SongStructureProps) {
   return (
     <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
       {/* Background Grid */}
-      <line x1="0" y1={height - 20} x2={width} y2={height - 20} stroke="hsl(var(--border))" strokeWidth="2" />
+      <line x1="0" y1={height - 20} x2={width} y2={height - 20} stroke="var(--border)" strokeWidth="2" />
       
       {/* Energy Curve (Behind blocks) */}
       <path
         d={`M 0,${height-20} L ${curvePoints.join(" L ")} L ${width},${height-20}`}
         fill="none"
-        stroke="hsl(var(--foreground))"
+        stroke="var(--foreground)"
         strokeWidth="2"
         strokeDasharray="4 4"
         opacity="0.2"
@@ -60,8 +60,8 @@ export function SongStructure({ sections }: SongStructureProps) {
               width={sectionWidth - gap}
               height={sectionHeight}
               rx="8"
-              fill={`hsl(var(--${section.color}))`}
-              stroke="hsl(var(--background))"
+              fill={`var(--${section.color})`}
+              stroke="var(--background)"
               strokeWidth="2"
               opacity="0.9"
             />
@@ -73,7 +73,7 @@ export function SongStructure({ sections }: SongStructureProps) {
               textAnchor="middle"
               fontSize="14"
               fontWeight="bold"
-              fill="hsl(var(--foreground))"
+              fill="var(--foreground)"
             >
               {section.name}
             </text>
@@ -84,7 +84,7 @@ export function SongStructure({ sections }: SongStructureProps) {
               y={height - 40}
               textAnchor="middle"
               fontSize="12"
-              fill="hsl(var(--primary-foreground))"
+              fill="var(--primary-foreground)"
               opacity="0.8"
             >
               {section.duration} Bars

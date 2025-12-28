@@ -16,7 +16,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
   return (
     <svg width="100%" viewBox={`0 0 ${gridWidth} ${height + 40}`} className="w-full max-w-2xl mx-auto drop-shadow-sm">
       {/* Background Container */}
-      <rect x="0" y="0" width={gridWidth} height={height + 40} fill="hsl(var(--card))" rx="12" stroke="hsl(var(--border))" strokeWidth="1" />
+      <rect x="0" y="0" width={gridWidth} height={height + 40} fill="var(--card)" rx="12" stroke="var(--border)" strokeWidth="1" />
 
       {/* Beat Backgrounds (Alternating) */}
       {Array.from({ length: totalBeats }).map((_, i) => (
@@ -26,7 +26,8 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
           y="40"
           width={beatWidth}
           height={height}
-          fill={i % 2 === 0 ? "hsl(var(--muted)/0.3)" : "transparent"}
+          fill={i % 2 === 0 ? "var(--muted)" : "transparent"}
+          fillOpacity={i % 2 === 0 ? 0.3 : 0}
         />
       ))}
 
@@ -38,7 +39,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
           y1="40"
           x2={i * (beatWidth / 2)}
           y2={height + 40}
-          stroke="hsl(var(--border))"
+          stroke="var(--border)"
           strokeWidth="1"
           strokeDasharray="4 4"
           opacity="0.5"
@@ -52,7 +53,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             x={i * beatWidth + 10}
             y="30"
             textAnchor="start"
-            fill="hsl(var(--foreground))"
+            fill="var(--foreground)"
             fontSize="16"
             fontWeight="bold"
           >
@@ -63,7 +64,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             x={i * beatWidth + beatWidth / 2 + 5}
             y="30"
             textAnchor="start"
-            fill="hsl(var(--muted-foreground))"
+            fill="var(--muted-foreground)"
             fontSize="12"
           >
             &
@@ -80,8 +81,8 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
             width={note.duration * beatWidth - 4} // Gap
             height={note.type === "note" ? 60 : 20}
             rx="6"
-            fill={note.type === "note" ? "hsl(var(--primary))" : "hsl(var(--muted))"}
-            stroke={note.type === "note" ? "hsl(var(--primary-foreground))" : "none"}
+            fill={note.type === "note" ? "var(--primary)" : "var(--muted)"}
+            stroke={note.type === "note" ? "var(--primary-foreground)" : "none"}
             strokeWidth="2"
             opacity={note.type === "rest" ? 0.5 : 1}
           />
@@ -91,7 +92,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
               x={note.start * beatWidth + (note.duration * beatWidth) / 2}
               y="95"
               textAnchor="middle"
-              fill="hsl(var(--primary-foreground))"
+              fill="var(--primary-foreground)"
               fontSize="12"
               fontWeight="bold"
             >
@@ -108,7 +109,7 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
           y1="20"
           x2={activeBeat * beatWidth}
           y2={height + 40}
-          stroke="hsl(var(--accent))"
+          stroke="var(--accent)"
           strokeWidth="4"
           strokeLinecap="round"
         />

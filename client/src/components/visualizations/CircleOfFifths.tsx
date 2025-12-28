@@ -20,10 +20,10 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
   return (
     <svg width="100%" viewBox="0 0 400 400" className="w-full max-w-md mx-auto drop-shadow-md">
       {/* Outer Ring (Major) */}
-      <circle cx={center} cy={center} r={radius} fill="hsl(var(--card))" stroke="hsl(var(--border))" strokeWidth="1" />
+      <circle cx={center} cy={center} r={radius} fill="var(--card)" stroke="var(--border)" strokeWidth="1" />
       
       {/* Inner Ring (Minor) */}
-      <circle cx={center} cy={center} r={radius * 0.65} fill="hsl(var(--muted)/0.3)" stroke="hsl(var(--border))" strokeWidth="1" />
+      <circle cx={center} cy={center} r={radius * 0.65} fill="var(--muted)" fillOpacity="0.3" stroke="var(--border)" strokeWidth="1" />
 
       {majorKeys.map((key, i) => {
         const angleDeg = i * sliceAngle - 90;
@@ -50,7 +50,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
                    L ${center + Math.cos((angleDeg - 15) * Math.PI / 180) * radius} ${center + Math.sin((angleDeg - 15) * Math.PI / 180) * radius} 
                    A ${radius} ${radius} 0 0 1 ${center + Math.cos((angleDeg + 15) * Math.PI / 180) * radius} ${center + Math.sin((angleDeg + 15) * Math.PI / 180) * radius} 
                    Z`}
-                fill="hsl(var(--primary))"
+                fill="var(--primary)"
                 opacity="0.2"
               />
             )}
@@ -63,7 +63,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
               textAnchor="middle"
               fontWeight="bold"
               fontSize="18"
-              fill={isActive ? "hsl(var(--primary))" : isSharp ? "hsl(var(--accent))" : isFlat ? "hsl(var(--secondary))" : "hsl(var(--foreground))"}
+              fill={isActive ? "var(--primary)" : isSharp ? "var(--accent)" : isFlat ? "var(--secondary)" : "var(--foreground)"}
             >
               {key}
             </text>
@@ -75,7 +75,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
               dy="4"
               textAnchor="middle"
               fontSize="14"
-              fill={isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))"}
+              fill={isActive ? "var(--primary)" : "var(--muted-foreground)"}
             >
               {minorKeys[i]}
             </text>
@@ -86,7 +86,7 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
                 y1={center + Math.sin((angleDeg + 15) * Math.PI / 180) * (radius * 0.65)}
                 x2={center + Math.cos((angleDeg + 15) * Math.PI / 180) * radius}
                 y2={center + Math.sin((angleDeg + 15) * Math.PI / 180) * radius}
-                stroke="hsl(var(--border))"
+                stroke="var(--border)"
                 strokeWidth="1"
                 opacity="0.5"
             />
@@ -95,8 +95,8 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
       })}
       
       {/* Center Label */}
-      <circle cx={center} cy={center} r={radius * 0.25} fill="hsl(var(--background))" stroke="hsl(var(--border))" />
-      <text x={center} y={center} dy="5" textAnchor="middle" fontSize="12" fontWeight="bold" fill="hsl(var(--muted-foreground))">
+      <circle cx={center} cy={center} r={radius * 0.25} fill="var(--background)" stroke="var(--border)" />
+      <text x={center} y={center} dy="5" textAnchor="middle" fontSize="12" fontWeight="bold" fill="var(--muted-foreground)">
         KEY
       </text>
     </svg>

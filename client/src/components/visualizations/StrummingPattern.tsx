@@ -27,10 +27,10 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
   return (
     <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="w-full max-w-2xl mx-auto drop-shadow-sm">
       {/* Background Track */}
-      <rect x="0" y="50" width={width} height="50" fill="hsl(var(--muted)/0.2)" rx="25" />
+      <rect x="0" y="50" width={width} height="50" fill="var(--muted)" fillOpacity="0.2" rx="25" />
       
       {/* Center Line */}
-      <line x1="20" y1="75" x2={width - 20} y2="75" stroke="hsl(var(--border))" strokeWidth="2" strokeDasharray="8 8" />
+      <line x1="20" y1="75" x2={width - 20} y2="75" stroke="var(--border)" strokeWidth="2" strokeDasharray="8 8" />
 
       {pattern.map((strum, i) => {
         const x = i * step + step / 2;
@@ -40,8 +40,8 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             // Ghost Note (Miss)
             return (
                 <g key={i} transform={`translate(${x}, ${y})`} opacity="0.3">
-                    <circle r="4" fill="hsl(var(--muted-foreground))" />
-                    <text y="50" textAnchor="middle" fill="hsl(var(--muted-foreground))" fontSize="14" fontWeight="bold">
+                    <circle r="4" fill="var(--muted-foreground)" />
+                    <text y="50" textAnchor="middle" fill="var(--muted-foreground)" fontSize="14" fontWeight="bold">
                         {getCountLabel(i, pattern.length)}
                     </text>
                 </g>
@@ -54,8 +54,8 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             {strum === "D" && (
               <path
                 d="M -15 -30 L 15 -30 L 0 30 Z"
-                fill="hsl(var(--primary))"
-                stroke="hsl(var(--background))"
+                fill="var(--primary)"
+                stroke="var(--background)"
                 strokeWidth="3"
                 filter="drop-shadow(0px 4px 2px rgba(0,0,0,0.1))"
               />
@@ -63,22 +63,22 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
             {strum === "U" && (
               <path
                 d="M -12 20 L 12 20 L 0 -20 Z"
-                fill="hsl(var(--accent))"
-                stroke="hsl(var(--background))"
+                fill="var(--accent)"
+                stroke="var(--background)"
                 strokeWidth="3"
                 filter="drop-shadow(0px 4px 2px rgba(0,0,0,0.1))"
               />
             )}
             {strum === "x" && (
               <g>
-                <circle r="25" fill="hsl(var(--destructive))" opacity="0.2" />
+                <circle r="25" fill="var(--destructive)" opacity="0.2" />
                 <text
                     x="0"
                     y="10"
                     textAnchor="middle"
                     fontSize="30"
                     fontWeight="bold"
-                    fill="hsl(var(--destructive))"
+                    fill="var(--destructive)"
                 >
                     ×
                 </text>
@@ -92,7 +92,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
               textAnchor="middle"
               fontSize="12"
               fontWeight="bold"
-              fill="hsl(var(--foreground))"
+              fill="var(--foreground)"
               className="uppercase tracking-wider"
             >
               {strum === "x" ? "Slap" : strum === "D" ? "Down" : "Up"}
@@ -105,7 +105,7 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
               textAnchor="middle"
               fontSize="16"
               fontWeight="bold"
-              fill="hsl(var(--foreground))"
+              fill="var(--foreground)"
             >
               {getCountLabel(i, pattern.length)}
             </text>
