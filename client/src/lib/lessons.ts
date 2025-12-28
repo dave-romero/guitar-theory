@@ -7,7 +7,7 @@ export interface Marker {
 
 export interface LegendItem {
   label: string;
-  color: "primary" | "secondary" | "blue" | "muted";
+  color: "primary" | "secondary" | "blue" | "muted" | "accent";
   outline?: boolean;
 }
 
@@ -291,6 +291,10 @@ cat(
         title: "Perfect 5ths",
         concept: "The 'Power Chord' interval.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root Note", color: "primary" },
+          { label: "Perfect 5th", color: "secondary" }
+        ],
         explanation: "The Perfect 5th is the most stable interval after the octave. It creates a powerful, thick sound used constantly in rock and pop.\n\nShape: From the Low E or A string, go down 1 string and up 2 frets.\n\nWait... that looks like the Octave shape? Close! The Octave is down 2 strings. The 5th is down 1 string.",
         tabs: [
           {
@@ -343,6 +347,10 @@ cat(
         title: "Major & Minor 3rds",
         concept: "The emotional color of music.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root Note", color: "primary" },
+          { label: "3rd (Major/Minor)", color: "secondary" }
+        ],
         explanation: "If the Root and 5th are the 'body' of the chord, the 3rd is the 'soul'. It determines if a chord is Happy (Major) or Sad (Minor).\n\nMajor 3rd: Up 1 string, back 1 fret.\nMinor 3rd: Up 1 string, back 2 frets.\n(Relative to the Root on E or A string)",
         tabs: [
           {
@@ -395,6 +403,12 @@ cat(
         title: "The Interval Map",
         concept: "Putting it all together around a Root.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root Note", color: "primary" },
+          { label: "Major 3rd / 5th", color: "secondary" },
+          { label: "Minor 3rd", color: "accent" },
+          { label: "Perfect 4th", color: "muted" }
+        ],
         explanation: "Now we can map out the key intervals surrounding any root note on the Low E string.\n\nRoot: Index finger\nMinor 3rd: Pinky (same string)\nMajor 3rd: Middle finger (next string)\nPerfect 5th: Ring finger (next string)\nOctave: Ring finger (skip a string)\n\nMemorizing this 'cluster' allows you to build chords and scales anywhere.",
         tabs: [
           {
@@ -433,6 +447,10 @@ note("a2 c3 cs3 d3 e3")
         title: "Interval Shapes",
         concept: "Visualizing distance as geometry.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Root Note", color: "primary" },
+          { label: "Target Interval", color: "secondary" }
+        ],
         explanation: "Instead of counting frets, guitarists see shapes. A 'Power Chord' isn't '7 semitones', it's 'down one, over two'.\n\nLet's review the shapes we know:\n1. Octave (L-shape)\n2. Power Chord (Diagonal)\n3. Major 3rd (Tight diagonal)\n4. Minor 3rd (Wide diagonal or same string)",
         tabs: [
           {
@@ -476,6 +494,9 @@ cat(
         title: "Ear Training",
         concept: "Connecting the ear to the hand.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: [
+          { label: "Mystery Note", color: "muted" }
+        ],
         explanation: "The ultimate goal is to hear a sound and know the shape immediately. Try this exercise:\n\n1. Play a Root note.\n2. Hum a pitch above it.\n3. Find that pitch on the guitar.\n4. Identify the interval (Is it a 5th? A 3rd?)\n\nUse the code below to test yourself. It plays a random interval - can you guess which one it is?",
         tabs: [
           {
