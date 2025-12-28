@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Marker {
+export interface Marker {
   string: number; // 1 (High E) to 6 (Low E)
   fret: number;   // 0 for open, 1+ for frets
   label?: string; // Optional text inside the marker (e.g., "R", "3", "5")

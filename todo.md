@@ -1,2 +1,3 @@
-- [ ] Refine SVG Tabs:
-    - [ ] Update `GuitarTab.tsx`: Decrease top padding by 15px and increase bottom padding by 15px to center content vertically
+- [ ] Standardize SVG Tabs:
+    - [ ] Update `client/src/lib/lessons.ts`: Convert all ASCII tabs to `GuitarTabProps` objects
+    - [ ] Update `client/src/components/LessonPage.tsx`: Replace ASCII rendering with `<GuitarTab />` and add `<TabLegend />`
