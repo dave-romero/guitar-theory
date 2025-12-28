@@ -29,29 +29,39 @@ export default function LessonPage({ lesson, categoryTitle, prevLessonUrl, nextL
 
     switch (lesson.visualization) {
       case "RhythmGrid":
-        return (
+        return lesson.rhythmGridData ? (
           <div className="my-8">
-            <RhythmGrid />
+            <RhythmGrid 
+              timeSignature={lesson.rhythmGridData.timeSignature}
+              notes={lesson.rhythmGridData.notes}
+              activeBeat={lesson.rhythmGridData.activeBeat}
+            />
           </div>
-        );
+        ) : null;
       case "StrummingPattern":
-        return (
+        return lesson.strummingPatternData ? (
           <div className="my-8">
-            <StrummingPattern />
+            <StrummingPattern 
+              pattern={lesson.strummingPatternData.pattern}
+            />
           </div>
-        );
+        ) : null;
       case "SongStructure":
-        return (
+        return lesson.songStructureData ? (
           <div className="my-8">
-            <SongStructure />
+            <SongStructure 
+              sections={lesson.songStructureData.sections}
+            />
           </div>
-        );
+        ) : null;
       case "CircleOfFifths":
-        return (
+        return lesson.circleOfFifthsData ? (
           <div className="my-8">
-            <CircleOfFifths />
+            <CircleOfFifths 
+              activeKey={lesson.circleOfFifthsData.activeKey}
+            />
           </div>
-        );
+        ) : null;
       default:
         return null;
     }

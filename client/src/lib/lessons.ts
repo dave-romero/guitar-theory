@@ -18,6 +18,30 @@ export interface TabData {
   markers: Marker[];
 }
 
+// Visualization Data Interfaces
+export interface RhythmGridData {
+  timeSignature: [number, number];
+  notes: { start: number; duration: number; type: "note" | "rest" }[];
+  activeBeat?: number;
+}
+
+export interface StrummingPatternData {
+  pattern: ("D" | "U" | "x" | "-")[];
+}
+
+export interface SongStructureData {
+  sections: {
+    name: string;
+    duration: number;
+    intensity: number;
+    color: "primary" | "secondary" | "accent" | "muted";
+  }[];
+}
+
+export interface CircleOfFifthsData {
+  activeKey: string;
+}
+
 export interface LessonContent {
   id: string;
   title: string;
@@ -29,6 +53,11 @@ export interface LessonContent {
   keyTerms: { term: string; definition: string }[];
   legend?: LegendItem[];
   visualization?: "RhythmGrid" | "StrummingPattern" | "SongStructure" | "CircleOfFifths";
+  // Visualization Props
+  rhythmGridData?: RhythmGridData;
+  strummingPatternData?: StrummingPatternData;
+  songStructureData?: SongStructureData;
+  circleOfFifthsData?: CircleOfFifthsData;
 }
 
 export interface Category {
@@ -1036,7 +1065,8 @@ note("g2 c3 d3").s("acoustic").slow(2)
           { term: "Number System", definition: "A method of transcribing music by denoting the scale degree on which a chord is built." },
           { term: "Tonic", definition: "The first note (degree) of a scale, or the '1' chord." }
         ],
-        visualization: "CircleOfFifths"
+        visualization: "CircleOfFifths",
+        circleOfFifthsData: { activeKey: "C" }
       },
       {
         id: "diatonic-chords",
@@ -1165,7 +1195,8 @@ note("c3 g3 d4 a4 e5").s("acoustic").slow(2)
           { term: "Circle of Fifths", definition: "A visual representation of the relationships among the 12 tones of the chromatic scale." },
           { term: "Key Signature", definition: "The sharps or flats at the beginning of a staff indicating the key." }
         ],
-        visualization: "CircleOfFifths"
+        visualization: "CircleOfFifths",
+        circleOfFifthsData: { activeKey: "C" }
       },
       {
         id: "relative-minor",
@@ -1347,19 +1378,7 @@ note("a2 b2 c3 d3 e3 f3 g3 a3").s("acoustic").slow(2)
           { label: "Accent", color: "accent" }
         ],
         explanation: "The Time Signature tells you how many beats are in a bar. \n\n*   **4/4 (Common Time):** ONE-two-three-four. Used in 90% of rock/pop.\n*   **3/4 (Waltz):** ONE-two-three. Has a swaying feel.",
-        tabs: [
-          {
-            title: "4/4 Pulse",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "accent" },
-              { string: 6, fret: 0, label: "2", color: "primary" },
-              { string: 6, fret: 0, label: "3", color: "primary" },
-              { string: 6, fret: 0, label: "4", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Time Signatures
 // Listen to the accent on the "1"
 // 4/4 Time (Rock)
@@ -1372,7 +1391,16 @@ note("c3 c3 c3").s("acoustic").velocity("1 0.5 0.5").slow(1)
           { term: "Time Signature", definition: "A fraction that indicates the meter of a piece of music (top number = beats per bar)." },
           { term: "Tempo", definition: "The speed of the music (BPM)." }
         ],
-        visualization: "RhythmGrid"
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [4, 4],
+          notes: [
+            { start: 0, duration: 1, type: "note" },
+            { start: 1, duration: 1, type: "note" },
+            { start: 2, duration: 1, type: "note" },
+            { start: 3, duration: 1, type: "note" }
+          ]
+        }
       },
       {
         id: "note-values",
@@ -1384,18 +1412,7 @@ note("c3 c3 c3").s("acoustic").velocity("1 0.5 0.5").slow(1)
           { label: "Rest", color: "muted" }
         ],
         explanation: "Rhythm is math. \n\n*   **Whole Note:** Lasts 4 beats.\n*   **Half Note:** Lasts 2 beats.\n*   **Quarter Note:** Lasts 1 beat.\n*   **Eighth Note:** Lasts 1/2 beat (counted '1 & 2 &').",
-        tabs: [
-          {
-            title: "Rhythm Pyramid",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Whole", color: "primary" },
-              { string: 5, fret: 0, label: "Half", color: "secondary" },
-              { string: 4, fret: 0, label: "Qtr", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Note Values
 // Dividing time
 // Quarter Notes (1, 2, 3, 4)
@@ -1408,7 +1425,19 @@ note("c3 c3 c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
           { term: "Note Value", definition: "The duration of a note relative to the tempo." },
           { term: "Rest", definition: "A period of silence in music." }
         ],
-        visualization: "RhythmGrid"
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [4, 4],
+          notes: [
+            { start: 0, duration: 4, type: "note" },
+            { start: 0, duration: 2, type: "note" },
+            { start: 2, duration: 2, type: "note" },
+            { start: 0, duration: 1, type: "note" },
+            { start: 1, duration: 1, type: "note" },
+            { start: 2, duration: 1, type: "note" },
+            { start: 3, duration: 1, type: "note" }
+          ]
+        }
       },
       {
         id: "strumming-patterns",
@@ -1420,21 +1449,7 @@ note("c3 c3 c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
           { label: "Up", color: "accent" }
         ],
         explanation: "The golden rule of strumming: **Keep your hand moving like a pendulum.**\n\n*   Down strokes on the beat (1, 2, 3, 4)\n*   Up strokes on the 'and' (&)\n\nThe most famous pattern is the 'Island Strum': D - D U - U D U",
-        tabs: [
-          {
-            title: "Island Strum",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-              { string: 6, fret: 0, label: "D", color: "primary" },
-              { string: 6, fret: 0, label: "U", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Strumming Pattern
 // Down - Down Up - Up Down Up
 note("c3 [c3,e3] ~ [c3,e3] [c3,e3] [c3,e3]")
@@ -1446,7 +1461,10 @@ note("c3 [c3,e3] ~ [c3,e3] [c3,e3] [c3,e3]")
           { term: "Strumming", definition: "Sweeping the pick or fingers across the strings." },
           { term: "Syncopation", definition: "Accenting the weak beats or off-beats." }
         ],
-        visualization: "StrummingPattern"
+        visualization: "StrummingPattern",
+        strummingPatternData: {
+          pattern: ["D", "-", "D", "U", "-", "U", "D", "U"]
+        }
       },
       {
         id: "syncopation",
@@ -1458,19 +1476,7 @@ note("c3 [c3,e3] ~ [c3,e3] [c3,e3] [c3,e3]")
           { label: "Off Beat", color: "primary" }
         ],
         explanation: "Syncopation means accenting the weak beats (the '&'s) instead of the strong beats. This creates a funky, groovy feel that makes people want to dance.",
-        tabs: [
-          {
-            title: "Off-Beat Rhythm",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "secondary" },
-              { string: 6, fret: 0, label: "&", color: "primary" },
-              { string: 6, fret: 0, label: "2", color: "secondary" },
-              { string: 6, fret: 0, label: "&", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Syncopation
 // Accenting the off-beats
 note("~ c3 ~ c3").s("acoustic").slow(1)
@@ -1480,7 +1486,16 @@ note("~ c3 ~ c3").s("acoustic").slow(1)
           { term: "Syncopation", definition: "A disturbance or interruption of the regular flow of rhythm." },
           { term: "Off-beat", definition: "The points between the main beats." }
         ],
-        visualization: "RhythmGrid"
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [4, 4],
+          notes: [
+            { start: 0.5, duration: 0.5, type: "note" },
+            { start: 1.5, duration: 0.5, type: "note" },
+            { start: 2.5, duration: 0.5, type: "note" },
+            { start: 3.5, duration: 0.5, type: "note" }
+          ]
+        }
       },
       {
         id: "triplets-shuffle",
@@ -1492,18 +1507,7 @@ note("~ c3 ~ c3").s("acoustic").slow(1)
           { label: "Swing", color: "primary" }
         ],
         explanation: "A **Triplet** is fitting 3 notes into the space of 2. This creates a rolling, circular feel.\n\n**Shuffle** (or Swing) is based on triplets. It's the heartbeat of Blues and Jazz. Instead of '1 & 2 &', it's '1-let 2-let'.",
-        tabs: [
-          {
-            title: "Triplet Feel",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "primary" },
-              { string: 6, fret: 0, label: "trip", color: "secondary" },
-              { string: 6, fret: 0, label: "let", color: "secondary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Straight vs Triplet
 // Feel the difference
 // Straight 8ths (Rock)
@@ -1515,7 +1519,19 @@ note("c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
         keyTerms: [
           { term: "Triplet", definition: "A group of three notes played inside the length of two notes." },
           { term: "Shuffle", definition: "A rhythmic feel based on triplets, common in blues and jazz." }
-        ]
+        ],
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [4, 4],
+          notes: [
+            { start: 0, duration: 0.33, type: "note" },
+            { start: 0.33, duration: 0.33, type: "note" },
+            { start: 0.66, duration: 0.33, type: "note" },
+            { start: 1, duration: 0.33, type: "note" },
+            { start: 1.33, duration: 0.33, type: "note" },
+            { start: 1.66, duration: 0.33, type: "note" }
+          ]
+        }
       },
       {
         id: "odd-meters",
@@ -1527,20 +1543,7 @@ note("c3 c3 c3 c3 c3 c3").s("acoustic").slow(1)
           { label: "Accent", color: "accent" }
         ],
         explanation: "Most music is in 4/4, but **Odd Meters** like 5/4 or 7/8 create a unique, uneven feel. They are common in Progressive Rock, Jazz, and Folk music.\n\n*   **5/4 (Take Five):** Count '1-2-3, 1-2'.\n*   **7/8 (Money):** Count '1-2-3-4, 1-2-3'.",
-        tabs: [
-          {
-            title: "5/4 Pulse (1-2-3, 1-2)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "1", color: "accent" },
-              { string: 6, fret: 0, label: "2", color: "primary" },
-              { string: 6, fret: 0, label: "3", color: "primary" },
-              { string: 6, fret: 0, label: "4", color: "accent" },
-              { string: 6, fret: 0, label: "5", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// 5/4 Time Signature
 // "Take Five" Feel
 // Count: ONE two three FOUR five
@@ -1552,7 +1555,18 @@ note("c2 c2 c2 c2 c2")
         keyTerms: [
           { term: "Odd Meter", definition: "A time signature where the number of beats in a bar is not divisible by 2 or 3." },
           { term: "Compound Meter", definition: "A time signature where the beat is divided into three equal parts." }
-        ]
+        ],
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [5, 4],
+          notes: [
+            { start: 0, duration: 1, type: "note" },
+            { start: 1, duration: 1, type: "note" },
+            { start: 2, duration: 1, type: "note" },
+            { start: 3, duration: 1, type: "note" },
+            { start: 4, duration: 1, type: "note" }
+          ]
+        }
       },
       {
         id: "tempo-dynamics",
@@ -1564,19 +1578,7 @@ note("c2 c2 c2 c2 c2")
           { label: "Loud (f)", color: "accent" }
         ],
         explanation: "Music isn't just about notes; it's about **how** you play them.\n\n*   **Tempo:** The speed (BPM). Fast = Excitement, Slow = Sadness/Grandeur.\n*   **Dynamics:** The volume. Getting louder (**Crescendo**) builds tension; getting softer (**Decrescendo**) creates intimacy.",
-        tabs: [
-          {
-            title: "Dynamics Control",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "p", color: "secondary" },
-              { string: 6, fret: 0, label: "mp", color: "secondary" },
-              { string: 6, fret: 0, label: "mf", color: "primary" },
-              { string: 6, fret: 0, label: "f", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Dynamics (Volume)
 // Getting louder (Crescendo)
 note("c3 c3 c3 c3")
@@ -1590,7 +1592,16 @@ note("c3 c3 c3 c3")
         keyTerms: [
           { term: "Tempo", definition: "The speed at which a passage of music is or should be played." },
           { term: "Dynamics", definition: "The variation in loudness between notes or phrases." }
-        ]
+        ],
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "p", duration: 1, intensity: 0.2, color: "secondary" },
+            { name: "mp", duration: 1, intensity: 0.4, color: "secondary" },
+            { name: "mf", duration: 1, intensity: 0.7, color: "primary" },
+            { name: "f", duration: 1, intensity: 1.0, color: "accent" }
+          ]
+        }
       },
       {
         id: "groove",
@@ -1603,18 +1614,7 @@ note("c3 c3 c3 c3")
           { label: "Guitar", color: "secondary" }
         ],
         explanation: "**Groove** (or 'The Pocket') is when the band locks together so tightly it feels like one giant instrument. As a guitarist, your job is to lock in with the **Kick Drum** and **Snare**.\n\nIf the drummer hits the kick, you hit a bass note. If they hit the snare, you chop a chord.",
-        tabs: [
-          {
-            title: "Locking with the Kick",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Kick", color: "primary" },
-              { string: 6, fret: 0, label: "Kick", color: "primary" },
-              { string: 6, fret: 0, label: "Snare", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// In The Pocket
 // Guitar locking with Drums
 // Drums: Kick - Snare - Kick - Snare
@@ -1628,7 +1628,17 @@ stack(
         keyTerms: [
           { term: "Groove", definition: "The sense of propulsive rhythmic 'feel' or sense of 'swing'." },
           { term: "Pocket", definition: "When the rhythm section is playing perfectly in time with one another." }
-        ]
+        ],
+        visualization: "RhythmGrid",
+        rhythmGridData: {
+          timeSignature: [4, 4],
+          notes: [
+            { start: 0, duration: 1, type: "note" },
+            { start: 1, duration: 1, type: "note" },
+            { start: 2, duration: 1, type: "note" },
+            { start: 3, duration: 1, type: "note" }
+          ]
+        }
       },
       {
         id: "percussive-guitar",
@@ -1640,19 +1650,7 @@ stack(
           { label: "Percussive Slap (X)", color: "accent" }
         ],
         explanation: "The guitar is also a percussion instrument. You can use **Percussive Slaps** (hitting the strings with your thumb or palm) to create a backbeat, simulating a snare drum.\n\nThis is the secret to the 'John Mayer' or 'Ed Sheeran' acoustic style.",
-        tabs: [
-          {
-            title: "Slap Strum Technique",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Strum", color: "primary" },
-              { string: 6, fret: 0, label: "X", color: "accent" },
-              { string: 6, fret: 0, label: "Strum", color: "primary" },
-              { string: 6, fret: 0, label: "X", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Percussive Guitar
 // Strum - Slap - Strum - Slap
 // The "x" note represents a percussive hit
@@ -1665,7 +1663,10 @@ note("c3 x c3 x")
           { term: "Percussive Guitar", definition: "Using the body of the guitar or muted strings to create rhythmic sounds." },
           { term: "Backbeat", definition: "A strong accent on one of the normally unaccented beats of the bar." }
         ],
-        visualization: "StrummingPattern"
+        visualization: "StrummingPattern",
+        strummingPatternData: {
+          pattern: ["D", "x", "D", "x"]
+        }
       },
       {
         id: "rubato",
@@ -1677,19 +1678,7 @@ note("c3 x c3 x")
           { label: "Fast", color: "accent" }
         ],
         explanation: "**Rubato** (Italian for 'robbed') means playing without a strict beat. You 'rob' time from one phrase and give it to another.\n\nThis is how you make a solo sound like a human voice—speeding up for excitement, slowing down for emphasis.",
-        tabs: [
-          {
-            title: "Free Flow",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Slow", color: "secondary" },
-              { string: 6, fret: 1, label: "Fast", color: "accent" },
-              { string: 6, fret: 2, label: "Fast", color: "accent" },
-              { string: 6, fret: 3, label: "Slow", color: "secondary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Rubato (Free Time)
 // Notice the tempo fluctuation
 note("c3 d3 e3 f3 g3")
@@ -1701,7 +1690,16 @@ note("c3 d3 e3 f3 g3")
         keyTerms: [
           { term: "Rubato", definition: "The temporary disregarding of strict tempo to allow an expressive quickening or slackening, usually without altering the overall pace." },
           { term: "Ad Libitum", definition: "At one's pleasure; freely." }
-        ]
+        ],
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Slow", duration: 2, intensity: 0.3, color: "secondary" },
+            { name: "Fast", duration: 1, intensity: 0.8, color: "accent" },
+            { name: "Fast", duration: 1, intensity: 0.8, color: "accent" },
+            { name: "Slow", duration: 2, intensity: 0.3, color: "secondary" }
+          ]
+        }
       }
     ]
   },
@@ -1719,19 +1717,7 @@ note("c3 d3 e3 f3 g3")
           { label: "Chorus (Anthem)", color: "primary" }
         ],
         explanation: "Most songs are built on two main pillars:\n\n1.  **The Verse:** Tells the story. The lyrics change each time. The energy is usually lower.\n2.  **The Chorus:** The main message or 'hook'. The lyrics are the same each time. The energy is high and anthemic.",
-        tabs: [
-          {
-            title: "Energy Flow",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Verse", color: "secondary" },
-              { string: 6, fret: 1, label: "Verse", color: "secondary" },
-              { string: 6, fret: 2, label: "Chorus", color: "primary" },
-              { string: 6, fret: 2, label: "Chorus", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Verse vs Chorus Dynamics
 // Listen to the lift in energy
 // Verse (Quiet, Palm Muted)
@@ -1744,7 +1730,15 @@ note("c3 e3 g3 c4").s("acoustic").velocity(1).slow(1)
           { term: "Verse", definition: "A section of a song where the melody stays the same but lyrics change, telling the story." },
           { term: "Chorus", definition: "The repeated section of a song that contains the main message and hook." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
+            { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
+            { name: "Chorus", duration: 8, intensity: 0.9, color: "primary" },
+            { name: "Chorus", duration: 8, intensity: 0.9, color: "primary" }
+          ]
+        }
       },
       {
         id: "bridge",
@@ -1756,18 +1750,7 @@ note("c3 e3 g3 c4").s("acoustic").velocity(1).slow(1)
           { label: "Bridge (New Feel)", color: "accent" }
         ],
         explanation: "The **Bridge** (or 'Middle 8') usually happens after the second chorus. Its job is to break the repetition and take the listener somewhere new before the final chorus.\n\nBridges often use different chords, a new melody, or even a key change.",
-        tabs: [
-          {
-            title: "Bridge Progression (vi - IV)",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 5, fret: 0, label: "Am", color: "accent" },
-              { string: 4, fret: 3, label: "F", color: "accent" },
-              { string: 6, fret: 3, label: "G", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Bridge Section
 // Breaking away from the main theme
 // Chorus (Happy)
@@ -1780,7 +1763,14 @@ note("a2 c3 e3").s("acoustic").slow(2)
           { term: "Bridge", definition: "A contrasting section that prepares for the return of the original material section." },
           { term: "Release", definition: "Another term for the bridge, providing relief from the verse/chorus repetition." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Chorus", duration: 8, intensity: 0.8, color: "primary" },
+            { name: "Bridge", duration: 8, intensity: 0.6, color: "accent" },
+            { name: "Chorus", duration: 8, intensity: 1.0, color: "primary" }
+          ]
+        }
       },
       {
         id: "intros-outros",
@@ -1792,18 +1782,7 @@ note("a2 c3 e3").s("acoustic").slow(2)
           { label: "Outro", color: "secondary" }
         ],
         explanation: "**Intros** set the mood and establish the key. **Outros** bring the song to a satisfying close (or a fade out).\n\nA great intro is instantly recognizable (think 'Sweet Child O' Mine' or 'Stairway to Heaven').",
-        tabs: [
-          {
-            title: "Iconic Intro Riff Idea",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 4, fret: 2, label: "E", color: "primary" },
-              { string: 3, fret: 0, label: "G", color: "primary" },
-              { string: 2, fret: 1, label: "C", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Intro
 // Setting the scene
 note("e3 g3 c4 e4")
@@ -1816,7 +1795,14 @@ note("e3 g3 c4 e4")
           { term: "Intro", definition: "The opening section of a piece of music, usually instrumental." },
           { term: "Outro", definition: "The concluding section of a piece of music." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Intro", duration: 4, intensity: 0.5, color: "primary" },
+            { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
+            { name: "Outro", duration: 4, intensity: 0.3, color: "secondary" }
+          ]
+        }
       },
       {
         id: "pre-chorus",
@@ -1829,18 +1815,7 @@ note("e3 g3 c4 e4")
           { label: "Chorus", color: "primary" }
         ],
         explanation: "The **Pre-Chorus** is the link between the Verse and the Chorus. Its job is to **build anticipation**.\n\nIt often uses rising chords or a melody that climbs higher in pitch, making the listener crave the release of the Chorus.",
-        tabs: [
-          {
-            title: "The Build Up",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Low", color: "secondary" },
-              { string: 6, fret: 2, label: "Build", color: "accent" },
-              { string: 6, fret: 4, label: "High", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// The Pre-Chorus Lift
 // Building tension...
 // Verse (Low)
@@ -1855,7 +1830,14 @@ note("c4 e4 g4").s("acoustic").slow(2)
           { term: "Pre-Chorus", definition: "A section that builds tension and leads into the chorus." },
           { term: "Build-up", definition: "Increasing intensity, volume, or tempo to prepare for a drop or chorus." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
+            { name: "Pre-Chorus", duration: 4, intensity: 0.7, color: "accent" },
+            { name: "Chorus", duration: 8, intensity: 1.0, color: "primary" }
+          ]
+        }
       },
       {
         id: "hooks-riffs",
@@ -1907,18 +1889,7 @@ note("e2 g2 a2 e2 g2 bb2 a2")
           { label: "Melody", color: "accent" }
         ],
         explanation: "**Arrangement** is the art of deciding *who plays what and when*. A common mistake is everyone playing at once.\n\nThink of it like a conversation: if everyone shouts, it's noise. If people take turns and support each other, it's harmony.",
-        tabs: [
-          {
-            title: "Layering Example",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 3, label: "Bass", color: "primary" },
-              { string: 4, fret: 0, label: "Chord", color: "secondary" },
-              { string: 2, fret: 1, label: "Melody", color: "accent" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Building an Arrangement
 // 1. Bass -> 2. Chords -> 3. Melody
 stack(
@@ -1932,7 +1903,14 @@ stack(
           { term: "Arrangement", definition: "The adaptation of a composition for performance by different instruments or voices." },
           { term: "Texture", definition: "How the melodic, rhythmic, and harmonic materials are combined in a composition." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Bass", duration: 4, intensity: 0.3, color: "primary" },
+            { name: "Bass+Chords", duration: 4, intensity: 0.6, color: "secondary" },
+            { name: "Full Band", duration: 4, intensity: 0.9, color: "accent" }
+          ]
+        }
       },
       {
         id: "dynamics-flow",
@@ -1944,19 +1922,7 @@ stack(
           { label: "High Energy", color: "accent" }
         ],
         explanation: "A great song takes the listener on a journey. It shouldn't be at '10' the whole time.\n\n*   **Start Low:** Draw the listener in.\n*   **Build:** Create tension in the Pre-Chorus.\n*   **Peak:** Release the energy in the Chorus.\n*   **Drop:** Bring it down for the Bridge.",
-        tabs: [
-          {
-            title: "Intensity Map",
-            startFret: 0,
-            fretCount: 4,
-            markers: [
-              { string: 6, fret: 0, label: "Low", color: "secondary" },
-              { string: 6, fret: 1, label: "Med", color: "secondary" },
-              { string: 6, fret: 2, label: "High", color: "accent" },
-              { string: 6, fret: 3, label: "Peak", color: "primary" },
-            ]
-          }
-        ],
+        tabs: [],
         strudelCode: `// Dynamics (Volume)
 // Controlling the intensity
 note("c3 c3 c3 c3")
@@ -1969,7 +1935,17 @@ note("c3 c3 c3 c3")
           { term: "Dynamics", definition: "The variation in loudness between notes or phrases." },
           { term: "Crescendo", definition: "A gradual increase in loudness." }
         ],
-        visualization: "SongStructure"
+        visualization: "SongStructure",
+        songStructureData: {
+          sections: [
+            { name: "Intro", duration: 4, intensity: 0.2, color: "secondary" },
+            { name: "Verse", duration: 8, intensity: 0.4, color: "secondary" },
+            { name: "Pre", duration: 4, intensity: 0.7, color: "accent" },
+            { name: "Chorus", duration: 8, intensity: 1.0, color: "primary" },
+            { name: "Bridge", duration: 8, intensity: 0.5, color: "secondary" },
+            { name: "Outro", duration: 4, intensity: 0.3, color: "secondary" }
+          ]
+        }
       },
       {
         id: "song-analysis",
