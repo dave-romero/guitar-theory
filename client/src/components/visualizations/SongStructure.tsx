@@ -75,7 +75,7 @@ export function SongStructure({ sections }: SongStructureProps) {
             {/* Top Label (Name) */}
             <text
               x={currentX + (sectionWidth - gap) / 2}
-              y={y - 10}
+              y={y - 18}
               textAnchor="middle"
               fontSize="14"
               fontWeight="bold"
