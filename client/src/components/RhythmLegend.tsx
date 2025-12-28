@@ -18,7 +18,7 @@ export function RhythmLegend({ items }: RhythmLegendProps) {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-6 p-4 bg-card border border-border rounded-lg shadow-sm w-fit mx-auto mt-4">
+    <div className="flex flex-wrap items-center gap-6 p-4 bg-card border border-border rounded-lg shadow-sm w-fit">
       <span className="text-sm font-serif font-medium text-muted-foreground">Key:</span>
       
       {displayItems.map((item, index) => (

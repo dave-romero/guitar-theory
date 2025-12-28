@@ -23,9 +23,7 @@ export default function DesignLab() {
         </div>
         
         {/* Global Legend for RhythmGrid */}
-        <div className="flex justify-center">
-          <RhythmLegend />
-        </div>
+        <RhythmLegend />
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
