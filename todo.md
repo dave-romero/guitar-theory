@@ -1,6 +1,9 @@
-- [ ] Update `LessonPage.tsx` layout:
-    - [ ] Move Strudel iframe container below the main content grid (full width)
-    - [ ] Remove the 2-column grid structure
-    - [ ] Add `key={lesson.id}` to the iframe element to force re-render on lesson change
-    - [ ] Apply CSS transform `scale(0.85)` or similar to the iframe to reduce text size, with `transform-origin: top left` and adjusted width/height to compensate
-- [ ] Verify navigation updates the iframe content correctly
+- [ ] Update `LessonPage.tsx`:
+    - [ ] Move "Interactive Code" section above navigation buttons
+    - [ ] Change header to "Interactive Code", left-aligned, matching "Key Terms" style
+- [ ] Update `lessons.ts` (all 10 lessons):
+    - [ ] Change sound source to `.s("guitar")`
+    - [ ] Refactor `stack()`/`late()` to `cat()` or sequential timing for clear separation
+    - [ ] Add commented glossary section at the bottom of each code snippet explaining:
+        - Note names (e.g., "c4 = Middle C")
+        - Functions (e.g., "note()", "s()", "slow()")

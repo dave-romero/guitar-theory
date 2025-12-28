@@ -35,8 +35,16 @@ E|--0--1--2--3--4--5--6--7--8--9--10--11--12--|
     strudelCode: `// Play the chromatic scale on low E string
 // Each note represents one fret (half step)
 note("e2 f2 f#2 g2 g#2 a2 a#2 b2 c3 c#3 d3 d#3 e3")
-  .s("sawtooth") // Guitar-like tone
-  .slow(2) // Slow it down to hear each note clearly`,
+  .s("guitar") // Use a guitar sound
+  .slow(2)     // Play slowly to hear each note
+
+/* 
+  GLOSSARY:
+  - note("..."): Plays a sequence of notes
+  - e2, f2, etc.: Note names with octave numbers (2 is low, 3 is higher)
+  - s("guitar"): Sets the instrument sound to guitar
+  - slow(2): Slows down the playback speed (higher number = slower)
+*/`,
     nextLesson: "/lesson/cat1/2"
   },
   "cat1-2": {
@@ -68,11 +76,19 @@ E|-----5------------------------|
       }
     ],
     explanation: `<p>Because of how the guitar is tuned, the same note appears in multiple locations. The open A string can also be played on the 5th fret of the low E string, the 19th fret of the D string, and so on. This redundancy gives you options: you might choose a lower position for easier fingering, or a higher position for a brighter tone.</p><p>The "5th fret rule" helps you navigate: press the 5th fret of any string, and you get the same note as the next open string (except the G string, where you need the 4th fret to match the open B).</p>`,
-    strudelCode: `// Play the note A on different octaves (simulating different strings)
-note("a2 a3 a4") // Low A, middle A, high A
-  .s("sawtooth")
+    strudelCode: `// Play the note A in different octaves
+// Simulating finding the same note on different strings
+note("a2 a3 a4") 
+  .s("guitar")
   .slow(1.5)
-  // Same note name, different octaves - all sound like "A"`,
+
+/* 
+  GLOSSARY:
+  - a2: Low A (like open A string)
+  - a3: Middle A (like 2nd fret G string)
+  - a4: High A (like 5th fret high E string)
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/1",
     nextLesson: "/lesson/cat1/3"
   },
@@ -107,13 +123,23 @@ E|------------------------------|
       }
     ],
     explanation: `<p>If intervals are the building blocks of music, then half steps and whole steps are the individual bricks. A half step is the smallest move you can make in Western music—just one fret. A whole step is two frets, or two half steps stacked together.</p><p>Every scale, chord, and melody is built from combinations of these two basic movements. Understanding this simple concept unlocks everything else in music theory.</p>`,
-    strudelCode: `// Demonstrate half step vs whole step
-stack(
-  note("c4 c#4").s("sawtooth"), // Half step: C to C# (1 fret)
-  note("c4 d4").s("sawtooth").late(2) // Whole step: C to D (2 frets)
+    strudelCode: `// Demonstrate half step vs whole step sequentially
+cat(
+  // 1. Half step: C to C# (1 fret distance)
+  note("c4 c#4").s("guitar"),
+  
+  // 2. Whole step: C to D (2 frets distance)
+  note("c4 d4").s("guitar")
 )
 .slow(2)
-// Listen to the difference in distance between the notes`,
+
+/* 
+  GLOSSARY:
+  - cat(...): Concatenates (sequences) patterns so they play one after another
+  - c4, c#4: Notes in the 4th octave (middle range)
+  - #: Sharp symbol (one half step higher)
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/2",
     nextLesson: "/lesson/cat1/4"
   },
@@ -148,11 +174,25 @@ E|--8--10--12--13--15--17--19--20--|
       }
     ],
     explanation: `<p>The major scale is the foundation of Western music. It's the "do-re-mi" you've heard since childhood. What makes it major? The specific pattern of whole and half steps: W-W-H-W-W-W-H.</p><p>Notice that the half steps occur between the 3rd-4th notes (mi-fa) and the 7th-8th notes (ti-do). This pattern is the same in every key—if you start on any note and follow this formula, you'll create a major scale. The major scale sounds happy, bright, and resolved.</p>`,
-    strudelCode: `// C Major Scale - the classic "do re mi fa sol la ti do"
-note("c3 d3 e3 f3 g3 a3 b3 c4") // Scale degrees: 1 2 3 4 5 6 7 8
-  .s("sawtooth")
+    strudelCode: `// C Major Scale - "do re mi fa sol la ti do"
+note("c3 d3 e3 f3 g3 a3 b3 c4") 
+  .s("guitar")
   .slow(2)
-// Listen for the characteristic "happy" sound of the major scale`,
+
+/* 
+  GLOSSARY:
+  - c3 to c4: One full octave of the C Major scale
+  - Scale Degrees:
+    1: c3 (Root)
+    2: d3
+    3: e3
+    4: f3
+    5: g3
+    6: a3
+    7: b3
+    8: c4 (Octave)
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/3",
     nextLesson: "/lesson/cat1/5"
   },
@@ -195,14 +235,24 @@ E|--3--------------15-----------|
       }
     ],
     explanation: `<p>An octave is the most consonant interval besides playing the same note twice. When you play a note and its octave together, they blend so well they almost sound like one note. Physically, the higher note vibrates exactly twice as fast as the lower note.</p><p>On guitar, you can find octaves by moving 12 frets up on the same string, or by using efficient 2-string shapes: skip one string and move up 2 frets. These octave shapes are movable—learn the pattern once, and you can play octaves anywhere on the neck.</p>`,
-    strudelCode: `// Root note and its octave played together (harmony) and separately (melody)
-stack(
-  note("c3"), // Root note
-  note("c4")  // Octave above
-)
-.s("sawtooth")
-.slow(2)
-// Notice how they blend together - almost sound like one note`,
+    strudelCode: `// 1. Play root and octave separately (Melody)
+// 2. Play them together (Harmony)
+cat(
+  note("c3 c4").s("guitar"), // Separate
+  stack(
+    note("c3"), 
+    note("c4")
+  ).s("guitar") // Together
+).slow(2)
+
+/* 
+  GLOSSARY:
+  - cat(...): Plays patterns one after another
+  - stack(...): Plays notes at the same time (harmony)
+  - c3: Low C (Root)
+  - c4: High C (Octave, 12 half steps higher)
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/4",
     nextLesson: "/lesson/cat1/6"
   },
@@ -245,14 +295,25 @@ E|--3---------------------------|
       }
     ],
     explanation: `<p>The perfect 5th is one of the most important intervals in music. It's called "perfect" because it's neither major nor minor—it's neutral and stable. Count up 7 half steps from any note, and you've found its perfect 5th.</p><p>On guitar, power chords use this interval: root on the 6th string, 5th on the 5th string at the same fret. This shape is movable and sounds huge with distortion, which is why it's everywhere in rock music. The perfect 5th is so consonant that it's been used in music for thousands of years.</p>`,
-    strudelCode: `// Power chord: root + perfect 5th
-stack(
-  note("c3"),  // Root
-  note("g3")   // Perfect 5th above (7 half steps)
-)
-.s("sawtooth")
-.slow(2)
-// This is the classic "power chord" sound - strong and stable`,
+    strudelCode: `// Power Chord Demonstration
+cat(
+  // 1. Play Root then 5th separately
+  note("c3 g3").s("guitar"),
+  
+  // 2. Play them together (Power Chord)
+  stack(
+    note("c3"), // Root
+    note("g3")  // Perfect 5th (7 half steps up)
+  ).s("guitar")
+).slow(2)
+
+/* 
+  GLOSSARY:
+  - c3: Root note (C)
+  - g3: Perfect 5th note (G)
+  - stack(...): Plays notes simultaneously to create a chord
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/5",
     nextLesson: "/lesson/cat1/7"
   },
@@ -294,16 +355,29 @@ E|------------------------------|
       }
     ],
     explanation: `<p>The 3rd is the most emotionally powerful interval in music. It's what makes a chord sound happy or sad. A major 3rd (4 half steps) sounds bright, cheerful, and optimistic. A minor 3rd (3 half steps) sounds dark, melancholic, and introspective.</p><p>The difference is just ONE fret, but the emotional impact is huge. When you build chords in the next category, the 3rd will be the note that determines whether you're playing a major or minor chord. This is the "mood maker" of music.</p>`,
-    strudelCode: `// Compare major 3rd vs minor 3rd
-stack(
-  // Major 3rd: C to E (happy sound)
-  note("c4 e4").s("sawtooth"),
+    strudelCode: `// Compare Major vs Minor 3rds
+cat(
+  // 1. Major 3rd (Happy)
+  stack(
+    note("c4"), 
+    note("e4")
+  ).s("guitar"),
   
-  // Minor 3rd: C to Eb (sad sound)
-  note("c4 eb4").s("sawtooth").late(2)
-)
-.slow(2)
-// Listen to the emotional difference - just one half step changes everything`,
+  // 2. Minor 3rd (Sad)
+  stack(
+    note("c4"), 
+    note("eb4")
+  ).s("guitar")
+).slow(2)
+
+/* 
+  GLOSSARY:
+  - c4: Root note
+  - e4: Major 3rd (4 half steps up)
+  - eb4: Minor 3rd (3 half steps up, "flat" E)
+  - stack(...): Plays notes together as a chord
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/6",
     nextLesson: "/lesson/cat1/8"
   },
@@ -337,12 +411,28 @@ E|--8--9--10--11--12--13--14--15--16--17--18--19--20--|
       }
     ],
     explanation: `<p>Here's the complete map of intervals within one octave. Each interval has a unique sound and function in music. The "perfect" intervals (4th, 5th, octave) are stable and neutral. The major intervals sound bright; minor intervals sound dark.</p><p>The tritone (6 half steps) is the most dissonant interval—it sounds tense and unstable, which is why it's been called "the devil's interval" throughout history. Memorizing these distances will help you build chords, play melodies, and understand harmony.</p>`,
-    strudelCode: `// Play all intervals ascending from C
+    strudelCode: `// Play all 12 intervals ascending from C
 note("c4 c#4 d4 eb4 e4 f4 f#4 g4 g#4 a4 bb4 b4 c5")
-  .s("sawtooth")
+  .s("guitar")
   .slow(3)
-// Listen to each interval's unique character
-// Notice how tension builds and releases`,
+
+/* 
+  GLOSSARY:
+  - c4: Root
+  - c#4: Minor 2nd
+  - d4: Major 2nd
+  - eb4: Minor 3rd
+  - e4: Major 3rd
+  - f4: Perfect 4th
+  - f#4: Tritone
+  - g4: Perfect 5th
+  - g#4: Minor 6th
+  - a4: Major 6th
+  - bb4: Minor 7th
+  - b4: Major 7th
+  - c5: Octave
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/7",
     nextLesson: "/lesson/cat1/9"
   },
@@ -388,16 +478,28 @@ E|--3-----3---------------------|
       }
     ],
     explanation: `<p>Instead of counting frets every time, you can learn visual shapes for common intervals. These shapes are movable—learn them once, and they work anywhere on the neck.</p><p>For example, a perfect 5th on the 6th and 5th strings is always "same fret on both strings." A major 3rd is "4 frets higher on the next string." There's one exception: the G-to-B string relationship is different because of how the guitar is tuned, so shapes need a one-fret adjustment there. Learning these shapes will make you faster at finding intervals and building chords.</p>`,
-    strudelCode: `// Demonstrate the same interval (major 3rd) in different octaves
-// Simulating playing it on different string pairs
-stack(
-  note("c3 e3"),  // Lower position (like 6th-5th strings)
-  note("c4 e4").late(1),  // Middle position (like 4th-3rd strings)
-  note("c5 e5").late(2)   // Higher position (like 2nd-1st strings)
-)
-.s("sawtooth")
-.slow(2)
-// Same interval shape, different positions on the neck`,
+    strudelCode: `// Playing the same interval (Major 3rd) in different octaves
+// This simulates moving the shape across string pairs
+cat(
+  // Low position (like 6th-5th strings)
+  stack(note("c3"), note("e3")).s("guitar"),
+  
+  // Middle position (like 4th-3rd strings)
+  stack(note("c4"), note("e4")).s("guitar"),
+  
+  // High position (like 2nd-1st strings)
+  stack(note("c5"), note("e5")).s("guitar")
+).slow(2)
+
+/* 
+  GLOSSARY:
+  - cat(...): Sequences the three chords
+  - stack(...): Plays the two notes of each interval together
+  - c3/e3: Major 3rd interval in low register
+  - c4/e4: Major 3rd interval in middle register
+  - c5/e5: Major 3rd interval in high register
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/8",
     nextLesson: "/lesson/cat1/10"
   },
@@ -431,27 +533,32 @@ E|--5--6--7--8--9--10--11--12---|
       }
     ],
     explanation: `<p>Now it's time to train your ear. Each interval has a unique sound that you can learn to recognize. Many musicians use reference songs: a perfect 4th sounds like "Here Comes the Bride," a perfect 5th sounds like "Star Wars," a major 3rd sounds like "When the Saints Go Marching In."</p><p>Practice playing intervals and singing them back. Try playing an interval and identifying it before looking at the fretboard. The Strudel example below plays various intervals in a musical context—listen actively and try to identify each interval by its sound quality. This skill takes time, but it's incredibly valuable for learning songs by ear and improvising.</p>`,
-    strudelCode: `// Interval ear training: various intervals in musical context
-// Try to identify each interval by sound
-stack(
-  // Perfect 5th (strong, stable)
-  note("c4 g4").s("sawtooth"),
+    strudelCode: `// Ear Training Challenge: Identify these intervals
+cat(
+  // 1. Perfect 5th (Strong, Stable)
+  stack(note("c4"), note("g4")).s("guitar"),
   
-  // Major 3rd (happy, bright)
-  note("c4 e4").s("sawtooth").late(2),
+  // 2. Major 3rd (Happy, Bright)
+  stack(note("c4"), note("e4")).s("guitar"),
   
-  // Perfect 4th (open, stable)
-  note("c4 f4").s("sawtooth").late(4),
+  // 3. Perfect 4th (Open, Stable)
+  stack(note("c4"), note("f4")).s("guitar"),
   
-  // Minor 3rd (sad, dark)
-  note("c4 eb4").s("sawtooth").late(6),
+  // 4. Minor 3rd (Sad, Dark)
+  stack(note("c4"), note("eb4")).s("guitar"),
   
-  // Tritone (tense, dissonant)
-  note("c4 f#4").s("sawtooth").late(8)
-)
-.slow(2)
-// Listen carefully to each interval's unique character
-// Can you identify them by sound alone?`,
+  // 5. Tritone (Tense, Dissonant)
+  stack(note("c4"), note("f#4")).s("guitar")
+).slow(2)
+
+/* 
+  GLOSSARY:
+  - cat(...): Plays the intervals one after another
+  - stack(...): Plays the two notes together
+  - c4: The root note for all examples
+  - g4, e4, f4, etc.: The interval note above the root
+  - s("guitar"): Sets the instrument sound to guitar
+*/`,
     prevLesson: "/lesson/cat1/9"
   }
 };
