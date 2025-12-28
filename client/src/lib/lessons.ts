@@ -21,6 +21,7 @@ export interface LessonContent {
   tabs: TabData[];
   strudelCode: string;
   keyTerms: { term: string; definition: string }[];
+  legend?: { primary: string; secondary: string };
 }
 
 export interface Category {
@@ -39,6 +40,7 @@ export const lessons: Category[] = [
         title: "The Musical Alphabet",
         concept: "The 12 notes of Western music and the chromatic scale.",
         learningGoals: ["Understand the core concept", "Apply it to the fretboard"],
+        legend: { primary: "Natural Note", secondary: "Sharp/Flat" },
         explanation: "The musical alphabet consists of 7 natural notes: A, B, C, D, E, F, G. Between most of these notes are sharps (#) or flats (b). The distance between any two adjacent notes (like A to A#) is called a half step (or semitone). On the guitar, one fret equals one half step.\n\nThe full chromatic scale is: A, A#, B, C, C#, D, D#, E, F, F#, G, G#.\n\nNotice that B to C and E to F do NOT have sharps between them. This is the most important rule to memorize!",
         tabs: [
           {
@@ -48,7 +50,7 @@ export const lessons: Category[] = [
             markers: [
               { string: 5, fret: 0, label: "A", color: "primary" },
               { string: 5, fret: 1, label: "A#", color: "secondary" },
-              { string: 5, fret: 2, label: "B", color: "secondary" },
+              { string: 5, fret: 2, label: "B", color: "primary" },
               { string: 5, fret: 3, label: "C", color: "primary" },
               { string: 5, fret: 4, label: "C#", color: "secondary" },
               { string: 5, fret: 5, label: "D", color: "primary" },
