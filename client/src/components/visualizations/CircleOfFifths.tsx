@@ -18,9 +18,9 @@ export function CircleOfFifths({ activeKey }: CircleOfFifthsProps) {
   const sliceAngle = 360 / 12;
 
   return (
-    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden">
+    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden h-[430px]">
       <div className="w-full h-full flex items-center justify-center">
-        <svg width="100%" viewBox="0 0 400 400" className="w-full max-w-md mx-auto drop-shadow-md">
+        <svg viewBox="0 0 400 400" className="h-full w-auto mx-auto drop-shadow-md">
           {/* Outer Ring (Major) */}
           <circle cx={center} cy={center} r={radius} fill="var(--card)" stroke="var(--border)" strokeWidth="1" />
           

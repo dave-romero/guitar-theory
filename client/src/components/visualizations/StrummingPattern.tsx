@@ -25,9 +25,9 @@ export function StrummingPattern({ pattern }: StrummingPatternProps) {
   };
 
   return (
-    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden">
+    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden h-[180px]">
       <div className="w-full h-full flex items-center justify-center">
-        <svg width="100%" viewBox={`0 0 ${width} ${height}`} className="w-full max-w-2xl mx-auto drop-shadow-sm">
+        <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-auto mx-auto drop-shadow-sm">
           {/* Background Track */}
           <rect x="0" y="50" width={width} height="50" fill="var(--muted)" fillOpacity="0.2" rx="25" />
           

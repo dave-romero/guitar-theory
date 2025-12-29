@@ -14,9 +14,9 @@ export function RhythmGrid({ timeSignature, notes, activeBeat }: RhythmGridProps
   const height = 120;
 
   return (
-    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden">
+    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden h-[190px]">
       <div className="w-full h-full flex items-center justify-center">
-        <svg width="100%" viewBox={`0 0 ${gridWidth} ${height + 40}`} className="w-full max-w-2xl mx-auto">
+        <svg viewBox={`0 0 ${gridWidth} ${height + 40}`} className="h-full w-auto mx-auto">
           {/* Background Container */}
           <rect x="0" y="0" width={gridWidth} height={height + 40} fill="transparent" />
 

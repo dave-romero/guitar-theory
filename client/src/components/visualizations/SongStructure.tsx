@@ -32,9 +32,9 @@ export function SongStructure({ sections }: SongStructureProps) {
   currentX = 60;
 
   return (
-    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden">
+    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden h-[250px]">
       <div className="w-full h-full flex items-center justify-center">
-        <svg width="100%" viewBox={`0 -20 ${width} ${height - 20}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
+        <svg viewBox={`0 -20 ${width} ${height - 20}`} className="h-full w-auto mx-auto drop-shadow-sm">
           {/* Energy Axis */}
           <line x1="50" y1="10" x2="50" y2={height - 40} stroke="var(--border)" strokeWidth="2" />
           <text x="40" y="20" textAnchor="end" fontSize="12" fill="var(--muted-foreground)">High</text>
