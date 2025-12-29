@@ -9,6 +9,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { lessons } from "./lib/lessons";
 import Home from "./pages/Home";
 import TestTabs from "./pages/TestTabs";
+import DesignLab from "./pages/DesignLab";
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
       <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/test-tabs"} component={TestTabs} />
+      <Route path={"/design-lab"} component={DesignLab} />
         
         {/* Dynamic Lesson Route */}
         <Route path="/:categoryId/:lessonId">
