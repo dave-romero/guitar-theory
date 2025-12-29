@@ -28,32 +28,28 @@ export default function DesignLab() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <h3 className="font-medium">4/4 Time (Standard)</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <RhythmGrid
-                timeSignature={[4, 4]}
-                notes={[
-                  { start: 0, duration: 1, type: "note" },
-                  { start: 1, duration: 1, type: "note" },
-                  { start: 2, duration: 0.5, type: "note" },
-                  { start: 2.5, duration: 0.5, type: "note" },
-                  { start: 3, duration: 1, type: "rest" },
-                ]}
-                activeBeat={2}
-              />
-            </div>
+            <RhythmGrid
+              timeSignature={[4, 4]}
+              notes={[
+                { start: 0, duration: 1, type: "note" },
+                { start: 1, duration: 1, type: "note" },
+                { start: 2, duration: 0.5, type: "note" },
+                { start: 2.5, duration: 0.5, type: "note" },
+                { start: 3, duration: 1, type: "rest" },
+              ]}
+              activeBeat={2}
+            />
           </div>
           <div className="space-y-2">
             <h3 className="font-medium">3/4 Time (Waltz)</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <RhythmGrid
-                timeSignature={[3, 4]}
-                notes={[
-                  { start: 0, duration: 1, type: "note" },
-                  { start: 1, duration: 1, type: "note" },
-                  { start: 2, duration: 1, type: "note" },
-                ]}
-              />
-            </div>
+            <RhythmGrid
+              timeSignature={[3, 4]}
+              notes={[
+                { start: 0, duration: 1, type: "note" },
+                { start: 1, duration: 1, type: "note" },
+                { start: 2, duration: 1, type: "note" },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -67,19 +63,15 @@ export default function DesignLab() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <h3 className="font-medium">Island Strum (D - D U - U D U)</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <StrummingPattern
-                pattern={["D", "-", "D", "U", "-", "U", "D", "U"]}
-              />
-            </div>
+            <StrummingPattern
+              pattern={["D", "-", "D", "U", "-", "U", "D", "U"]}
+            />
           </div>
           <div className="space-y-2">
             <h3 className="font-medium">Percussive Slap</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <StrummingPattern
-                pattern={["D", "x", "D", "U", "x", "U", "D", "x"]}
-              />
-            </div>
+            <StrummingPattern
+              pattern={["D", "x", "D", "U", "x", "U", "D", "x"]}
+            />
           </div>
         </div>
       </section>
@@ -92,21 +84,19 @@ export default function DesignLab() {
         </div>
         <div className="space-y-2">
           <h3 className="font-medium">Standard Pop Structure</h3>
-          <div className="p-6 border rounded-lg bg-card">
-            <SongStructure
-              sections={[
-                { name: "Intro", duration: 4, intensity: 0.4, color: "muted" },
-                { name: "Verse 1", duration: 8, intensity: 0.3, color: "secondary" },
-                { name: "Pre-Chorus", duration: 4, intensity: 0.6, color: "primary" },
-                { name: "Chorus", duration: 8, intensity: 0.9, color: "accent" },
-                { name: "Verse 2", duration: 8, intensity: 0.3, color: "secondary" },
-                { name: "Chorus", duration: 8, intensity: 0.9, color: "accent" },
-                { name: "Bridge", duration: 8, intensity: 0.5, color: "muted" },
-                { name: "Chorus", duration: 8, intensity: 1.0, color: "accent" },
-                { name: "Outro", duration: 4, intensity: 0.2, color: "muted" },
-              ]}
-            />
-          </div>
+          <SongStructure
+            sections={[
+              { name: "Intro", duration: 4, intensity: 0.4, color: "muted" },
+              { name: "Verse 1", duration: 8, intensity: 0.3, color: "secondary" },
+              { name: "Pre-Chorus", duration: 4, intensity: 0.6, color: "primary" },
+              { name: "Chorus", duration: 8, intensity: 0.9, color: "accent" },
+              { name: "Verse 2", duration: 8, intensity: 0.3, color: "secondary" },
+              { name: "Chorus", duration: 8, intensity: 0.9, color: "accent" },
+              { name: "Bridge", duration: 8, intensity: 0.5, color: "muted" },
+              { name: "Chorus", duration: 8, intensity: 1.0, color: "accent" },
+              { name: "Outro", duration: 4, intensity: 0.2, color: "muted" },
+            ]}
+          />
         </div>
       </section>
 
@@ -119,15 +109,11 @@ export default function DesignLab() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <h3 className="font-medium">Key of C Major</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <CircleOfFifths activeKey="C" />
-            </div>
+            <CircleOfFifths activeKey="C" />
           </div>
           <div className="space-y-2">
             <h3 className="font-medium">Key of E Major</h3>
-            <div className="p-6 border rounded-lg bg-card">
-              <CircleOfFifths activeKey="E" />
-            </div>
+            <CircleOfFifths activeKey="E" />
           </div>
         </div>
       </section>
