@@ -32,7 +32,7 @@ export function SongStructure({ sections }: SongStructureProps) {
   currentX = 60;
 
   return (
-    <div className="my-8 p-6 border rounded-lg bg-card flex items-center justify-center h-[300px] overflow-hidden">
+    <div className="my-8 px-6 py-[15px] border rounded-lg bg-card flex items-center justify-center overflow-hidden">
       <div className="w-full h-full flex items-center justify-center">
         <svg width="100%" viewBox={`0 -20 ${width} ${height - 20}`} className="w-full max-w-3xl mx-auto drop-shadow-sm">
           {/* Energy Axis */}
